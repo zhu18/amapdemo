@@ -1,23 +1,23 @@
-
+let timer=0;
 class Util {
     constructor() {
         this.chartInstance = []
         this.tasks = []
     }
-    restructureData(array, opt, isNewData){
-        let newArray =[]
+    restructureData(array, opt, isNewData) {
+        let newArray = []
         let item
-        array.forEach(v =>{
+        array.forEach(v => {
             item = Object.assign({
-                lnglat: isNewData?this.randomLnglat(v.lnglat):v.lnglat,
+                lnglat: isNewData ? this.randomLnglat(v.lnglat) : v.lnglat,
                 name: v.name,
-                style: isNewData?Math.ceil(Math.random() * 3):v.style
-            },opt)
+                style: isNewData ? Math.ceil(Math.random() * 3) : v.style
+            }, opt)
             newArray.push(item)
         })
         return newArray
     }
-    resizeData(array, multiples){
+    resizeData(array, multiples) {
         let newArray = []
         for (let index = 0; index < multiples; index++) {
             array.forEach(v => {
@@ -45,35 +45,48 @@ class Util {
             return;
         }
     }
+    getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.hash.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
 }
 
-class Animate {
-    constructor(map) {
-        const c = map.getCenter()
-        this.center = c
-        this.flag = true
-        this.map = map
-    }
-    setCenter(lnglat) {
+
+
+
+
+
+
+
+
+// class Animate {
+    // constructor(map) {
+    //     const c = map.getCenter()
+    //     this.center = c
+    //     this.flag = true
+    //     this.map = map
+    // }
+    function setCenter(lnglat) {
         map.setCenter(lnglat)
-        this.center = map.getCenter()
     }
-    stop() {
-        this.setCenter(map.getCenter())
+    function stop() {
+        map.setCenter(map.getCenter())
         map.setStatus({
             resizeEnable: false,
             rotateEnable: false,
             pitchEnable: false,
         })
     }
-    start() {
+    function start() {
         map.setStatus({
             resizeEnable: true,
             rotateEnable: true,
             pitchEnable: true,
         })
     }
-    setZoom(index) {
+    function setZoom(index) {
         return new Promise((resolve, reject) => {
             (function _setZoom() {
                 map.setZoom(map.getZoom() + .09)
@@ -86,7 +99,7 @@ class Animate {
             // _setZoom(this)
         })
     }
-    pitch(deg) {
+    function pitch(deg) {
         return new Promise((resolve, reject) => {
             (function _pitch() {
                 if (map.getPitch() > deg) {
@@ -106,13 +119,13 @@ class Animate {
             })()
         })
     }
-    autoRotation() {
+    function autoRotation() {
         (function _rotation() {
             map.setRotation(map.getRotation() + 0.1)
             requestAnimationFrame(_rotation)
         })()
     }
-    rotation(deg) {
+    function rotation(deg) {
         return new Promise((resolve, reject) => {
             (function _rotation() {
                 map.setRotation(map.getRotation() + 1)
@@ -124,16 +137,13 @@ class Animate {
             })()
         })
     }
-    animation(to) {
-        return this._animation(to)
+    function animation(to) {
+        return _animation(to)
     }
-    _animation(to, speed = 0.00009) {
+    function _animation(to, speed = 0.00009) {
         return new Promise((resolve, reject) => {
-            let x = this.center.lng
-            let y = this.center.lat
-            let z = this.rotation
-            let pitch = this.pitch
-            let aaa = new AMap.LngLat(this.center.lng, this.center.lat)
+            let x = map.getCenter().lng
+            let y = map.getCenter().lat
             let x1 = x - to[0]
             let y1 = y - to[1]
             let speed2 = (x1 * speed) / y1
@@ -156,7 +166,6 @@ class Animate {
                     if (map.getCenter().lng > to[0] && map.getCenter().lng > to[1]) {
                         requestAnimationFrame(aa)
                     } else {
-                        this.center = map.getCenter()
                         resolve('ok')
                     }
                 } else if (x1 < 0 && y1 > 0) {
@@ -166,7 +175,6 @@ class Animate {
                     if (map.getCenter().lng < to[0] && map.getCenter().lng > to[1]) {
                         requestAnimationFrame(aa)
                     } else {
-                        this.center = map.getCenter()
                         resolve('ok')
                     }
                 } else if (x1 < 0 && y1 < 0) {
@@ -176,7 +184,6 @@ class Animate {
                     if (map.getCenter().lng < to[0] && map.getCenter().lng > to[1]) {
                         requestAnimationFrame(aa)
                     } else {
-                        this.center = map.getCenter()
                         resolve('ok')
                     }
                 }
@@ -186,11 +193,10 @@ class Animate {
         })
     }
 
-}
-var tasks=[]
-function navigation(map){
-    let animate = new Animate(map);
-    tasks=[f1,f2,f3,f4,f5,f6,f7]
+// }
+var tasks = []
+function navigation(map) {
+    tasks = [f1, f2, f3, f4, f5, f6, f7]
     next()
     function next() {
         if (tasks.length > 0) {
@@ -204,49 +210,49 @@ function navigation(map){
         tasks.push(task);
     }
     function f1() {
-        animate.setCenter([116.372169, 40.041315])
-        animate.setZoom(18).then(_ => {
+        // animate.setCenter([116.372169, 40.041315])
+        setZoom(18).then(_ => {
             next()
         })
     }
     function f2() {
         //map.setMapStyle('amap://styles/2b5b5a7bf7d342735986be35a82f241f')
-        return animate.pitch(60).then(_ => {
+        pitch(60).then(_ => {
             next()
         })
     }
     function f3() {
-        animate.rotation(110).then(_ => {
+        rotation(110).then(_ => {
             next()
         })
     }
     function f4() {
-        animate.animation([116.35469, 40.036877]).then(_ => {
+        animation([116.35469, 40.036877]).then(_ => {
             next()
         })
     }
     function f5() {
-        animate.rotation(200).then(_ => {
+        rotation(200).then(_ => {
             next()
         })
     }
     function f6() {
-        animate.animation([116.357872, 40.030425]).then(_ => {
+        animation([116.357872, 40.030425]).then(_ => {
             next()
         })
     }
     function f7() {
 
-        animate.pitch(80).then(_ => {
+        pitch(80).then(_ => {
 
             next()
         })
 
     }
-    let timer;
+    
     map.on('mousedown', (e) => {
         clearTimeout(timer)
-        animate.stop()
+        stop()
         tasks = []
         timer = setTimeout(() => {
             map.setStatus({
@@ -254,12 +260,12 @@ function navigation(map){
                 rotateEnable: true,
                 pitchEnable: true
             })
-            animate.autoRotation()
+            autoRotation()
         }, 10000);
     })
     document.onkeydown = function (event) {
         if (event.ctrlKey) {
-            animate.start()
+            start()
         }
 
     };

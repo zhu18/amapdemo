@@ -55,6 +55,12 @@ var chartInstance = [], intervalTime = 5000,
         },
     };
 
+function removeEchart(){
+    $('#lineWarp').removeClass('loaded');
+    $('#hbarWarp').removeClass('loaded');
+    $('#baseLineWarp').removeClass('loaded');
+    $('#vbarWarp').removeClass('loaded');
+}
 function initEchart() {
     //loadchartwarp
     setTimeout(()=>{

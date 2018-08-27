@@ -1,5 +1,5 @@
 let util = new Util();
-let map = new AMap.Map('container', {
+var map = new AMap.Map('container', {
     resizeEnable: true,
     rotateEnable: true,
     pitchEnable: true,
@@ -98,21 +98,81 @@ layer.setOptions({
     }
 });
 
-layer.render();
+
 setTimeout(() => {
     $("#container").addClass('loaded')
 }, 1000);
-setTimeout(() => {
+
+window.onload=function(){
+    hashChange()
+}
+function stepOne() {
+    tasks = [];
+    (function _a() {
+        let zIndex = map.getZoom()
+            map.setZoom(zIndex - 0.1)
+        if (zIndex >5) {
+            requestAnimationFrame(_a)
+        }else{
+            map.setPitch(0)
+            map.setRotation(0)
+            removeEchart()
+        }
+    })()
+   
+}
+function stepTwo() {
+    tasks=[];
+    (function _a() {
+        let zIndex = map.getZoom()
+        if (zIndex<10) {
+            map.setZoom(zIndex + 0.1)
+        }else if(zIndex>10){
+            map.setZoom(zIndex - 0.1)
+        }
+        if (zIndex !=10) {
+            requestAnimationFrame(_a)
+        }else{
+            map.setPitch(0)
+            map.setRotation(0)
+            removeEchart()
+        }
+    })()
+}
+function stepThree() {
     navigation(map)
-}, 3000);
-
-setTimeout(() => {
     initEchart()
-}, 10000);
+
+}
 
 
+//监听触发操作
+function hashChange() {
+    let step = util.getQueryString('step')
+    clearTimeout(timer)
+    if (step == 1) {
+        stepOne()
+        setTimeout(() => {
+            layer.render();
+        }, 100);
+    } else if (step == 2) {
+        stepTwo()
+    } else if (step == 3) {
+            stepThree()
+           
+    }else{
+        stepOne()
+        setTimeout(() => {
+            layer.render();
+        }, 100);
+    }
+}
 
-
+//url变化监听器
+if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
+    
+    window.onhashchange = hashChange;  
+}
 
 
 
