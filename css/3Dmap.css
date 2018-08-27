@@ -98,18 +98,15 @@ ul,li{list-style: none;margin:0;}
     width: 120px;
     border-radius: 3px;
     margin-left: 10px;
-    border: 1px solid rgba(67, 236, 236, 0.8);
+    border: 2px solid rgba(67, 236, 236, 0.8);
     transform: skewX(160deg);
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    -ms-transition: all .2s;
-    -o-transition: all .2s;
-    transition: all .2s;
+    transition: all .5s;
     background: rgba(0,0,0,0);
+    box-shadow: 0 0 0 rgba(0,255,255,1),
 }
 .nav li:hover{
-    border-color:rgba(67, 236, 236, 1);
-    background: rgba(0,0,0,.7);
+    border: #eff solid 2px;
+    box-shadow: 0 0 10px rgba(0,255,255,.9), 0 0 50px 2px rgba(0,255,255,.5), 0 0 20px 1px rgba(0,255,255,.5), 0 0 80px 1px rgba(0,255,255,.5), inset 0 0 10px rgba(0,255,255,.9), inset 0 0 50px 2px rgba(0,255,255,.5), inset 0 0 20px 1px rgba(0,255,255,.5), inset 0 0 80px 1px rgba(0,255,255,.5);
 }
 .nav li a{
     position: absolute;
@@ -117,12 +114,13 @@ ul,li{list-style: none;margin:0;}
     height: 100%;
     line-height: 25px;
     text-align: center;
-    color:#c4edef;
+    color:rgba(67, 236, 236, 1);
     text-decoration: none;
     transform: skewX(20deg);
+    transition: color .5s;
 }
 .nav li:hover a{
-    color:#2af5ff;
+    color:#dafdff;
 }
 #container{
     opacity: 0;
