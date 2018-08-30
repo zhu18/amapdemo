@@ -1,0 +1,60 @@
+.echart-con{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    perspective:600px;
+    transform-style: preserve-3d;
+}
+.echart-con .item{
+    float: left;
+    box-sizing: border-box;
+    width: calc(25% - 15px);
+    height: 150px;
+    margin-right: 20px;
+
+    /* border-radius: 0px; */
+    /* border: 1px solid rgba(101, 202, 202, 0.92);*/
+    /*box-shadow: 0 0 5px rgba(37, 156, 156, 0.73);*/
+    transition: transform 1s;
+    transform: rotateX(90deg);
+    background-image:url(./static/images/border2.png);
+    background-size: cover;
+    padding: 27px 20px 0px 24px;
+    /*  */
+}
+.echart-con .item.loaded{
+    transform: rotateX(0deg);
+}
+.echart-con .item:nth-of-type(4n){
+    margin-right: 0;
+}
+.echart-con .item .chart{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.31);
+
+}
+.con-panel{
+    position: fixed;
+    top:0;
+    width: 120px;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.left-panel{
+    left: 0;
+    background: -webkit-linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)); /* 标准的语法（必须放在最后） */
+}
+.right-panel{
+    right: 0;
+    background: -webkit-linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* 标准的语法（必须放在最后） */
+}
