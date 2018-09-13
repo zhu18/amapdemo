@@ -71,7 +71,7 @@ layer.setOptions({
         fill: function (obj) {
             var style = obj.value.style;
             var color;
-            var cls=colors['orange'];
+            var cls=colors['blue'];
             if (style == 0) {
                 color = cls[0];
             } else if (style == 1) {
