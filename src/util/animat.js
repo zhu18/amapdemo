@@ -1,11 +1,16 @@
 class Animate {
     constructor(map) {
         this.center = map.getCenter()
-        this.flag = true
         this.map = map
         this.tasks = []
     }
+    /*
+        * @description 执行动画
+        * @params options 动画执行参数
+        * @params speed 动画间隔
+    */
     playing(options, speed = 500) {
+        console.log(options)
         this.stop()
         if (Array.isArray(options)) {
             for (const item of options) {
@@ -13,7 +18,6 @@ class Animate {
                     if (item.hasOwnProperty(key)) {
                         const value = item[key];
                         this.switchFn(key, value, speed)
-
                     }
                 }
             }
@@ -28,7 +32,11 @@ class Animate {
             this.next()
         }
     }
+    /*
+        * @description 动画分类
+    */
     switchFn(key, value, speed) {
+        console.log(key)
         let that = this
         function delayed() {
             that.delayed(speed).then(_ => {
@@ -36,6 +44,7 @@ class Animate {
             })
         }
         switch (key) {
+            // zoom动画
             case 'zoom':
                 function fnzoom(params) {
                     that.setZoom(value).then(_ => {
@@ -43,10 +52,9 @@ class Animate {
                     })
                 }
                 this.tasks.push(delayed, fnzoom)
-                // that.next()
                 break;
+            // 仰角动画
             case 'pitch':
-
                 function fnPitch(params) {
                     that.pitch(value).then(_ => {
                         that.next()
@@ -55,7 +63,9 @@ class Animate {
                 that.tasks.push(delayed, fnPitch)
                 // that.next()
                 break;
+            // 中心点动画
             case 'center':
+                //多点运动
                 if (Array.isArray(value) && Array.isArray(value[0])) {
                     let num = 0
                     let fn = 'fn' + num
@@ -78,8 +88,8 @@ class Animate {
                         num++
 
                     })
-                    // that.next();
                 } else {
+                    //单点运动
                     function fnCenter(params) {
                         that.animation(value).then(_ => {
                             that.next()
@@ -88,6 +98,7 @@ class Animate {
                     that.tasks.push(delayed, fnCenter)
                 }
                 break;
+            // 旋转动画
             case 'rotation':
                 function fnRotation(params) {
                     that.rotation(value).then(_ => {
@@ -96,6 +107,7 @@ class Animate {
                 }
                 that.tasks.push(delayed, fnRotation)
                 break;
+            // 回掉函数
             case 'callBack':
                 function callBack(params) {
                     value()
@@ -108,6 +120,10 @@ class Animate {
                 break;
         }
     }
+    /*
+        * @description  延迟动画,用于两个动画间隙
+        * @params speed 间隔时长
+    */
     delayed(speed = 500) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -115,6 +131,9 @@ class Animate {
             }, speed);
         })
     }
+    /*
+        * @description  执行动画队列中下一个动画
+    */
     next() {
         if (this.tasks.length > 0) {
             this.tasks.shift()();
@@ -122,11 +141,21 @@ class Animate {
             return;
         }
     }
+    /*
+        *  @description  设置地图当前中心点
+        *  @params lnglat 地图经纬度
+    */
     setCenter(lnglat) {
-       this.map.setCenter(lnglat)
+        this.map.setCenter(lnglat)
         this.center = this.map.getCenter()
     }
+    /*
+       **  停止动画
+   */
     stop() {
+        /*
+        ** 清空当前动画队列,
+        */
         this.tasks = []
         // this.setCenter(map.getCenter())
         // map.setStatus({
@@ -142,9 +171,13 @@ class Animate {
             pitchEnable: true,
         })
     }
+    /*
+        * @description  设置地图显示的缩放级别
+        * @params index 可设范围：[3,18]/[3,19](移动端)
+     */
     setZoom(index) {
         this.map.setZoom(index)
-        let map=this.map
+        let map = this.map
         return new Promise((resolve, reject) => {
             (function _setZoom() {
                 map.setZoom(map.getZoom() + .1)
@@ -155,9 +188,12 @@ class Animate {
                 }
                 requestAnimationFrame(_setZoom)
             })()
-            // _setZoom(this)
         })
     }
+    /*
+        * @description  设置俯仰角,3D视图有效
+        * @params index 可设范围：[3,18]/[3,19](移动端)
+     */
     pitch(deg) {
         let map = this.map
         return new Promise((resolve, reject) => {
@@ -181,13 +217,20 @@ class Animate {
             })()
         })
     }
+    /*
+        * @description  自动旋转
+     */
     autoRotation() {
         let map = this.map
-        (function _rotation() {
-            map.setRotation(map.getRotation() + 0.1)
-            requestAnimationFrame(_rotation)
-        })()
+            (function _rotation() {
+                map.setRotation(map.getRotation() + 0.1)
+                requestAnimationFrame(_rotation)
+            })()
     }
+    /*
+       * @description  设置地图顺时针旋转角度，旋转原点为地图容器中心点，
+       * @params deg 取值范围 [0-360]
+    */
     rotation(deg) {
         let map = this.map
         return new Promise((resolve, reject) => {
@@ -205,6 +248,12 @@ class Animate {
     animation(to) {
         return this._animation(to)
     }
+
+    /*
+       * @description  地图中心点平移至指定点位置
+       * @params to 目标点经纬度
+       * @params speed 运动速度
+    */
     _animation(to, speed = 0.00009) {
         let map = this.map
         return new Promise((resolve, reject) => {

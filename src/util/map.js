@@ -5,7 +5,7 @@
 //     blue: ['#D7D5FF', '#7355FF', '#4100FF'],
 
 // }
-class Amap {
+class JFmap {
     constructor(props) {
         this.map = this._initMap(props)
         this.layer=this._loca()
@@ -111,4 +111,4 @@ class Amap {
 }
 
 
-export default Amap
+export default JFmap
