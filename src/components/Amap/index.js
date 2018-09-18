@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css'
-import { citys } from "../../data/city.js";
+import { citys } from "../../assets/data/city.js";
 import { restructureData } from "../../util/tool.js";
 import { initEchart, removeEchart } from "../echarts"
 class AmapBox extends Component {

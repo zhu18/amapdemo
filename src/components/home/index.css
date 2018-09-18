@@ -19,7 +19,7 @@
     /*box-shadow: 0 0 5px rgba(37, 156, 156, 0.73);*/
     transition: transform 1s;
     transform: rotateX(90deg);
-    background-image:url(./static/images/border2.png);
+    background-image:url(../../assets/imgs/border2.png);
     background-size: cover;
     padding: 27px 20px 0px 24px;
     /*  */

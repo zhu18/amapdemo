@@ -17,7 +17,7 @@
 .title::before {
     content: '';
     display: block;
-    background: url(../../static/images/t0.png);
+    background: url(../../assets/imgs/t0.png);
     width: 100px;
     height: 50px;
     position: absolute;
@@ -30,7 +30,7 @@
     top: -13px;
     left: -94px;
     transform: perspective(1000px) rotateY(40deg) rotateX(-45deg);
-    background: url(../../static/images/t0.png);
+    background: url(../../assets/imgs/t0.png);
     display: block;
     width: 100px;
     height: 100px;
@@ -38,7 +38,7 @@
 }
 .title-after-img {
     display: block;
-    background: url(../../static/images/t5.png);
+    background: url(../../assets/imgs/t5.png);
     width: 100px;
     height: 100px;
     position: absolute;
@@ -47,7 +47,7 @@
 }
 .title-after-inimg{
     display: block;
-    background: url(../../static/images/t51.png);
+    background: url(../../assets/imgs/t51.png);
     width: 100px;
     height: 100px;
     position: absolute;
@@ -56,7 +56,7 @@
 }
 .title-after-pimg{
     display: block;
-    background: url(../../static/images/t0.png);
+    background: url(../../assets/imgs/t0.png);
     width: 80px;
     height: 80px;
     position: absolute;
