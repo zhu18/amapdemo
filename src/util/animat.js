@@ -9,34 +9,42 @@ class Animate {
         * @params options 动画执行参数
         * @params speed 动画间隔
     */
-    playing(options, speed = 500) {
-        console.log(options)
+    playing(obj, speed = 500) {
+        const that=this
+        if (obj.hasOwnProperty('beforeAction')) {
+            obj.beforeAction.apply(this.map);
+        }
         this.stop()
-        if (Array.isArray(options)) {
-            for (const item of options) {
+        if (Array.isArray(obj.options)) {
+            for (const item of obj.options) {
                 for (const key in item) {
                     if (item.hasOwnProperty(key)) {
                         const value = item[key];
-                        this.switchFn(key, value, speed)
+                        that.switchFn(key, value, speed, obj.callBack)
                     }
                 }
             }
             this.next()
-        } else if (options instanceof Object) {
+        } else if (obj.options instanceof Object) {
 
-            for (const key in options) {
+            for (const key in obj.options) {
 
-                const value = options[key];
-                this.switchFn(key, value, speed)
+                const value = obj.options[key];
+
+                this.switchFn(key, value, speed, obj.callBack)
             }
+            function callBack(params) {
+                obj.callBack()
+                that.next()
+            }
+            that.tasks.push(callBack)
             this.next()
         }
     }
     /*
         * @description 动画分类
     */
-    switchFn(key, value, speed) {
-        console.log(key)
+    switchFn(key, value, speed,scallback) {
         let that = this
         function delayed() {
             that.delayed(speed).then(_ => {
@@ -109,16 +117,12 @@ class Animate {
                 break;
             // 回掉函数
             case 'callBack':
-                function callBack(params) {
-                    value()
-                    that.next()
-
-                }
-                that.tasks.push(delayed, callBack)
                 break;
             default:
+               
                 break;
         }
+       
     }
     /*
         * @description  延迟动画,用于两个动画间隙

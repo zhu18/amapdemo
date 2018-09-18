@@ -4,6 +4,7 @@ import AmapBox from "./components/Amap";
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import JFmap from "./util/map";
 import { Animate } from './util/animat.js';
+// import options from './step/step1';
 import './App.css'
 class App extends Component {
   constructor(props) {
@@ -11,64 +12,42 @@ class App extends Component {
     this.state = {
       baseMap: null,
       locaMap: null,
-      options: null,
-      stepOptions: [
-        {
-          beforeAction:()=>{
-          },
-          zoom: 4.2,
-          pitch: 0,
-          rotation: 0,
-          callBack: () => {
-            alert(123)
-          }
-        },
-        {
-          cneter: [116.369793, 40.041126],
-          zoom: 10,
-          pitch: 0,
-          rotation: 0
-        },
-        [
-          {
-            zoom: 18,
-            pitch: 30,
-            rotation: 10,
-            center: [116.36563, 40.051338]
-          },
-          {
-            rotation: 100,
-            center: [116.354611, 40.047382],
-          }
-          , {
-            pitch: 50
-
-          }
-        ]
-      ]
-
+      options: null
     }
   }
   componentWillReceiveProps(nextprops) {
     if (nextprops.match.params.step !== this.props.match.params.step) {
-      const options = this.state.stepOptions[nextprops.match.params.step - 1]
-      this.setState({
-        options
-      })
+      // const options = this.state.stepOptions[nextprops.match.params.step - 1]
+      try {
+        import(/* webpackChunkName: "options" */ `./step/step${nextprops.match.params.step}`).then(module => {
+          let options = module.default
+          this.setState({
+            options
+          })
+        });
+      } catch (error) {
+         console.warn('no fond this file!');
+      }
+      
+      
     }
   }
   componentDidMount() {
     let baseMap = new JFmap('container')
     let locaMap = new Animate(baseMap.getMap())
-    const options = this.state.stepOptions[this.props.match.params.step - 1]
-    this.setState({
-      baseMap,
-      locaMap
-    },()=>{
+    import(/* webpackChunkName: "options" */ `./step/step${this.props.match.params.step}`).then(module=>{
+      const options = module.default
       this.setState({
-        options
+        baseMap,
+        locaMap
+      }, () => {
+        this.setState({
+          options
+        })
       })
     })
+  
+    
     
   }
   render() {
