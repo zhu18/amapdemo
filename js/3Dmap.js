@@ -5,7 +5,7 @@ var bjcolors = {};
 var getColorByAdcode = function(adcode){
     if(!bjcolors[adcode]){
         var gb = Math.random()*155+50;
-        bjcolors[adcode] = '#0092ffaa';
+        bjcolors[adcode] = 'rgba('+ gb +','+ gb +',255,.6)'//'#0092ffaa';
         //rgba('+ gb +','+ gb +',255,.8)
     }
     return bjcolors[adcode]
@@ -24,13 +24,25 @@ var disProvince = new AMap.DistrictLayer.Province({
             var adcode = properties.adcode;
             return getColorByAdcode(adcode);
         },
-        'province-stroke':'cornflowerblue',
-        'city-stroke': '#003890',//中国地级市边界
-        'county-stroke': '#001e60'//中国区县边界
+        'province-stroke':'#fff',
+        'city-stroke': 'rgba(255,255,255,.8)',//'#003890',//中国地级市边界
+        'county-stroke':'rgba(255,255,255,.8)'// '#001e60'//中国区县边界
     }
 })
 
 
+var canvas = document.createElement('div');
+canvas.className='clayer'
+canvas.id='clayer'
+$(function(){
+    $('#clayer').polygonizr();
+})
+
+// 创建一个自定义图层
+var customLayer = new AMap.CustomLayer(canvas, {
+    zIndex: 11,
+    zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
+});
 
 var map = new AMap.Map('container', {
     resizeEnable: true,
@@ -48,6 +60,7 @@ var map = new AMap.Map('container', {
     expandZoomRange: true,
     layers: [
         disProvince,
+        customLayer,
         new AMap.TileLayer({
             zooms: [3, 18],    //可见级别
             visible: true,    //是否可见
@@ -70,32 +83,7 @@ var layer = Loca.visualLayer({
     shape: 'circle'
 });
 
-function addMarker() {
-    marker = new AMap.Marker({
-        icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-        position: [116.412467, 39.897761]
-    });
-    marker.setMap(map);
-}
-// 构造矢量圆形
-var circle = new AMap.Circle({
-    center: new AMap.LngLat("116.403322", "39.920255"), // 圆心位置
-    radius: 1000,  //半径
-    strokeColor: "#F33",  //线颜色
-    strokeOpacity: 1,  //线透明度
-    strokeWeight: 3,  //线粗细度
-    fillColor: "#ee2200",  //填充颜色
-    fillOpacity: 0.35 //填充透明度
-});
 
-// 将以上覆盖物添加到地图上
-// 单独将点标记添加到地图上
-// map.add(marker);
-// add方法可以传入一个覆盖物数组，将点标记和矢量圆同时添加到地图上
-
-addMarker();
-map.add([circle]);
-map.setFitView();
 
 // 获取 canvas 实例
 // var canvas = document.createElement('canvas');
@@ -110,16 +98,9 @@ map.setFitView();
 //
 // ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
 // ctx.fillRect (30, 30, 55, 50);
-var canvas = document.createElement('div');
-canvas.className='clayer'
-canvas.id='clayer'
-// 创建一个自定义图层
-var customLayer = new AMap.CustomLayer(canvas, {
-    zIndex: 12,
-    zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
-});
 
-map.add(customLayer);
+
+//map.add(customLayer);
 
 // 同时引入工具条插件，比例尺插件和鹰眼插件
 AMap.plugin([
@@ -129,8 +110,6 @@ AMap.plugin([
     window.ovv=new AMap.OverView({isOpen:true})
     // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
     map.addControl(window.ovv);
-
-
 
     // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
     map.addControl(new AMap.Geolocation());
@@ -180,7 +159,7 @@ layer.setOptions({
         fill: function (obj) {
             var style = obj.value.style;
             var color;
-            var cls=colors['blue'];
+            var cls=colors['orange'];
             if (style == 0) {
                 color = cls[0];
             } else if (style == 1) {
@@ -217,43 +196,72 @@ window.onload=function(){
 }
 function stepOne() {
     tasks = [];
-    (function _a() {
-        let zIndex = map.getZoom()
-            map.setZoom(zIndex - 0.1)
-        if (zIndex >5) {
-            requestAnimationFrame(_a)
-        }else{
-            map.setPitch(0)
-            map.setRotation(0)
-            removeEchart()
-        }
-    })()
-   
+    map.setCenter([116.306412,39.919372])
+    map.setZoom(4)
+    setPitch(0)
+    setRotation(0)
+    removeEchart()
 }
 function stepTwo() {
     tasks=[];
-    (function _a() {
-        let zIndex = map.getZoom()
-        if (zIndex<10) {
-            map.setZoom(zIndex + 0.1)
-        }else if(zIndex>10){
-            map.setZoom(zIndex - 0.1)
-        }
-        if (zIndex !=10) {
-            requestAnimationFrame(_a)
-        }else{
-            map.setPitch(0)
-            map.setRotation(0)
-            removeEchart()
-        }
-    })()
+    map.setCenter([116.306412,39.919372])
+    map.setZoom(9)
+    setPitch(30)
+    setRotation(0)
+
+    removeEchart()
+
 }
 function stepThree() {
    // navigation(map)
+    //before()
     initEchart()
 
+    map.setZoom(15)
+    setPitch(60)
+    setRotation(180)
+
+
+    map.panTo([116.589811,39.914282])
 }
 
+function setPosition(ps,callback){
+    callback=callback||function(){}
+    var form={v:map.getPitch()}
+    return new TWEEN.Tween(form).to({v:deg},1000).start().onUpdate(
+        function(){
+            map.setPitch(this.v)
+            console.log('pitch:'+this.v);
+        }).onComplete(callback)
+}
+
+function setPitch(deg,callback){
+    callback=callback||function(){}
+    var form={v:map.getPitch()}
+    return new TWEEN.Tween(form).to({v:deg},1000).start().onUpdate(
+        function(){
+            map.setPitch(this.v)
+            console.log('pitch:'+this.v);
+        }).onComplete(callback)
+}
+
+function setRotation(deg,callback){
+    callback=callback||function(){}
+    var form={v:map.setRotation()}
+    return new TWEEN.Tween(form).to({v:deg},1000).start().onUpdate(
+        function(){
+            map.setRotation(this.v)
+            console.log('Rotation:'+this.v);
+        }).onComplete(callback)
+}
+
+animate();
+function animate() {
+    requestAnimationFrame(animate);
+    // [...]
+    TWEEN.update();
+    // [...]
+}
 
 //监听触发操作
 function hashChange() {
