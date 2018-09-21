@@ -189,3 +189,48 @@ ul,li{list-style: none;margin:0;}
     background: -moz-linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* Firefox 3.6 - 15 */
     background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)); /* 标准的语法（必须放在最后） */
 }
+
+
+
+
+.info-window{
+    height: 100px;
+    background:transparent;
+    position: relative;
+}
+.info-window .line{
+    width: 40px;
+    height: 100px;
+    position: absolute;
+    border: 1px solid #fff;
+    transform:skew(10deg,0deg);
+    right:0;
+    bottom: 0;
+    border-width: 1px 1px 0 0 ;
+}
+.info-window .info-content{
+    min-width: 120px;
+    border: 10px double transparent;
+    box-sizing: border-box;
+    -webkit-border-image: url(../img/info-window-bg3.png) 8 round;
+    border-image: url(../img/info-window-bg3.png) 8 round;
+    height: 42px;
+    display: inline-block;
+    position: absolute;
+    bottom:79px;
+    right: 47px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+}
+.info-window .info-content div{
+    background: rgba(0,114,255,.75);
+    color: #fff;
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    left: -5px;
+    bottom:-5px;
+    z-index: -1;
+}
