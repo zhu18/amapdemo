@@ -45,45 +45,6 @@ var customLayer = new AMap.CustomLayer(canvas, {
 });
 
 var map = new AMap.Map('container', {
-<<<<<<< HEAD
-        resizeEnable: true,
-        rotateEnable: true,
-        pitchEnable: true,
-        showIndoorMap:false,
-        isHotspot:false,
-        pitch: 0,
-        rotation: 0,
-        viewMode: '3D',//开启3D视图,默认为关闭
-        buildingAnimation: true,//楼块出现是否带动画
-        features: ['bg', 'road', 'point'],//隐藏默认楼块
-        showLabel: false,
-        mapStyle: 'amap://styles/2b5b5a7bf7d342735986be35a82f241f',
-        expandZoomRange: true,
-        layers: [
-            disProvince,
-            new AMap.TileLayer({
-                zooms: [3, 18],    //可见级别
-                visible: true,    //是否可见
-                opacity: 1,       //透明度
-                zIndex: 0         //叠加层级
-            }),
-            new AMap.Buildings({
-                zooms: [5, 18],
-                zIndex: 10,
-                heightFactor: 2//2倍于默认高度，3D下有效
-            })//楼块图层
-        ],
-        zoom: 4,
-        center: [116.372169, 40.041315]
-    });
-    var map2 = new Loca(map)
-    var layer = Loca.visualLayer({
-        container: map2,
-        type: 'point',
-        shape: 'circle'
-    });
-
-=======
     resizeEnable: true,
     rotateEnable: true,
     pitchEnable: true,
@@ -121,7 +82,6 @@ var layer = Loca.visualLayer({
     type: 'point',
     shape: 'circle'
 });
->>>>>>> 6c1cbc13f80eb19d5c579dd85ce167bd11cb0313
 
 
 
@@ -244,6 +204,130 @@ function stepOne() {
 }
 function stepTwo() {
     step2()
+    // tasks=[];
+    // map.setCenter([116.306412,39.919372])
+    // map.setZoom(9)
+    // setPitch(60)
+    // setRotation(0)
+
+    // removeEchart()
+
+
+    // var colors = ['#ecda9a', '#efc47e', '#f3ad6a', '#f7945d'];
+    // let map3 = new Loca(map)
+    // var layer2 = Loca.visualLayer({
+    //     container: map3,
+    //     type: 'polygon',
+    //     shape: 'polygon'
+    // });
+
+    // layer2.setData(dd, {
+    //     lnglat: 'coordinates'
+    // });
+    // layer2.setOptions({
+    //     style: {
+    //         height: 70000,
+    //         opacity: 0.7,
+    //         fill: '#0098fe'
+    //     }
+    // });
+    // var layer3 = Loca.visualLayer({
+    //     container: map3,
+    //     type: 'line',
+    //     shape: 'line'
+    // });
+
+    // layer3.setData(dd, {
+    //     lnglat: 'coordinates'
+    // });
+
+    // var layer4 = Loca.visualLayer({
+    //     container: map3,
+    //     type: 'point',
+    //     shape: 'image'
+    // });
+
+    // layer4.setData(dd, {
+    //     lnglat: 'center'
+    // });
+
+  
+
+
+    // layer3.setOptions({
+    //     style: {
+    //         height: 70001,
+    //         opacity: 1,
+    //         stroke:'#ffffff',
+    //         lineWidth:0
+    //     }
+    // });
+    // layer4.setOptions({
+    //     source:'http://img.zcool.cn/community/0117e2571b8b246ac72538120dd8a4.jpg@1280w_1l_2o_100sh.jpg',
+    //     style: {
+    //         size: 250,
+    //         opacity: 0.6
+    //     }
+    //     // style: {
+    //     //     height: 20001,
+    //     //     opacity: 1,
+    //     //     stroke: '#fff',
+    //     //     lineWidth: 100
+    //     // }
+    // });
+    // layer2.render();
+    // layer3.render();
+    // // layer4.render();
+    // console.log(map.getBounds())
+    // let aaa=new AMap.ImageLayer({
+    //     bounds: new AMap.Bounds([115.43897, 39.404159], [117.55351, 40.747247]),
+    //     // bounds: map.getBounds().path,
+    //     map:map,
+    //     opacity:1,
+    //     url:'../img/step2_bg2.png'
+    // })
+    // map.add(aaa)
+
+
+    // var layer5 = Loca.visualLayer({
+    //     container: map3,
+    //     type: 'point',
+    //     shape: 'circle',
+    //     // 设置正多边形顶点数量。
+    //     // 拆分 32 个顶点就可以近似看做是圆形，拆分越多越平滑，但会有性能损耗。
+    // });
+  
+
+    // layer5.setData(ddd, {
+    //     lnglat: 'coord'
+    // });
+
+    // var topColors = [
+    //     '#ffffff'
+    // ];
+
+    // layer5.setOptions({
+    //     // 单位米
+    //     unit: 'meter',
+    //     style: {
+    //         // 正多边形半径
+    //         radius: 2.5,
+    //         // 高度为 0 即可贴地面
+    //         height: 0.2,
+    //         fill: '#0eb1db',
+    //         lineWidth: 2,
+    //         stroke: 'rgba(255,255,255,.6)',
+    //         opacity: 0.8,
+    //     }
+    // });
+
+    // layer5.render();
+
+   
+  
+    
+
+
 
    
 
@@ -321,12 +405,14 @@ function hashChange() {
     }
 }
 
-
 //url变化监听器
 if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
     
     window.onhashchange = hashChange;  
 }
+
+
+
 
 
 
