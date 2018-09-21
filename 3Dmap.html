@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>3D地图</title>
-    <link href="./css/3Dmap.css" rel="stylesheet" />
+    <link href="./css/3Dmap.css" rel="stylesheet"/>
 
 
-    <script language="javascript" src="http://webapi.amap.com/maps?v=1.4.10&key=8845df0c0040e4aa27ceb18ad84dfdf9&plugin=Map3D,AMap.DistrictLayer,AMap.ControlBar"></script>
+    <script language="javascript"
+            src="http://webapi.amap.com/maps?v=1.4.10&key=8845df0c0040e4aa27ceb18ad84dfdf9&plugin=Map3D,AMap.DistrictLayer,AMap.ControlBar"></script>
     <script src="http://webapi.amap.com/loca?key=8845df0c0040e4aa27ceb18ad84dfdf9"></script>
     <script src="http://a.amap.com/jsapi_demos/static/citys.js"></script>
     <script src="js/tween.min.js"></script>
     <style>
-        #bglayer{
-            width:100%;
+        #bglayer {
+            width: 100%;
             height: 100%;
             background: url("img/bg1.png"); /*radial-gradient(rgba(255,255,255,.3), rgba(0,50,90,.6), rgba(0,0,0,.8));*/
         }
-        #clayer{
-            width:100%;
-            height: 100%;
 
+        #clayer {
+            width: 100%;
+            height: 100%;
 
         }
     </style>
@@ -30,54 +31,73 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="title">jusfoun-FE - 空间信息可视化交互平台
-            <div class="title-after">
-                <div class="title-after-img"></div>
-                <div class="title-after-inimg"></div>
-                <div class="title-after-pimg"></div>
-            </div>
-        </div>
-        <ul class="nav">
-            <li>
-                <a href="#step=1">全国</a>
-            </li>
-            <li>
-                <a href="#step=2">北京地区</a>
-            </li>
-            <li>
-                <a href="#step=3">朝阳地区</a>
-            </li>
-            <li>
-                <a href="#">信息统计</a>
-            </li>
-        </ul>
-    </div>
-    <div id="container" style="width:100%; height:100%;resize:both;"></div>
-    <div class="echart-con">
-        <div class="item" id="lineWarp">
-            <div id="line" class="chart"></div>
-        </div>
-        <div class="item" id="hbarWarp">
-            <div id="hbar" class="chart"></div>
-        </div>
-        <div class="item" id="baseLineWarp">
-            <div id="baseLine" class="chart"></div>
-        </div>
-        <div class="item" id="vbarWarp">
-            <div id="vbar" class="chart"></div>
+<div class="header">
+    <div class="title">空间信息可视化交互平台
+        <div class="title-after">
+            <div class="title-after-img"></div>
+            <div class="title-after-inimg"></div>
+            <div class="title-after-pimg"></div>
         </div>
     </div>
+    <ul class="nav">
+        <li>
+            <a class="active" href="#step=1">全国</a>
+        </li>
+        <li>
+            <a href="#step=2">北京地区</a>
+        </li>
+        <li>
+            <a href="#step=3">朝阳地区</a>
+        </li>
+        <li>
+            <a href="#">信息统计</a>
+        </li>
+    </ul>
+</div>
+<div id="container" style="width:100%; height:100%;resize:both;"></div>
+<div class="echart-con">
+    <div class="item" id="lineWarp">
+        <div id="line" class="chart"></div>
+    </div>
+    <div class="item" id="hbarWarp">
+        <div id="hbar" class="chart"></div>
+    </div>
+    <div class="item" id="baseLineWarp">
+        <div id="baseLine" class="chart"></div>
+    </div>
+    <div class="item" id="vbarWarp">
+        <div id="vbar" class="chart"></div>
+    </div>
+</div>
 
-    <div class="con-panel left-panel"></div>
-    <div class="con-panel right-panel"></div>
+<div class="con-panel left-panel"></div>
+<div class="con-panel right-panel"></div>
 
-    <script src="./js/echarts.min.js" type="text/javascript"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/polygonizr.min.js"></script>
-    <script src="./js/util.js" type="text/javascript"></script>
-    <script src="./js/baseChart.js" type="text/javascript"></script>
-    <script src="./js/3Dmap.js" type="text/javascript"></script>
+<div class="con-statis">
+    <div class="base-info">
+        <label class="name">全国范围</label>
+        <label class="time">0000-00-00     00:00</label>
+    </div>
+    <div class="turnover">
+        <label class="lbl-name">累计成交量</label>
+        <img src="./img/light9.png" />
+        <div class="numberRun1"></div>
+    </div>
+    <div class="nums">
+        <label class="lbl-name">平台数量</label>
+        <div class="numberRun2"></div>
+        <img src="./img/light8.png" />
+    </div>
+</div>
+
+<script src="./js/echarts.min.js" type="text/javascript"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/polygonizr.min.js"></script>
+<script src="./js/util.js" type="text/javascript"></script>
+<script src="./js/baseChart.js" type="text/javascript"></script>
+<script src="./js/mask.js" type="text/javascript"></script>
+<script src="./js/3Dmap.js" type="text/javascript"></script>
+<script src="./js/numberAnimate.js" type="text/javascript"></script>
 </body>
 
 </html>

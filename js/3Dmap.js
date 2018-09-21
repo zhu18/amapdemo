@@ -45,43 +45,43 @@ var customLayer = new AMap.CustomLayer(canvas, {
 });
 
 var map = new AMap.Map('container', {
-    resizeEnable: true,
-    rotateEnable: true,
-    pitchEnable: true,
-    showIndoorMap:false,
-    isHotspot:false,
-    pitch: 0,
-    rotation: 0,
-    viewMode: '3D',//开启3D视图,默认为关闭
-    buildingAnimation: true,//楼块出现是否带动画
-    features: ['bg', 'road', 'point'],//隐藏默认楼块
-    showLabel: false,
-    mapStyle: 'amap://styles/2b5b5a7bf7d342735986be35a82f241f',
-    expandZoomRange: true,
-    layers: [
-        disProvince,
-        customLayer,
-        new AMap.TileLayer({
-            zooms: [3, 18],    //可见级别
-            visible: true,    //是否可见
-            opacity: 1,       //透明度
-            zIndex: 0         //叠加层级
-        }),
-        new AMap.Buildings({
-            zooms: [5, 18],
-            zIndex: 10,
-            heightFactor: 2//2倍于默认高度，3D下有效
-        })//楼块图层
-    ],
-    zoom: 4,
-    center: [116.372169, 40.041315]
-});
-let map2 = new Loca(map)
-var layer = Loca.visualLayer({
-    container: map2,
-    type: 'point',
-    shape: 'circle'
-});
+        resizeEnable: true,
+        rotateEnable: true,
+        pitchEnable: true,
+        showIndoorMap:false,
+        isHotspot:false,
+        pitch: 0,
+        rotation: 0,
+        viewMode: '3D',//开启3D视图,默认为关闭
+        buildingAnimation: true,//楼块出现是否带动画
+        features: ['bg', 'road', 'point'],//隐藏默认楼块
+        showLabel: false,
+        mapStyle: 'amap://styles/2b5b5a7bf7d342735986be35a82f241f',
+        expandZoomRange: true,
+        layers: [
+            disProvince,
+            new AMap.TileLayer({
+                zooms: [3, 18],    //可见级别
+                visible: true,    //是否可见
+                opacity: 1,       //透明度
+                zIndex: 0         //叠加层级
+            }),
+            new AMap.Buildings({
+                zooms: [5, 18],
+                zIndex: 10,
+                heightFactor: 2//2倍于默认高度，3D下有效
+            })//楼块图层
+        ],
+        zoom: 4,
+        center: [116.372169, 40.041315]
+    });
+    var map2 = new Loca(map)
+    var layer = Loca.visualLayer({
+        container: map2,
+        type: 'point',
+        shape: 'circle'
+    });
+
 
 
 
@@ -285,14 +285,12 @@ function hashChange() {
     }
 }
 
+
 //url变化监听器
 if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
     
     window.onhashchange = hashChange;  
 }
-
-
-
 
 
 
