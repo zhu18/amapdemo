@@ -193,6 +193,7 @@ var customLayer = new AMap.CustomLayer(canvas, {
     }
 
     function stepOne() {
+        destroyStep2()
         tasks = [];
         //map.setCenter([116.306412, 39.919372])
         map.setCenter([110.515396, 35.498597])
@@ -209,6 +210,7 @@ var customLayer = new AMap.CustomLayer(canvas, {
     }
 
     function stepThree() {
+        destroyStep2()
         // navigation(map)
         //before()
         initEchart()
