@@ -107,13 +107,13 @@ function step2(params) {
 
 
     // 地图底下阴影层
-    let bgLayer = new AMap.ImageLayer({
+    /*let bgLayer = new AMap.ImageLayer({
         // bounds: new AMap.Bounds([115.43897, 39.404159], [117.55351, 40.747247]),
         bounds: new AMap.Bounds([112.95133, 36.031928], [120.30252, 44.223328]),
         map: map,
         opacity: 1,
         url: '../img/step2_bg4.png'
-    })
+    })*/
     // map.add(bgLayer)
 
 

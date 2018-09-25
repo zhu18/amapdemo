@@ -193,13 +193,8 @@ var customLayer = new AMap.CustomLayer(canvas, {
     }
 
     function stepOne() {
-        tasks = [];
-        //map.setCenter([116.306412, 39.919372])
-        map.setCenter([110.515396, 35.498597])
-        map.setZoom(4)
-        setPitch(0)
-        setRotation(0)
-        removeEchart()
+
+        step1();
     }
 
     function stepTwo() {
