@@ -13,10 +13,11 @@ function step1() {
 
 function addImageLayer() {
     var imgLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([73.337662,15.879339], [139.343521,54.979123]),
-        url:'img/circle.png',
+        bounds: new AMap.Bounds([54.616959,-3.812636], [164.083755,62.376933]),
+        url:'../../img/circle.png',
         opacity:1,
-        visible:true
+        visible:true,
+        rejectMapMask:true
     });
     imgLayer.setMap(map);
 }
