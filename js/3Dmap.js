@@ -62,7 +62,7 @@ var customLayer = new AMap.CustomLayer(canvas, {
         expandZoomRange: true,
         layers: [
             // disProvince,
-            customLayer,
+            //customLayer,
             new AMap.TileLayer({
                 zooms: [3, 18],    //可见级别
                 visible: true,    //是否可见
@@ -117,6 +117,7 @@ var customLayer = new AMap.CustomLayer(canvas, {
     });
     map.on('click', function (e) {
         console.log(e.lnglat + '')
+        alert(e.lnglat);
     })
 
 
@@ -201,6 +202,8 @@ var customLayer = new AMap.CustomLayer(canvas, {
         setPitch(0)
         setRotation(0)
         removeEchart()
+
+        step1();
     }
 
     function stepTwo() {

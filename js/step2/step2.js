@@ -125,8 +125,6 @@ function step2(params) {
     //     opacity: 1,
     //     url: '../img/step2_bg4.png'
     // })
-    // map.add(bgLayer)
-
 
     // 网格涂层
    layer5 = Loca.visualLayer({
