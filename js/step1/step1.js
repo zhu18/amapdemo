@@ -1,13 +1,13 @@
 function step1() {
 
     tasks = [];
-    //map.setCenter([116.306412, 39.919372])
     map.setCenter([110.515396, 35.498597])
     map.setZoom(4)
     setPitch(0)
     setRotation(0)
     removeEchart();
 
+    addBorderLayer();
     addPointLayer();
     addImageLayer();
 }
@@ -39,6 +39,7 @@ function addPointLayer() {
         orange: ['#FFE7CB', '#FF8850', '#FF5005'],
         green: ['#E9FFE3', '#59FF5B', '#07FF23'],
         sky: ['#D9FFF7', '#62FFFF', '#00FFFF'],
+        sky2: ['#0c6dc5', '#fff', '#0fdbea'],
         blue: ['#D7D5FF', '#7355FF', '#4100FF'],
 
     }
@@ -52,19 +53,18 @@ function addPointLayer() {
                 var r;
 
                 if (style == 0) {
-                    r = isHalo ? 10 : 3;
+                    r = isHalo ? 10 : 5;
                 } else if (style == 1) {
                     r = isHalo ? 8 : 2;
                 } else {
                     r = isHalo ? 5 : 1;
                 }
-
                 return r;
             },
             fill: function (obj) {
                 var style = obj.value.style;
                 var color;
-                var cls = colors['sky'];
+                var cls = colors['sky2'];
                 if (style == 0) {
                     color = cls[0];
                 } else if (style == 1) {
@@ -90,7 +90,25 @@ function addPointLayer() {
             }
         }
     });
+
     layer.render();
+}
+
+function addBorderLayer() {
+
+    var disCountry = new AMap.DistrictLayer.Country({
+        zIndex:10,
+        depth:2,
+        rejectMapMask: true,
+        styles:{
+            'nation-stroke':'#0eb2d9',
+            'province-stroke':'#0eb2d9',
+            'fill':function(props){//中国特有字段
+                return 'rgba(11,84,181,.7)'
+            }
+        }
+    });
+    disCountry.setMap(map);
 }
 
 function addImageLayer() {
