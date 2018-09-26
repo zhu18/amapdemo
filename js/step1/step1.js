@@ -1,3 +1,4 @@
+var step1Loca, disCountry;
 function step1() {
 
     tasks = [];
@@ -14,9 +15,9 @@ function step1() {
 
 function addPointLayer() {
 
-    var loca = new Loca(map)
+    step1Loca = new Loca(map)
     var layer = Loca.visualLayer({
-        container: loca,
+        container: step1Loca,
         type: 'point',
         shape: 'circle'
     });
@@ -96,7 +97,7 @@ function addPointLayer() {
 
 function addBorderLayer() {
 
-    var disCountry = new AMap.DistrictLayer.Country({
+    disCountry = new AMap.DistrictLayer.Country({
         zIndex:10,
         depth:2,
         rejectMapMask: true,
@@ -120,4 +121,9 @@ function addImageLayer() {
         rejectMapMask: true
     });
     imgLayer.setMap(map);
+}
+
+function destroyStep1() {
+    step1Loca?step1Loca.destroy():{};
+    disCountry?disCountry.hide():{};
 }
