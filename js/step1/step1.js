@@ -64,7 +64,7 @@ function addPointLayer() {
             fill: function (obj) {
                 var style = obj.value.style;
                 var color;
-                var cls = colors['orange'];
+                var cls = colors['sky'];
                 if (style == 0) {
                     color = cls[0];
                 } else if (style == 1) {

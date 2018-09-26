@@ -8,7 +8,7 @@ body, html {
     height: 100%;
     background: #000
 }
-
+.amap-toolbar{display: none;}
 ul, li {
     list-style: none;
     margin: 0;
