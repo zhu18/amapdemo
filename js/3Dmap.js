@@ -78,24 +78,6 @@ var map = new AMap.Map('container', {
     center: [116.372169, 40.041315]
 });
 
-
-// 获取 canvas 实例
-// var canvas = document.createElement('canvas');
-//
-// // 将 canvas 宽高设置为地图实例的宽高
-// canvas.width = map.getSize().width;
-// canvas.height = map.getSize().height;
-// var ctx = canvas.getContext("2d");
-// ctx.fillStyle = "rgb(200,0,0)";
-// //绘制矩形
-// ctx.fillRect (10, 10, 55, 50);
-//
-// ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-// ctx.fillRect (30, 30, 55, 50);
-
-
-//map.add(customLayer);
-
 // 同时引入工具条插件，比例尺插件和鹰眼插件
 AMap.plugin([
     'AMap.OverView',
@@ -128,8 +110,6 @@ function stepOne() {
 
 function stepTwo() {
     step2()
-
-
 }
 
 function stepThree() {
@@ -198,7 +178,6 @@ function hashChange() {
         stepTwo()
     } else if (step == 3) {
         stepThree()
-
     } else {
         stepOne()
     }
@@ -207,7 +186,6 @@ function hashChange() {
 
 //url变化监听器
 if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
-
     window.onhashchange = hashChange;
 }
 
