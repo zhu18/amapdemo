@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     initMap();
     animate();
-    //addMapControl();
+    addMapControl();
 
     hashChange();
     //url变化监听器
@@ -81,6 +81,7 @@ function addMapControl() {
 
     map.on('click', function (e) {
         console.log(e.lnglat + '')
+        alert(e.lnglat);
     })
 }
 

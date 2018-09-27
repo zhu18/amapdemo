@@ -2,15 +2,21 @@ var step1Loca, disCountry;
 function step1() {
 
     tasks = [];
+<<<<<<< HEAD
     map.setCenter([110.515396, 35.498597])
     map.setZoom(4.3)
+=======
+    map.setCenter([105.515396, 39.998597])
+    map.setZoom(4.4)
+>>>>>>> 7bc803f6894fba4244f63562f96e5e9e955cf300
     setPitch(0)
     setRotation(0)
     removeEchart();
 
     addBorderLayer();
     addPointLayer();
-    addImageLayer();
+    addBorderLayer2();
+    addCircleLayer();
 }
 
 function addPointLayer() {
@@ -112,10 +118,21 @@ function addBorderLayer() {
     disCountry.setMap(map);
 }
 
-function addImageLayer() {
+function addCircleLayer() {
     var imgLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
-        url: '../../img/circle.png',
+        url: '../../img/map-circle.png',
+        opacity: 1,
+        visible: true,
+        rejectMapMask: true
+    });
+    imgLayer.setMap(map);
+}
+
+function addBorderLayer2() {
+    var imgLayer = new AMap.ImageLayer({
+        bounds: new AMap.Bounds([66.482734,11.754113], [141.350843,59.795826]),
+        url: '../../img/map-border.png',
         opacity: 1,
         visible: true,
         rejectMapMask: true
