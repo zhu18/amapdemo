@@ -11,8 +11,8 @@ function fixedMap(params) {
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
     tasks = [];
-    map.setCenter([115.849726, 40.211949])
-    map.setZoom(9.4)
+    map.setCenter([114.149726, 40.211949])
+    map.setZoom(9.6)
     setPitch(55)
     setRotation(0)
     removeEchart()
@@ -32,7 +32,7 @@ function step2(params) {
     layer2.setData(dd, {
         lnglat: 'coordinates'
     });
-    var colors = ['rgba(0,152,254,0.8)', 'rgba(0,152,254,0.6)', 'rgba(0,152,254,0.9)', 'rgba(0,152,254,0.7)']
+    var colors = ['rgba(0,152,254,0.5)', 'rgba(0,152,254,0.6)', 'rgba(0,152,254,0.9)', 'rgba(0,152,254,0.3)']
     // layer2.setOptions({
     //     style: {
     //         height: 70000,
@@ -57,14 +57,39 @@ function step2(params) {
             fillOpacity: 0.5
         },
         selectStyle: {
+            fill: function (res) {
+                var index = res.index;
+                return colors[index % colors.length];
+            },
             lineWidth: 2,
             fillOpacity: 0.6,
         }
     });
   
-
-
-
+    layer2.on('mouseenter',function(e){
+        layer2.setOptions({
+            style: {
+                height: function (res) {
+                    if (res.value.name === e.rawData.name) {
+                        return '130000';
+                    } else {
+                       
+                        return '70000'
+                    }
+                },
+                fill: function (res) {
+                    if (res.value.name===e.rawData.name) {
+                        return '#000e44';
+                    }else{
+                        var index = res.index;
+                        return colors[index % colors.length];
+                    }
+                },
+                fillOpacity: 0.7,
+            },
+        });
+        layer2.render()
+    })
     // 带有高度的北京地图(线)
     topLine = Loca.visualLayer({
         container: map3,
@@ -148,9 +173,10 @@ function step2(params) {
             height: 0.2,
             fill: '#0eb1db',
             lineWidth: 2,
-            stroke: 'rgba(255,255,255,.6)',
-            opacity: 0.8,
+            stroke: 'rgba(255,255,255,.4)',
+            opacity: 0.4,
         }
+        
     });
     //信息图层
     //构建自定义信息窗体
