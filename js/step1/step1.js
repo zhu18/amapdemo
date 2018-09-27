@@ -2,13 +2,8 @@ var step1Loca, disCountry;
 function step1() {
 
     tasks = [];
-<<<<<<< HEAD
-    map.setCenter([110.515396, 35.498597])
-    map.setZoom(4.3)
-=======
     map.setCenter([105.515396, 39.998597])
     map.setZoom(4.4)
->>>>>>> 7bc803f6894fba4244f63562f96e5e9e955cf300
     setPitch(0)
     setRotation(0)
     removeEchart();
