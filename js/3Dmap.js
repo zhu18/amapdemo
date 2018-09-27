@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     initMap();
     animate();
-    addMapControl();
+    //addMapControl();
 
     hashChange();
     //url变化监听器

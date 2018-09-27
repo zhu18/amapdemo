@@ -8,7 +8,7 @@ function step1() {
     setRotation(0)
     removeEchart();
 
-    addBorderLayer();
+    //addBorderLayer();
     addPointLayer();
     addBorderLayer2();
     addCircleLayer();
@@ -103,11 +103,16 @@ function addBorderLayer() {
         depth:2,
         rejectMapMask: true,
         styles:{
-            'nation-stroke':'#0eb2d9',
-            'province-stroke':'#0eb2d9',
+            /*'nation-stroke':'#0eb2d9',
+            'province-stroke':'#0eb2d9',*/
+            'nation-stroke':'white',
+            'province-stroke':'white',
             'fill':function(props){//中国特有字段
-                return 'rgba(11,84,181,.7)'
+                return 'black'
             }
+            /*'fill':function(props){//中国特有字段
+                return 'rgba(11,84,181,.7)'
+            }*/
         }
     });
     disCountry.setMap(map);
@@ -126,7 +131,7 @@ function addCircleLayer() {
 
 function addBorderLayer2() {
     var imgLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([66.482734,11.754113], [141.350843,59.795826]),
+        bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
         url: '../../img/map-border.png',
         opacity: 1,
         visible: true,
