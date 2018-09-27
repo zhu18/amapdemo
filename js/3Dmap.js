@@ -131,10 +131,12 @@ function stepOne() {
 }
 
 function stepTwo() {
+    destroyStep1();
     step2()
 }
 
 function stepThree() {
+    destroyStep1();
     destroyStep2()
 
     initEchart()
