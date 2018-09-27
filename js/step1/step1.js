@@ -3,7 +3,7 @@ function step1() {
 
     tasks = [];
     map.setCenter([110.515396, 35.498597])
-    map.setZoom(4)
+    map.setZoom(4.3)
     setPitch(0)
     setRotation(0)
     removeEchart();
