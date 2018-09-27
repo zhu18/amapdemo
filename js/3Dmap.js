@@ -81,6 +81,7 @@ function addMapControl() {
 
     map.on('click', function (e) {
         console.log(e.lnglat + '')
+        alert(e.lnglat);
     })
 }
 
@@ -131,10 +132,12 @@ function stepOne() {
 }
 
 function stepTwo() {
+    destroyStep1();
     step2()
 }
 
 function stepThree() {
+    destroyStep1();
     destroyStep2()
 
     initEchart()

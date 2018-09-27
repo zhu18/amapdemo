@@ -1,22 +1,24 @@
+var step1Loca, disCountry;
 function step1() {
 
     tasks = [];
-    map.setCenter([110.515396, 35.498597])
-    map.setZoom(4)
+    map.setCenter([105.515396, 39.998597])
+    map.setZoom(4.4)
     setPitch(0)
     setRotation(0)
     removeEchart();
 
-    addBorderLayer();
+    //addBorderLayer();
     addPointLayer();
-    addImageLayer();
+    addBorderLayer2();
+    addCircleLayer();
 }
 
 function addPointLayer() {
 
-    var loca = new Loca(map)
+    step1Loca = new Loca(map)
     var layer = Loca.visualLayer({
-        container: loca,
+        container: step1Loca,
         type: 'point',
         shape: 'circle'
     });
@@ -96,28 +98,49 @@ function addPointLayer() {
 
 function addBorderLayer() {
 
-    var disCountry = new AMap.DistrictLayer.Country({
+    disCountry = new AMap.DistrictLayer.Country({
         zIndex:10,
         depth:2,
         rejectMapMask: true,
         styles:{
-            'nation-stroke':'#0eb2d9',
-            'province-stroke':'#0eb2d9',
+            /*'nation-stroke':'#0eb2d9',
+            'province-stroke':'#0eb2d9',*/
+            'nation-stroke':'white',
+            'province-stroke':'white',
             'fill':function(props){//中国特有字段
-                return 'rgba(11,84,181,.7)'
+                return 'black'
             }
+            /*'fill':function(props){//中国特有字段
+                return 'rgba(11,84,181,.7)'
+            }*/
         }
     });
     disCountry.setMap(map);
 }
 
-function addImageLayer() {
+function addCircleLayer() {
     var imgLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
-        url: '../../img/circle.png',
+        url: '../../img/map-circle.png',
         opacity: 1,
         visible: true,
         rejectMapMask: true
     });
     imgLayer.setMap(map);
+}
+
+function addBorderLayer2() {
+    var imgLayer = new AMap.ImageLayer({
+        bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
+        url: '../../img/map-border.png',
+        opacity: 1,
+        visible: true,
+        rejectMapMask: true
+    });
+    imgLayer.setMap(map);
+}
+
+function destroyStep1() {
+    step1Loca?step1Loca.destroy():{};
+    disCountry?disCountry.hide():{};
 }
