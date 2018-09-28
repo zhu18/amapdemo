@@ -105,7 +105,7 @@ function addBorderLayer() {
             'nation-stroke':'#0eb2d9',
             'province-stroke':'#0eb2d9',
             'fill':function(props){//中国特有字段
-                return 'rgba(11,84,181,.7)'
+                return 'rgba(11,84,181,1)'
             }
         }
     });
@@ -115,7 +115,7 @@ function addBorderLayer() {
 function addImageLayer() {
     var imgLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
-        url: '../../img/circle.png',
+        url: './img/circle.png',
         opacity: 1,
         visible: true,
         rejectMapMask: true
