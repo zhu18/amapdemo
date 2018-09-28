@@ -170,7 +170,7 @@ ul, li {
 #container {
     opacity: 0;
     transition: opacity 1s;
-    /*background: url(../img/big-bg.png) no-repeat !important;*/
+    background: url(../img/big-bg.png) no-repeat !important;
     background-size: 100%;
 }
 

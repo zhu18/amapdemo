@@ -1,4 +1,4 @@
-var step1Loca, disCountry;
+var step1Loca, disCountry,circleLayer;
 function step1() {
 
     tasks = [];
@@ -98,7 +98,7 @@ function addPointLayer() {
 
 function addBorderLayer() {
 
-    disCountry = new AMap.DistrictLayer.Country({
+    var mapBorder = new AMap.DistrictLayer.Country({
         zIndex:10,
         depth:2,
         rejectMapMask: true,
@@ -112,22 +112,22 @@ function addBorderLayer() {
             }
         }
     });
-    disCountry.setMap(map);
+    mapBorder.setMap(map);
 }
 
 function addCircleLayer() {
-    var imgLayer = new AMap.ImageLayer({
+    circleLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
         url: '../../img/map-circle.png',
         opacity: 1,
         visible: true,
         rejectMapMask: true
     });
-    imgLayer.setMap(map);
+    circleLayer.setMap(map);
 }
 
 function addBorderLayer2() {
-    var imgLayer = new AMap.ImageLayer({
+    disCountry = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
         bounds: new AMap.Bounds([63.018388,13.933034], [146.784235,58.900369]),
         url: '../../img/map-bg2.png',
@@ -135,10 +135,11 @@ function addBorderLayer2() {
         visible: true,
         rejectMapMask: true
     });
-    imgLayer.setMap(map);
+    disCountry.setMap(map);
 }
 
 function destroyStep1() {
     step1Loca?step1Loca.destroy():{};
     disCountry?disCountry.hide():{};
+    circleLayer?circleLayer.hide():{};
 }
