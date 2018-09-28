@@ -29,9 +29,9 @@ var ring = [
 const ddd = [{ coord: "115.549577,39.548351", value: 1114 }]
 // const ddd = [{ coord: "115.54031,39.711105", value: 1114 }]
 
-for (let index = 1; index < 25; index++) {
+for (let index = 1; index < 38; index++) {
     var val = ddd[0].coord.split(',');
-    var x = parseFloat(val[0]) + 0.07* index
+    var x = parseFloat(val[0]) + 0.06* index
     var y = parseFloat(val[1])
     ddd.push(
         { coord: `${x},${y}`, value: 1114 }
@@ -43,7 +43,7 @@ ddd.forEach((v, i) => {
     for (let index = 0; index < 30; index++) {
         var val = ddd[i].coord.split(',');
         var x = parseFloat(val[0])
-        var y = parseFloat(val[1]) + 0.07 * index
+        var y = parseFloat(val[1]) + 0.06 * index
         if (AMap.GeometryUtil.isPointInRing([x, y], ring)) {
             ddd.push(
                 { coord: `${x},${y}`, value: 1114 }
@@ -51,7 +51,7 @@ ddd.forEach((v, i) => {
         }
     }
 })
-ddd.splice(0, 25)
+ddd.splice(0, 38)
 
 
 // ddd.forEach((v, i, array) => {

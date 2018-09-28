@@ -1,16 +1,17 @@
-var step1Loca, disCountry;
+var step1Loca, disCountry,circleLayer;
 function step1() {
 
     tasks = [];
-    map.setCenter([110.515396, 35.498597])
-    map.setZoom(4)
+    map.setCenter([105.515396, 39.998597])
+    map.setZoom(4.4)
     setPitch(0)
     setRotation(0)
     removeEchart();
 
-    addBorderLayer();
+    //addBorderLayer();
     addPointLayer();
-    addImageLayer();
+    addBorderLayer2();
+    addCircleLayer();
 }
 
 function addPointLayer() {
@@ -97,33 +98,56 @@ function addPointLayer() {
 
 function addBorderLayer() {
 
-    disCountry = new AMap.DistrictLayer.Country({
+    var mapBorder = new AMap.DistrictLayer.Country({
         zIndex:10,
         depth:2,
         rejectMapMask: true,
         styles:{
-            'nation-stroke':'#0eb2d9',
-            'province-stroke':'#0eb2d9',
+            /*'nation-stroke':'#0eb2d9',
+            'province-stroke':'#0eb2d9',*/
+            'nation-stroke':'red',
+            'province-stroke':'red',
             'fill':function(props){//中国特有字段
+<<<<<<< HEAD
                 return 'rgba(11,84,181,1)'
+=======
+                return 'rgba(11,84,181,0)'
+>>>>>>> e4bbb7f9f28e310a0bdd9adc8fa02d637f4e4e78
             }
         }
     });
-    disCountry.setMap(map);
+    mapBorder.setMap(map);
 }
 
-function addImageLayer() {
-    var imgLayer = new AMap.ImageLayer({
+function addCircleLayer() {
+    circleLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
+<<<<<<< HEAD
         url: './img/circle.png',
+=======
+        url: '../../img/map-circle.png',
         opacity: 1,
         visible: true,
         rejectMapMask: true
     });
-    imgLayer.setMap(map);
+    circleLayer.setMap(map);
+}
+
+function addBorderLayer2() {
+    disCountry = new AMap.ImageLayer({
+        //bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
+        bounds: new AMap.Bounds([63.018388,13.933034], [146.784235,58.900369]),
+        url: '../../img/map-bg2.png',
+>>>>>>> e4bbb7f9f28e310a0bdd9adc8fa02d637f4e4e78
+        opacity: 1,
+        visible: true,
+        rejectMapMask: true
+    });
+    disCountry.setMap(map);
 }
 
 function destroyStep1() {
     step1Loca?step1Loca.destroy():{};
     disCountry?disCountry.hide():{};
+    circleLayer?circleLayer.hide():{};
 }
