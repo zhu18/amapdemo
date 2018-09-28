@@ -1,4 +1,4 @@
-var step1Loca, disCountry, circleLayer;
+var step1Loca, mapBorderLayer, circleLayer;
 function step1() {
 
     tasks = [];
@@ -9,12 +9,13 @@ function step1() {
     removeEchart();
 
     //addBorderLayer();
-    addPointLayer();
-    addBorderLayer2();
+    addMapBorderLayer();
+    addLocaMap();
     addCircleLayer();
+    addCircle1();
 }
 
-function addPointLayer() {
+function addLocaMap() {
 
     step1Loca = new Loca(map)
     var layer = Loca.visualLayer({
@@ -116,7 +117,7 @@ function addBorderLayer() {
 function addCircleLayer() {
 
     circleLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([54.616959, -3.812636], [164.083755, 62.376933]),
+        bounds: new AMap.Bounds([63.28813,5.598022], [146.076575,62.672368]),
         url: '../../img/circle0.png',
         opacity: 1,
         visible: true,
@@ -125,9 +126,9 @@ function addCircleLayer() {
     circleLayer.setMap(map);
 }
 
-function addBorderLayer2() {
+function addMapBorderLayer() {
 
-    disCountry = new AMap.ImageLayer({
+    mapBorderLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
         bounds: new AMap.Bounds([63.018388, 13.933034], [146.784235, 58.900369]),
         url: '../../img/map-bg2.png',
@@ -135,11 +136,33 @@ function addBorderLayer2() {
         visible: true,
         rejectMapMask: true
     });
-    disCountry.setMap(map);
+    mapBorderLayer.setMap(map);
+}
+
+function addCircle1() {
+
+    var canvas=document.createElement("canvas");
+    canvas.width="300px";
+    canvas.height="300px";
+    var ctx=canvas.getContext("2d");
+    ctx.rect(20,20,150,100);
+    ctx.fillStyle="green";
+    ctx.fill();
+   /* var img=document.createElement("img");
+    img.src="../../img/circle1.png"
+    ctx.drawImage(img,0,0);*/
+
+    var CanvasLayer = new AMap.CanvasLayer({
+        canvas: canvas,
+        bounds: new AMap.Bounds([63.018388, 13.933034], [146.784235, 58.900369]),
+        zooms: [3, 18],
+    });
+
+    CanvasLayer.setMap(map);
 }
 
 function destroyStep1() {
     step1Loca ? step1Loca.destroy() : {};
-    disCountry ? disCountry.hide() : {};
+    mapBorderLayer ? mapBorderLayer.hide() : {};
     circleLayer ? circleLayer.hide() : {};
 }

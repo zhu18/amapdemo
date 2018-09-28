@@ -81,7 +81,6 @@ function addMapControl() {
 
     map.on('click', function (e) {
         console.log(e.lnglat + '')
-        alert(e.lnglat);
     })
 }
 
