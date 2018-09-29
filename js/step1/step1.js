@@ -11,8 +11,8 @@ function step1() {
     //addBorderLayer();
     addMapBorderLayer();
     addLocaMap();
-    addCircleLayer();
-    addCircle1();
+    //addCircleLayer();
+
 }
 
 function addLocaMap() {
@@ -137,28 +137,6 @@ function addMapBorderLayer() {
         rejectMapMask: true
     });
     mapBorderLayer.setMap(map);
-}
-
-function addCircle1() {
-
-    var canvas=document.createElement("canvas");
-    canvas.width="300px";
-    canvas.height="300px";
-    var ctx=canvas.getContext("2d");
-    ctx.rect(20,20,150,100);
-    ctx.fillStyle="green";
-    ctx.fill();
-   /* var img=document.createElement("img");
-    img.src="../../img/circle1.png"
-    ctx.drawImage(img,0,0);*/
-
-    var CanvasLayer = new AMap.CanvasLayer({
-        canvas: canvas,
-        bounds: new AMap.Bounds([63.018388, 13.933034], [146.784235, 58.900369]),
-        zooms: [3, 18],
-    });
-
-    CanvasLayer.setMap(map);
 }
 
 function destroyStep1() {

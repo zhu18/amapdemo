@@ -31,7 +31,7 @@ function initMap() {
     });
 
     map = new AMap.Map('container', {
-        mask: mask,
+        //mask: mask,
         resizeEnable: true,
         rotateEnable: true,
         pitchEnable: true,
