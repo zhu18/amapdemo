@@ -69,17 +69,17 @@ function step2(params) {
     layer2.on('mouseenter',function(e){
         layer2.setOptions({
             style: {
-                height: function (res) {
-                    if (res.value.name === e.rawData.name) {
-                        return '130000';
-                    } else {
+                // height: function (res) {
+                //     if (res.value.name === e.rawData.name) {
+                //         return '130000';
+                //     } else {
                        
-                        return '70000'
-                    }
-                },
+                //         return '70000'
+                //     }
+                // },
                 fill: function (res) {
                     if (res.value.name===e.rawData.name) {
-                        return '#000e44';
+                        return '#ffff33';
                     }else{
                         var index = res.index;
                         return colors[index % colors.length];
