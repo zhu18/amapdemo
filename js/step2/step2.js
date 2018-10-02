@@ -15,7 +15,7 @@ function step2(params) {
     map.setZoom(9.6)
     setPitch(55)
     setRotation(0)
-    removeEchart()
+    
 
 
     

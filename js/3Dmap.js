@@ -43,7 +43,7 @@ function initMap() {
         buildingAnimation: true,//楼块出现是否带动画
         features: ['bg', 'road', 'point'],//隐藏默认楼块
         showLabel: false,
-        mapStyle: 'amap://styles/2b5b5a7bf7d342735986be35a82f241f',
+        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         expandZoomRange: true,
         layers: [
             //customLayer,
@@ -127,24 +127,21 @@ function animate() {
 
 function stepOne() {
     destroyStep2();
+    destroyStep3();
     step1();
 }
 
 function stepTwo() {
     destroyStep1();
+    destroyStep3();
     step2()
 }
 
 function stepThree() {
     destroyStep1();
-    destroyStep2()
-
-    initEchart()
-    map.setZoom(15)
-    setPitch(60)
-    setRotation(180)
-
-    map.panTo([116.589811, 39.914282])
+    destroyStep2();
+    step3();
+   
 }
 
 
@@ -153,6 +150,9 @@ function hashChange() {
 
     var step = util.getQueryString('step')
     clearTimeout(timer)
+    //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
+    $('html')[0].className='step'+step;
+    
     if (step == 1) {
         stepOne()
     } else if (step == 2) {

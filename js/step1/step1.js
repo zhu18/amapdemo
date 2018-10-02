@@ -6,7 +6,7 @@ function step1() {
     map.setZoom(4.4);
     setPitch(0);
     setRotation(0);
-    removeEchart();
+    
 
     //addBorderLayer();
     addMapBorderLayer();

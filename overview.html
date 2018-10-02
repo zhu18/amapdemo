@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script language="javascript" src="http://webapi.amap.com/maps?v=1.4.10&key=8845df0c0040e4aa27ceb18ad84dfdf9"></script>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: rgb(4, 7, 44)
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 50px rgb(3, 191, 244), inset 0 0 80px rgba(3, 68, 244, 0.82), inset 0 0 150px rgba(0, 74, 255, 0.35);
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transition: box-shadow 1s;
+        }
+
+        .loaded .mask {
+            opacity: 1;
+            box-shadow: inset 0 0 11px rgb(3, 191, 244), inset 0 0 20px rgba(3, 68, 244, 0.82), inset 0 0 50px rgba(0, 74, 255, 0.35);
+        }
+
+        #container {
+            opacity: 0;
+            transition: all .8s;
+        }
+
+        .loaded #container {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container" style="width:100%; height:100%;resize:both;"></div>
+    <div class='mask'></div>
+    <script>
+
+        map = new AMap.Map('container', {
+            mapStyle: 'amap://styles/400f3cca392175a5df9c9d6ecba447d7',
+            zoom: 11
+        });
+        var marker = new AMap.Marker({
+            icon: "./img/step3_overview_sel.png",
+            position: [116.405467, 39.907761]
+        });
+        
+        map.add(marker);
+        map.on("complete", function () {
+            document.body.className = "loaded"
+        });
+        map.on('click', function (e) {
+            
+            marker.setPosition(e.lnglat)
+            top.map.setCenter(e.lnglat);
+            console.log('定位到[ ' + e.lnglat.getLng() + ',' + e.lnglat.getLat() + ' ]');
+        })
+    </script>
+</body>
+
+</html>
