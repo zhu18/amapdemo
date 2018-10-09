@@ -10,24 +10,23 @@ function fixedMap(params) {
 }
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
-
-    
+    map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
     setPitch(55)
     setPitch(0)
     setRotation(0)
-    new AMap.ImageLayer({
-        bounds: new AMap.Bounds([114.532907,39.233462
+    // new AMap.ImageLayer({
+    //     bounds: new AMap.Bounds([114.532907,39.233462
 
-        ], [117.951335,41.249809]),
-        url: '../../img/circle0.png',
-        opacity: 1,
-        visible: true,
-        map: map,
-        rejectMapMask: true,
-        zIndex: 1
-    });
+    //     ], [117.951335,41.249809]),
+    //     url: '../../img/circle0.png',
+    //     opacity: 1,
+    //     visible: true,
+    //     map: map,
+    //     rejectMapMask: true,
+    //     zIndex: 1
+    // });
     
     // 可视化图
     map3 = new Loca(map)
@@ -35,7 +34,7 @@ function step2(params) {
         console.log(e)
     })
     var amap = map3.getMap();
-    amap.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+    
     // 带有高度的北京地图(面)
     layer2 = Loca.visualLayer({
         eventSupport: true,
@@ -259,6 +258,7 @@ function step2(params) {
 }
 
 function destroyStep2() {
+    map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     map3?map3.destroy():()=>{}
 }
 

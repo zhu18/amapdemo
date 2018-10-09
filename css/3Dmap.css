@@ -8,6 +8,11 @@ body, html {
     height: 100%;
     background: #000;
 }
+body{
+    transition: opacity 1s;
+    background: url(../img/big-bg.png) no-repeat !important;
+    background-size: 100%;
+}
 .amap-toolbar{display: none;}
 ul, li {
     list-style: none;
@@ -182,8 +187,9 @@ ul, li {
 #container {
     opacity: 0;
     transition: opacity 1s;
-    background: url(../img/big-bg.png) no-repeat !important;
-    background-size: 100%;
+    background: url(../img/circle0.png) no-repeat center!important;
+    background-size: contain!important;
+   
 }
 
 #container.loaded {
