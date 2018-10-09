@@ -10,11 +10,12 @@ function fixedMap(params) {
 }
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
+    $('#container').addClass('container')
     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
     setPitch(55)
-    setPitch(0)
+    // setPitch(0)
     setRotation(0)
     // new AMap.ImageLayer({
     //     bounds: new AMap.Bounds([114.532907,39.233462
@@ -81,22 +82,22 @@ function step2(params) {
         }
     });
   
-    // layer2.on('mouseenter',function(e){
-    //     layer2.setOptions({
-    //         style: {
-    //             fill: function (res) {
-    //                 if (res.value.name===e.rawData.name) {
-    //                     return '#ffff33';
-    //                 }else{
-    //                     var index = res.index;
-    //                     return colors[index % colors.length];
-    //                 }
-    //             },
-    //             fillOpacity: 0.7,
-    //         },
-    //     });
-    //     // layer2.render()
-    // })
+    layer2.on('mouseenter',function(e){
+        layer2.setOptions({
+            style: {
+                fill: function (res) {
+                    if (res.value.name===e.rawData.name) {
+                        return '#ffff33';
+                    }else{
+                        var index = res.index;
+                        return colors[index % colors.length];
+                    }
+                },
+                fillOpacity: 0.7,
+            },
+        });
+        layer2.render()
+    })
     // 带有高度的北京地图(线)
     topLine = Loca.visualLayer({
         container: map3,
@@ -259,6 +260,7 @@ function step2(params) {
 
 function destroyStep2() {
     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
+    $('#container').removeClass('container')
     map3?map3.destroy():()=>{}
 }
 

@@ -204,12 +204,51 @@ ul, li {
     }
 }
 
-#container {
+.container {
     opacity: 0;
     transition: opacity 1s;
     background: url(../img/circle0.png) no-repeat center!important;
     background-size: contain!important;
+    position: relative;
    
+}
+.container:after{
+    content: '';
+    display: inline-block;
+    transition: opacity 1s;
+    background: url(../img/circle1.png) no-repeat center!important;
+    background-size: contain!important;
+    position: absolute;
+    left: 0;
+    top:0;
+    bottom:0;
+    right:0;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -webkit-animation: rotate 10s linear infinite;
+    animation: rotate 10s linear infinite;}
+@-webkit-keyframes rotate{from{-webkit-transform: rotate(0deg)}
+    to{-webkit-transform: rotate(360deg)}
+}
+.container::before{
+    transform: scale3d(0.5);
+    content: '';
+    display: inline-block;
+    transition: opacity 1s;
+    background: url(../img/circle2.png) no-repeat center!important;
+    background-size: 40%!important;
+    position: absolute;
+    left: 0;
+    top:0;
+    bottom:0;
+    right:0;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -webkit-animation: rotate2 9s linear infinite;
+    animation: rotate2 9s linear infinite;}
+@-webkit-keyframes rotate2{
+    from{-webkit-transform: rotate(0deg)}
+    to{-webkit-transform: rotate(-360deg)}
 }
 
 #container.loaded {
