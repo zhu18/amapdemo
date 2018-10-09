@@ -1,4 +1,4 @@
-var step1Loca, mapBorderLayer, circleLayer;
+var step1Loca, mapBorderLayer, bgLayer;
 function step1() {
 
     tasks = [];
@@ -6,13 +6,11 @@ function step1() {
     map.setZoom(4.4);
     setPitch(0);
     setRotation(0);
-    
 
-    //addBorderLayer();
+    addBGLayer();
     addMapBorderLayer();
     addLocaMap();
     //addCircleLayer();
-
 }
 
 function addLocaMap() {
@@ -97,26 +95,20 @@ function addLocaMap() {
     layer.render();
 }
 
-function addBorderLayer() {
 
-    var mapBorder = new AMap.DistrictLayer.Country({
-        zIndex: 10,
-        depth: 2,
-        rejectMapMask: true,
-        styles: {
-            'nation-stroke': '#0eb2d9',
-            'province-stroke': '#0eb2d9',
-            'fill': function (props) {//中国特有字段
-                return 'rgba(11,84,181,0)'
-            }
-        }
+function addBGLayer() {
+    bgLayer = new AMap.ImageLayer({
+        bounds: new AMap.Bounds([39.637711,5.598022], [170.793603,62.672368]),
+        url: '../../img/big-bg3.png',
+        opacity: 1,
+        visible: true
     });
-    disCountry.setMap(map);
+    bgLayer.setMap(map);
 }
 
 function addCircleLayer() {
 
-    circleLayer = new AMap.ImageLayer({
+    var circleLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([63.28813,5.598022], [146.076575,62.672368]),
         url: '../../img/circle0.png',
         opacity: 1,
@@ -130,7 +122,7 @@ function addMapBorderLayer() {
 
     mapBorderLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
-        bounds: new AMap.Bounds([63.018388, 13.933034], [146.784235, 58.900369]),
+        bounds: new AMap.Bounds([62.318388, 14.633034], [147.184235, 58.900369]),
         url: '../../img/map-bg2.png',
         opacity: 1,
         visible: true,
@@ -140,7 +132,7 @@ function addMapBorderLayer() {
 }
 
 function destroyStep1() {
-    step1Loca ? step1Loca.destroy() : {};
     mapBorderLayer ? mapBorderLayer.hide() : {};
-    circleLayer ? circleLayer.hide() : {};
+    step1Loca ? step1Loca.destroy() : {};
+    bgLayer ? bgLayer.hide() : {};
 }
