@@ -10,17 +10,32 @@ function fixedMap(params) {
 }
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
-    tasks = [];
+
+    
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
     setPitch(55)
+    setPitch(0)
     setRotation(0)
-    
+    new AMap.ImageLayer({
+        bounds: new AMap.Bounds([114.532907,39.233462
 
-
+        ], [117.951335,41.249809]),
+        url: '../../img/circle0.png',
+        opacity: 1,
+        visible: true,
+        map: map,
+        rejectMapMask: true,
+        zIndex: 1
+    });
     
     // 可视化图
     map3 = new Loca(map)
+    map.on('click',function(e){
+        console.log(e)
+    })
+    var amap = map3.getMap();
+    amap.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     // 带有高度的北京地图(面)
     layer2 = Loca.visualLayer({
         eventSupport: true,
@@ -29,6 +44,7 @@ function step2(params) {
         type: 'polygon',
         shape: 'polygon'
     });
+    
     layer2.setData(dd, {
         lnglat: 'coordinates'
     });
@@ -49,7 +65,6 @@ function step2(params) {
             height:70000,
             lineWidth: 1,
             stroke: '#eceff1',
-            opacity: 0.7,
             fill: function (res) {
                 var index = res.index;
                 return colors[index % colors.length];
@@ -57,39 +72,32 @@ function step2(params) {
             fillOpacity: 0.5
         },
         selectStyle: {
+            color:'#ffffff',
             fill: function (res) {
                 var index = res.index;
-                return colors[index % colors.length];
+                return '#ff9900';
             },
             lineWidth: 2,
             fillOpacity: 0.6,
         }
     });
   
-    layer2.on('mouseenter',function(e){
-        layer2.setOptions({
-            style: {
-                // height: function (res) {
-                //     if (res.value.name === e.rawData.name) {
-                //         return '130000';
-                //     } else {
-                       
-                //         return '70000'
-                //     }
-                // },
-                fill: function (res) {
-                    if (res.value.name===e.rawData.name) {
-                        return '#ffff33';
-                    }else{
-                        var index = res.index;
-                        return colors[index % colors.length];
-                    }
-                },
-                fillOpacity: 0.7,
-            },
-        });
-        layer2.render()
-    })
+    // layer2.on('mouseenter',function(e){
+    //     layer2.setOptions({
+    //         style: {
+    //             fill: function (res) {
+    //                 if (res.value.name===e.rawData.name) {
+    //                     return '#ffff33';
+    //                 }else{
+    //                     var index = res.index;
+    //                     return colors[index % colors.length];
+    //                 }
+    //             },
+    //             fillOpacity: 0.7,
+    //         },
+    //     });
+    //     // layer2.render()
+    // })
     // 带有高度的北京地图(线)
     topLine = Loca.visualLayer({
         container: map3,
@@ -104,7 +112,7 @@ function step2(params) {
             height: 70001,
             opacity: 0.8,
             stroke: 'rgba(255,255,255,.8)',
-            lineWidth: 0
+            lineWidth: 1
         }
     });
     bottomLine = Loca.visualLayer({
@@ -126,32 +134,51 @@ function step2(params) {
 
 
     // 定位点图层
-    layer4 = Loca.visualLayer({
+    pointer = Loca.visualLayer({
         container: map3,
         type: 'point',
         shape: 'image',
-        eventSupport: true,
-        zIndex: 200000
+        eventSupport: true
     });
-    layer4.setData([
+  
+    pointer.setData([
         {
-            location: '115.88131,39.845281',
-            name: 'A'
+            location: '116.88131,40.615281',
+            name: 'BB'
         },
+
+        {
+            location: '116.18131,40.415281',
+            name: 'AA'
+        },
+
+        {
+            location: '116.38131,40.215281',
+            name: 'CC'
+        }
     ], {
             lnglat: 'location'
         });
-    layer4.setOptions({
-        source: '../img/pointer_icon.png',
+    pointer.setOptions({
+        source:function(res){
+            if (res.index ==1) {
+                return '../img/pointer2-icon.png'
+            }else{
+                return '../img/pointer_icon.png'
+            }
+        },
         style: {
             size: 60,
             opacity: 1
         },
-        selectStyle: {
-            size: 190,
-            opacity: .4,
-            color: '#fcff19',
-        }
+        // selectStyle: {
+        //     size: 14,
+        //     opacity: 0.5
+        // }
+    });
+
+    pointer.on('mouseenter', function (ev) {
+        console.log(ev)
     });
     // 网格涂层
    layer5 = Loca.visualLayer({
@@ -208,23 +235,21 @@ function step2(params) {
     });
 
 
-    layer4.on('mouseenter', function (ev) {
-        infoWindow.open(map, (new AMap.LngLat(ev.lnglat[0]._lng, ev.lnglat[0]._lat, true)))
-    });
-    layer4.on('mouseleave', function (ev) {
-        infoWindow.close()
-    });
+   
 
 
-
+ 
 
 
 
     layer2.render();
     topLine.render();
     bottomLine.render();
-    layer4.render();
     layer5.render();
+    
+    pointer.render();
+    // layer4.render();
+
 
 
 
@@ -239,6 +264,7 @@ function destroyStep2() {
 
 
 
-
-
-
+function addCircleLayer() {
+   
+    // circleLayer.setMap(map);
+}
