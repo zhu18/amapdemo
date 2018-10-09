@@ -12,6 +12,12 @@ $(document).ready(function () {
         window.onhashchange = hashChange;
     }
     $("#container").addClass('loaded');
+    
+    $(document).mouseover(function () {
+        $(".nav").addClass("nav-active");
+    }).mouseout(function () {
+        $(".nav").removeClass("nav-active");
+    });
 });
 
 
