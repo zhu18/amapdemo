@@ -11,10 +11,21 @@ function fixedMap(params) {
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
     $('#container').addClass('container')
+
+   new AMap.ImageLayer({
+       bounds: new AMap.Bounds([114.9699, 39.083568
+       ], [117.87000, 41.41325
+ ]),
+        url: '../../img/step2_F.png',
+        opacity: 1,
+        map:map,
+        visible: true,
+        rejectMapMask: true
+    });
     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
-    setPitch(60)
+    setPitch(55)
     setRotation(0)
     // 可视化图
     map3 = new Loca(map)
@@ -52,7 +63,9 @@ function step2(params) {
             stroke: '#eceff1',
             fill: function (res) {
                 var index = res.index;
-                return colors[index % colors.length];
+                // return 'rgba(0,0,0,1)';
+                return 'rgba(0,0,0,0)';
+                // return colors[index % colors.length];
             },
             fillOpacity: 0.5
         },
@@ -242,9 +255,9 @@ function step2(params) {
 
 
     layer2.render();
-    topLine.render();
-    bottomLine.render();
-    layer5.render();
+    // topLine.render();
+    // bottomLine.render();
+    // layer5.render();
     
     pointer.render();
     // layer4.render();
