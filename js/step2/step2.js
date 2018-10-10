@@ -10,7 +10,7 @@ function fixedMap(params) {
 }
 var map3, layer2, topLine, bottomLine, layer4, layer5;
 function step2(params) {
-    $('#container').addClass('container')
+    $('.ring').show()
 
    new AMap.ImageLayer({
        bounds: new AMap.Bounds([114.9699, 39.083568
@@ -272,7 +272,7 @@ function step2(params) {
 
 function destroyStep2() {
     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
-    $('#container').removeClass('container')
+    $('.ring').hide()
     map3?map3.destroy():()=>{}
 }
 
