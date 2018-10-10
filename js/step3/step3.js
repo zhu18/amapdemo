@@ -14,6 +14,7 @@ function step3() {
     setRotation(0)
     initStatus();
     map.panTo([116.589811, 39.914282])
+
 }
 
 function initStatus()

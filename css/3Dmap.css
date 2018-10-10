@@ -170,19 +170,19 @@ ul, li {
     background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
     background-position: -20px -8px, 0px 0;
     transform: translate3d(0, 0, 0);
-    -webkit-animation: run-light 10s linear infinite; /*Safari and Chrome*/
+    -webkit-animation: run-light 15s linear infinite; /*Safari and Chrome*/
 }
 .step2 .menu-step2 {
     background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
     background-position: -20px -8px, 0px 0;
     transform: translate3d(0, 0, 0);
-    -webkit-animation: run-light 10s linear infinite; /*Safari and Chrome*/
+    -webkit-animation: run-light 15s linear infinite; /*Safari and Chrome*/
 }
 .step3 .menu-step3 {
     background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
     background-position: -20px -8px, 0px 0;
     transform: translate3d(0, 0, 0);
-    -webkit-animation: run-light 10s linear infinite; /*Safari and Chrome*/
+    -webkit-animation: run-light 15s linear infinite; /*Safari and Chrome*/
 }
 
 @keyframes run-light {
@@ -207,26 +207,97 @@ ul, li {
 .container {
     opacity: 0;
     transition: opacity 1s;
-    background: url(../img/circle0.png) no-repeat center!important;
+    /* background: url(../img/circle0.png) no-repeat center!important; */
     background-size: contain!important;
     position: relative;
    
 }
-.container:after{
-    content: '';
-    display: inline-block;
-    transition: opacity 1s;
-    background: url(../img/circle1.png) no-repeat center!important;
-    background-size: contain!important;
+.ring{
+    position: absolute;
+    left: 0;
+    top:0;
+    bottom:0;
+    right:0;
+    background: url(../img/c0.png) no-repeat center;
+    background-size: contain;
+    /* background-color: #000; */
+}
+.ring div{
     position: absolute;
     left: 0;
     top:0;
     bottom:0;
     right:0;
     -webkit-transition-property: -webkit-transform;
+    pointer-events: none;
+    transform: translate3d(0,0,0)
+} 
+.ring div:nth-child(1){
+    background: url(../img/c1.png) no-repeat center;
+    background-size: contain;
+    animation: rotate 15s linear infinite;
+}
+
+.ring div:nth-child(2){
+    background: url(../img/c2.png) no-repeat center;
+    background-size: contain;
+    animation: rotate2 20s linear infinite;
+}
+
+.ring div:nth-child(3){
+    background: url(../img/c3.png) no-repeat center;
+    background-size: contain;
+    animation: rotate 25s linear infinite;
+}
+
+.ring div:nth-child(4){
+    background: url(../img/c4.png) no-repeat center;
+    background-size: contain;
+      animation: rotate2 30s linear infinite;
+}
+
+.ring div:nth-child(5){
+    background: url(../img/c5.png) no-repeat center;
+    background-size: contain;
+    animation: rotate 35s linear infinite;
+}
+
+.ring div:nth-child(6){
+    background: url(../img/c6.png) no-repeat center;
+    background-size: contain;
+      animation: rotate2 40s linear infinite;
+}
+
+.ring div:nth-child(7){
+    background: url(../img/c7.png) no-repeat center;
+    background-size: contain;
+      animation: rotate 45s linear infinite;
+}
+
+.ring div:nth-child(8){
+    background: url(../img/c8.png) no-repeat center;
+    background-size: contain;
+      animation: rotate2 50s linear infinite;
+}
+
+.ring div:nth-child(9){
+    background: url(../img/c9.png) no-repeat center;
+    background-size: contain;
+    animation: rotate 55s linear infinite;
+}
+
+.container:after{
+    content: '';
+    display: inline-block;
+    transition: opacity 1s;
+    /* background: url(../img/circle1.png) no-repeat center!important; */
+    background-size: contain!important;
+   
+    -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1s;
-    -webkit-animation: rotate 10s linear infinite;
-    animation: rotate 10s linear infinite;}
+    -webkit-animation: rotate 15s linear infinite;
+    animation: rotate 15s linear infinite;
+}
 @-webkit-keyframes rotate{from{-webkit-transform: rotate(0deg)}
     to{-webkit-transform: rotate(360deg)}
 }
@@ -235,7 +306,7 @@ ul, li {
     content: '';
     display: inline-block;
     transition: opacity 1s;
-    background: url(../img/circle2.png) no-repeat center!important;
+    /* background: url(../img/circle2.png) no-repeat center!important; */
     background-size: 40%!important;
     position: absolute;
     left: 0;
