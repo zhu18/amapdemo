@@ -8,11 +8,11 @@ function fixedMap(params) {
         pitchEnable: false,
     })
 }
-var map3, layer2, topLine, bottomLine, layer4, layer5;
+var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
 function step2(params) {
     $('.ring').show()
 
-   new AMap.ImageLayer({
+    bgLayer=new AMap.ImageLayer({
        bounds: new AMap.Bounds([114.9699, 39.083568
        ], [117.87000, 41.41325
  ]),
@@ -273,6 +273,7 @@ function step2(params) {
 function destroyStep2() {
     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     $('.ring').hide()
+    bgLayer?bgLayer.hide():''
     map3?map3.destroy():()=>{}
 }
 
