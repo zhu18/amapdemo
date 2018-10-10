@@ -441,7 +441,7 @@ ul, li {
 }
 
 .mt-number-animate .mt-number-animate-dom:nth-child(3n) {
-    margin-right: 12px !important;
+    margin-right: 10px !important;
 }
 
 .mt-number-animate .mt-number-animate-dom .mt-number-animate-span {
