@@ -22,7 +22,6 @@ $(document).ready(function () {
 
 
 function initMap() {
-
     var canvas = document.createElement('div');
     canvas.className = 'clayer'
     canvas.id = 'clayer'
@@ -51,8 +50,7 @@ function initMap() {
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         expandZoomRange: true,
         layers: [
-            //customLayer,
-            new AMap.TileLayer({
+             new AMap.TileLayer({
                 zooms: [3, 18],    //可见级别
                 visible: true,    //是否可见
                 opacity: 1,       //透明度
