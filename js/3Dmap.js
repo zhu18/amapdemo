@@ -23,19 +23,6 @@ $(document).ready(function () {
 
 function initMap() {
 
-    var canvas = document.createElement('div');
-    canvas.className = 'clayer'
-    canvas.id = 'clayer'
-    $(function () {
-        $('#clayer').polygonizr();
-    })
-
-// 创建一个自定义图层
-    var customLayer = new AMap.CustomLayer(canvas, {
-        zIndex: 11,
-        zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
-    });
-
     map = new AMap.Map('container', {
         resizeEnable: true,
         rotateEnable: true,
@@ -51,8 +38,7 @@ function initMap() {
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         expandZoomRange: true,
         layers: [
-            //customLayer,
-            new AMap.TileLayer({
+             new AMap.TileLayer({
                 zooms: [3, 18],    //可见级别
                 visible: true,    //是否可见
                 opacity: 1,       //透明度
