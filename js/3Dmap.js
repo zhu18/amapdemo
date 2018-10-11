@@ -12,7 +12,7 @@ $(document).ready(function () {
         window.onhashchange = hashChange;
     }
     $("#container").addClass('loaded');
-    
+
     $(document).mouseover(function () {
         $(".nav").addClass("nav-active");
     }).mouseout(function () {
@@ -22,6 +22,18 @@ $(document).ready(function () {
 
 
 function initMap() {
+    var canvas = document.createElement('div');
+    canvas.className = 'clayer'
+    canvas.id = 'clayer'
+    $(function () {
+        $('#clayer').polygonizr();
+    })
+
+    // 创建一个自定义图层
+    var customLayer = new AMap.CustomLayer(canvas, {
+        zIndex: 11,
+        zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
+    });
 
     map = new AMap.Map('container', {
         resizeEnable: true,
@@ -63,7 +75,7 @@ function addMapControl() {
         'AMap.Geolocation',
     ], function () {
 
-        window.ovv = new AMap.OverView({isOpen: true})
+        window.ovv = new AMap.OverView({ isOpen: true })
         // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
         map.addControl(window.ovv);
         // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
@@ -71,41 +83,41 @@ function addMapControl() {
     });
 
     map.on('click', function (e) {
-        console.log(e.lnglat + '')
-        alert(e.lnglat);
+        // console.log(e.lnglat + '')
+        // alert(e.lnglat);
     })
 }
 
 function setPosition(ps, callback) {
     callback = callback || function () {
-        }
-    var form = {v: map.getPitch()}
-    return new TWEEN.Tween(form).to({v: deg}, 1000).start().onUpdate(
+    }
+    var form = { v: map.getPitch() }
+    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            console.log('pitch:' + this.v);
+            // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
 function setPitch(deg, callback) {
     callback = callback || function () {
-        }
-    var form = {v: map.getPitch()}
-    return new TWEEN.Tween(form).to({v: deg}, 1000).start().onUpdate(
+    }
+    var form = { v: map.getPitch() }
+    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            console.log('pitch:' + this.v);
+            // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
 function setRotation(deg, callback) {
     callback = callback || function () {
-        }
-    var form = {v: map.setRotation()}
-    return new TWEEN.Tween(form).to({v: deg}, 1000).start().onUpdate(
+    }
+    var form = { v: map.setRotation() }
+    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
         function () {
             map.setRotation(this.v)
-            console.log('Rotation:' + this.v);
+            // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
 
@@ -133,7 +145,7 @@ function stepThree() {
     destroyStep1();
     destroyStep2();
     step3();
-   
+
 }
 
 function playAnimation(domNode) {
@@ -150,8 +162,8 @@ function hashChange() {
     var step = util.getQueryString('step')
     clearTimeout(timer)
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
-    $('html')[0].className='step'+step;
-    
+    $('html')[0].className = 'step' + step;
+
     if (step == 1) {
         stepOne()
     } else if (step == 2) {
@@ -162,8 +174,6 @@ function hashChange() {
         stepOne()
     }
 }
-
-
 
 
 
