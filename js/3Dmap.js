@@ -136,6 +136,13 @@ function stepThree() {
    
 }
 
+function playAnimation(domNode) {
+    if($(domNode).hasClass('start')){
+        $(domNode).removeClass('start').addClass("stop").attr("title","停止播放");
+    }else{
+        $(domNode).removeClass('stop').addClass("start").attr("title","播放动画");
+    }
+}
 
 //监听触发操作
 function hashChange() {

@@ -147,6 +147,23 @@ ul, li {
     width: 170px;
     margin-left: 22px;
 }
+.nav li.op-btn{
+    width: 82px;
+    background: url(../img/bofan-btn.png);
+    cursor: pointer;
+}
+.nav li.start{
+    background-position: -3px -2px;
+}
+.nav li.start:hover{
+    background-position: -2px 42px;
+}
+.nav li.stop{
+    background-position: 89px -2px;
+}
+.nav li.stop:hover{
+    background-position: 90px 42px;
+}
 
 .nav li a {
     position: absolute;
