@@ -22,6 +22,7 @@ function step3() {
 function initStatus() {
     $(".turnover").removeClass('show')
     $(".nums").removeClass('show')
+    $(".word-container").hide();
 }
 
 function addParticlesLayer() {
@@ -37,7 +38,7 @@ function addParticlesLayer() {
 // 创建一个自定义图层
     particlesLayer = new AMap.CustomLayer(canvas, {
         zIndex: 11,
-        zooms: [1, 18] // 设置可见级别，[最小级别，最大级别]
+        zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
     });
     particlesLayer.setMap(map);
 
@@ -49,7 +50,7 @@ function addParticlesLayer() {
                         "value": 80,   //数量
                         "density": {
                             "enable": true,
-                            "value_area": 900   //区域散布密度大小
+                            "value_area": 1000   //区域散布密度大小
                         }
                     },
                     "color": {
@@ -59,7 +60,7 @@ function addParticlesLayer() {
                         "type": "circle",
                         "stroke": {
                             "width": 0,    //原理的宽度
-                            "color": "#06213f"
+                            "color": "#80a9ff"//"#06213f"
                         },
                         "polygon": {
                             "nb_sides": 5    // 原子的多边形边数
@@ -88,7 +89,7 @@ function addParticlesLayer() {
                     "line_linked": {
                         "enable": true,    //连接线
                         "distance": 150,
-                        "color": "#082d5d",
+                        "color": "#80a9ff",
                         "opacity": 1,
                         "width": 1
                     },
@@ -153,5 +154,6 @@ function addPolygonizrLayer() {
  */
 function destroyStep3() {
     removeEchart();
+    $(".word-container").show();
     particlesLayer ? particlesLayer.hide() : null;
 }

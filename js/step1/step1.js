@@ -97,6 +97,10 @@ function addLocaMap() {
 
 
 function addBGLayer() {
+    if(bgLayer){
+        bgLayer.show();
+        return;
+    }
     bgLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds([39.637711,5.598022], [170.793603,62.672368]),
         url: '../../img/big-bg3.png',
@@ -119,7 +123,10 @@ function addCircleLayer() {
 }
 
 function addMapBorderLayer() {
-
+    if(mapBorderLayer){
+        mapBorderLayer.show();
+        return;
+    }
     mapBorderLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([69.018388,12.533034], [143.884235,57.900369]),
         bounds: new AMap.Bounds([62.318388, 14.633034], [147.184235, 58.900369]),
@@ -133,6 +140,6 @@ function addMapBorderLayer() {
 
 function destroyStep1() {
     mapBorderLayer ? mapBorderLayer.hide() : {};
-    step1Loca ? step1Loca.destroy() : {};
     bgLayer ? bgLayer.hide() : {};
+    step1Loca ? step1Loca.destroy() : {};
 }
