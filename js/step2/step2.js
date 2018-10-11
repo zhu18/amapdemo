@@ -11,18 +11,17 @@ function fixedMap(params) {
 var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
 function step2(params) {
     $('.ring').show()
-
     bgLayer=new AMap.ImageLayer({
-       bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        //    bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        url: '../../img/step2_F.png',
+        // url: '../../img/step2_F.png',
         url: '../../img/step2_F2.png',
         opacity: 1,
-        height:70000,
-        map:map,
+        height: 70000,
+        map: map,
         visible: true,
         rejectMapMask: true
-    });
+    })
     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
@@ -277,8 +276,11 @@ function step2(params) {
 function destroyStep2() {
     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     $('.ring').hide()
-    bgLayer?bgLayer.hide():''
+    console.log(bgLayer)
+    // bgLayer ? bgLayer.hide() : ''
+    bgLayer ? map.remove(bgLayer) : ''
     map3?map3.destroy():()=>{}
+
 }
 
 

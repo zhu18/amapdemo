@@ -51,7 +51,7 @@ ddd.forEach((v, i) => {
         }
     }
 })
-ddd.splice(0, 38)
+ddd.splice(0, 38 )
 
 
 // ddd.forEach((v, i, array) => {

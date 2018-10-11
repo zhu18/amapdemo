@@ -4,16 +4,16 @@ function autoPlay(params) {
     function _fn() {
             setTimeout(() => {
                 flag ? window.location.hash = 'step=1' : ''
-            }, 0);
+            }, 500);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=2' : ''
-            }, 4000);
+            }, 2000);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=3' : ''
-            }, 8000);
+            }, 4000);
             setTimeout(() => {
                 flag ? navigation(map, _fn) : ''
-            }, 12000);
+            }, 6000);
     }
     _fn()
 }
