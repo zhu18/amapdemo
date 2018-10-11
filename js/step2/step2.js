@@ -13,11 +13,12 @@ function step2(params) {
     $('.ring').show()
 
     bgLayer=new AMap.ImageLayer({
-       bounds: new AMap.Bounds([114.9699, 39.083568
-       ], [117.87000, 41.41325
- ]),
+       bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
         url: '../../img/step2_F.png',
+        url: '../../img/step2_F2.png',
         opacity: 1,
+        height:70000,
         map:map,
         visible: true,
         rejectMapMask: true
@@ -25,12 +26,12 @@ function step2(params) {
     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
-    setPitch(55)
+    setPitch(60)
     setRotation(0)
     // 可视化图
     map3 = new Loca(map)
     map.on('click',function(e){
-        console.log(e)
+        console.log(`${e.lnglat.lng},${e.lnglat.lat}`)
     })
     // 带有高度的北京地图(面)
     layer2 = Loca.visualLayer({
@@ -186,7 +187,6 @@ function step2(params) {
     });
 
     pointer.on('mouseenter', function (ev) {
-        console.log(ev)
         infoWindow.open(map, (new AMap.LngLat(ev.lnglat[ev.rawData.index]._lng, ev.lnglat[ev.rawData.index]._lat, true)))
     });
     pointer.on('mouseleave', function (ev) {
@@ -261,6 +261,10 @@ function step2(params) {
     
     pointer.render();
     // layer4.render();
+    setTimeout(() => {
+        // fixedMap()
+        
+    }, 3000);
 
 
 

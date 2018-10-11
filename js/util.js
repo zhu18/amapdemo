@@ -137,10 +137,10 @@ class Util {
             })()
         })
     }
-    function animation(to) {
-        return _animation(to)
+function animation(to ,speed) {
+        return _animation(to, speed)
     }
-    function _animation(to, speed = 0.00009) {
+    function _animation(to, speed = 0.00001) {
         return new Promise((resolve, reject) => {
             let x = map.getCenter().lng
             let y = map.getCenter().lat
@@ -195,8 +195,9 @@ class Util {
 
 // }
 var tasks = []
-function navigation(map) {
-    tasks = [f1, f2, f3, f4, f5, f6, f7]
+function navigation(map,scallback) {
+    // tasks.length > 0 ? tasks = (tasks.push(scallback)) : tasks = [f1, f2, f3, f4, f5, f6, f7, scallback]
+    tasks = [f1, f2, f3, f4, f5, f6, f7, scallback]
     next()
     function next() {
         if (tasks.length > 0) {
@@ -227,24 +228,24 @@ function navigation(map) {
         })
     }
     function f4() {
-        animation([116.35469, 40.036877]).then(_ => {
+        animation([116.547737, 39.915975]).then(_ => {
             next()
         })
     }
     function f5() {
+        
+
         rotation(200).then(_ => {
             next()
         })
     }
     function f6() {
-        animation([116.357872, 40.030425]).then(_ => {
+        animation([116.545385, 39.90389], 0.00009).then(_ => {
             next()
         })
     }
     function f7() {
-
         pitch(80).then(_ => {
-
             next()
         })
 
