@@ -22,7 +22,7 @@ function stopPlay(params) {
     tasks = []
     flag = false
 }
-autoPlay()
+//autoPlay()
 
 $('.header .title').click(function () {
     console.log(tasks2)

@@ -22,18 +22,6 @@ $(document).ready(function () {
 
 
 function initMap() {
-    var canvas = document.createElement('div');
-    canvas.className = 'clayer'
-    canvas.id = 'clayer'
-    $(function () {
-        $('#clayer').polygonizr();
-    })
-
-    // 创建一个自定义图层
-    var customLayer = new AMap.CustomLayer(canvas, {
-        zIndex: 11,
-        zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
-    });
 
     map = new AMap.Map('container', {
         resizeEnable: true,
@@ -151,8 +139,10 @@ function stepThree() {
 function playAnimation(domNode) {
     if($(domNode).hasClass('start')){
         $(domNode).removeClass('start').addClass("stop").attr("title","停止播放");
+        autoPlay();
     }else{
         $(domNode).removeClass('stop').addClass("start").attr("title","播放动画");
+        stopPlay();
     }
 }
 
