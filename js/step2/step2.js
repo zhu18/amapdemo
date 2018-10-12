@@ -11,25 +11,28 @@ function fixedMap(params) {
 var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
 function step2(params) {
     $('.ring').show()
-    bgLayer=new AMap.ImageLayer({
-        //    bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        // url: '../../img/step2_F.png',
-        url: '../../img/step2_F2.png',
+    bgLayer = new AMap.ImageLayer({
+        bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        url: '../../img/step2_F.png',
+        // url: '../../img/step2_F2.png',
         opacity: 1,
         height: 70000,
         map: map,
         visible: true,
         rejectMapMask: true
     })
-    map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+    setTimeout(() => {
+        map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+
+    }, 500);
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
-    setPitch(60)
+    setPitch(0)
     setRotation(0)
     // 可视化图
     map3 = new Loca(map)
-    map.on('click',function(e){
+    map.on('click', function (e) {
         console.log(`${e.lnglat.lng},${e.lnglat.lat}`)
     })
     // 带有高度的北京地图(面)
@@ -40,7 +43,7 @@ function step2(params) {
         type: 'polygon',
         shape: 'polygon'
     });
-    
+
     layer2.setData(dd, {
         lnglat: 'coordinates'
     });
@@ -58,7 +61,7 @@ function step2(params) {
     // });
     layer2.setOptions({
         style: {
-            height:70000,
+            height: 70000,
             lineWidth: 1,
             stroke: '#eceff1',
             fill: function (res) {
@@ -70,7 +73,7 @@ function step2(params) {
             fillOpacity: 0.5
         },
         selectStyle: {
-            color:'#ffffff',
+            color: '#ffffff',
             fill: function (res) {
                 var index = res.index;
                 return '#ff9900';
@@ -96,7 +99,7 @@ function step2(params) {
     //     });
     //     layer2.render()
     // })
-   
+
     // layer2.on('mouseleave',function(e){
     //     layer2.setOptions({
     //         style: {
@@ -151,7 +154,7 @@ function step2(params) {
         shape: 'image',
         eventSupport: true
     });
-  
+
     pointer.setData([
         {
             location: '116.88131,40.215281',
@@ -171,11 +174,11 @@ function step2(params) {
             lnglat: 'location'
         });
     pointer.setOptions({
-        source:function(res){
+        source: function (res) {
             console.log(res)
-            if (res.value.name =='CC') {
+            if (res.value.name == 'CC') {
                 return '../img/pointer2-icon.png'
-            }else{
+            } else {
                 return '../img/pointer_icon.png'
             }
         },
@@ -192,7 +195,7 @@ function step2(params) {
         infoWindow.close()
     });
     // 网格涂层
-   layer5 = Loca.visualLayer({
+    layer5 = Loca.visualLayer({
         container: map3,
         type: 'point',
         shape: 'circle'
@@ -214,7 +217,7 @@ function step2(params) {
             stroke: 'rgba(255,255,255,.4)',
             opacity: 0.4,
         }
-        
+
     });
     //信息图层
     //构建自定义信息窗体
@@ -246,10 +249,10 @@ function step2(params) {
     });
 
 
-   
 
 
- 
+
+
 
 
 
@@ -257,12 +260,12 @@ function step2(params) {
     // topLine.render();
     // bottomLine.render();
     // layer5.render();
-    
+
     pointer.render();
     // layer4.render();
     setTimeout(() => {
         // fixedMap()
-        
+
     }, 3000);
 
 
@@ -279,7 +282,7 @@ function destroyStep2() {
     console.log(bgLayer)
     // bgLayer ? bgLayer.hide() : ''
     bgLayer ? map.remove(bgLayer) : ''
-    map3?map3.destroy():()=>{}
+    map3 ? map3.destroy() : () => { }
 
 }
 

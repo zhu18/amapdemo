@@ -29,7 +29,6 @@ $('.header .title').click(function () {
     stopPlay()
 })
 $('.header .title').dblclick(function () {
-
     flag = true
     autoPlay()
 })
