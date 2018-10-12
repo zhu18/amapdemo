@@ -7,13 +7,13 @@ function autoPlay(params) {
             }, 500);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=2' : ''
-            }, 2000);
+            }, 3000);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=3' : ''
-            }, 4000);
+            }, 6000);
             setTimeout(() => {
                 flag ? navigation(map, _fn) : ''
-            }, 6000);
+            }, 9000);
     }
     _fn()
 }
@@ -30,5 +30,6 @@ $('.header .title').click(function () {
 })
 $('.header .title').dblclick(function () {
     flag = true
+
     autoPlay()
 })

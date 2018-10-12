@@ -343,6 +343,39 @@ ul, li {
     opacity: 1;
 }
 
+.echart-lcon{
+    position: fixed;
+    left: 48px;
+    bottom: 230px;
+    height: 320px;
+    width: 310px;
+    z-index: 1000;
+    perspective: 600px;
+    transform-style: preserve-3d;
+    background: url(../img/step3-zone-border2.png) no-repeat;
+    background-size: 100% 100%;
+    transform: translate3d(0,500px,0);
+    opacity: 0;
+    transition: all .5s;
+}
+.step3 .echart-lcon{
+    opacity: 1;
+    transform: translate3d(0,0,0)
+}
+.echart-lcon div{
+    background: url(../img/step3-zone-bg3.png) no-repeat;
+    position: relative;
+    left: 28px;
+    top: 25px;
+    height: 280px;
+    width: 263px;
+}
+.echart-lcon img{
+    margin-left: 20px;
+    height: 260px;
+    margin-top: 11px;
+}
+
 .echart-con {
     position: fixed;
     bottom: 0;

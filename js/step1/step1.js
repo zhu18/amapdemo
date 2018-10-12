@@ -2,7 +2,7 @@ var step1Loca, mapBorderLayer, bgLayer;
 function step1() {
 
     tasks = [];
-    map.setCenter([105.515396, 39.998597]);
+    map.setCenter([99.515396, 39.998597]);
     map.setZoom(4.4);
     setPitch(0);
     setRotation(0);
