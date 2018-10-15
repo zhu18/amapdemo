@@ -1,6 +1,7 @@
 var flag = true;
 var tasks2 = [];
 function autoPlay(params) {
+    flag = true;
     function _fn() {
             setTimeout(() => {
                 flag ? window.location.hash = 'step=1' : ''
@@ -29,7 +30,6 @@ $('.header .title').click(function () {
     stopPlay()
 })
 $('.header .title').dblclick(function () {
-    flag = true
 
     autoPlay()
 })

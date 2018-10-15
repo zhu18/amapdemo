@@ -12,10 +12,10 @@ var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
 function step2(params) {
     $('.ring').show()
     bgLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        url: '../../img/step2_F.png',
-        // url: '../../img/step2_F2.png',
+        //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        //url: '../../img/step2_F.png',
+         url: '../../img/step2_F2.png',
         opacity: 1,
         height: 70000,
         map: map,
@@ -28,7 +28,7 @@ function step2(params) {
     }, 500);
     map.setCenter([114.149726, 40.211949])
     map.setZoom(9.6)
-    setPitch(0)
+    setPitch(60)
     setRotation(0)
     // 可视化图
     map3 = new Loca(map)
