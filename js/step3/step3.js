@@ -211,7 +211,7 @@ function addM()
         zoomPaths(paths,0.0001)
         addMeshLayers(paths,500,5,[.8,.95,1,.5],[.3,.7])
         // 添加灯光效果
-        var mesh = addMesh(paths,0,10000,[1,1,1,.3],[1,1,1,0],'back')
+        var mesh = addMesh(paths,0,10000,[1,1,1,.3],[1,1,1,0],'front')
     }
     
    
