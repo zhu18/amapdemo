@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="zrender.js"></script>
+    <style>
+        #con {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="con"></div>
+    <script>
+        var con = document.getElementById("con")
+        var zr = zrender.init(con, { renderer: 'canvas' })
+        var c = new zrender.Circle({
+            shape: {
+                cx:100,
+                cy:100,
+                r:50
+            },
+            style:{
+                fill:'#369',
+                shadowBlur:15,
+                shadowColor:'#f93',
+                
+            }
+        })
+        zr.add(c);
+
+        c.animate('style', true)
+    .when(1000, {fill: '#f94',shadowBlur:100})
+    .done(function () {
+         // Animation done
+    })
+    .start()
+    c.animate('shape', true)
+    .when(1000, {cx: 400,cy:500,r:150})
+    .done(function () {
+         // Animation done
+    })
+    .start()
+    </script>
+</body>
+
+</html>

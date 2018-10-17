@@ -13,9 +13,9 @@ function step2(params) {
     $('.ring').show()
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
         //url: '../../img/step2_F.png',
-         url: '../../img/step2_F2.png',
+        url: '../../img/step2_F2.png',
         opacity: 1,
         height: 70000,
         map: map,
@@ -112,6 +112,13 @@ function step2(params) {
     //     });
     //     layer2.render()
     // })
+
+
+
+
+
+
+
     // 带有高度的北京地图(线)
     topLine = Loca.visualLayer({
         container: map3,
@@ -173,6 +180,22 @@ function step2(params) {
     ], {
             lnglat: 'location'
         });
+
+    let lnglat = [{
+        location: [116.88131, 40.215281],
+        name: 'BB'
+    },
+
+    {
+        location: [116.18131, 40.415281],
+        name: 'AA'
+    },
+
+    {
+        location: [116.38131, 40.215281],
+        name: 'CC'
+    }
+    ]
     pointer.setOptions({
         source: function (res) {
             console.log(res)
@@ -187,41 +210,34 @@ function step2(params) {
             opacity: 1
         }
     });
+    lnglat.forEach(v => {
+        var content = '';
+        v.name == "CC" ? content = "<div class= 'pointer-icon2'></div>" : content = "<div class= 'pointer-icon'>1</div>"
+        var marker = new AMap.Marker({
+            position: v.location,
+            bubble: true,
+            animation: "AMAP_ANIMATION_DROP",
+            label: { content: content },
+            icon: '../img/pointer0-iocn.png',
+        });
 
-    pointer.on('mouseenter', function (ev) {
-        infoWindow.open(map, (new AMap.LngLat(ev.lnglat[ev.rawData.index]._lng, ev.lnglat[ev.rawData.index]._lat, true)))
-    });
-    pointer.on('mouseleave', function (ev) {
-        infoWindow.close()
-    });
-    // 网格涂层
-    layer5 = Loca.visualLayer({
-        container: map3,
-        type: 'point',
-        shape: 'circle'
-    });
-    layer5.setData(ddd, {
-        lnglat: 'coord'
-    });
+        marker.on('mouseover', function (ev) {
+            console.log(ev)
+            v.name == "CC" ? infoWindow.open(map, v.location, true) : infoWindow2.open(map, v.location, true)
 
-    layer5.setOptions({
-        // 单位米
-        unit: 'meter',
-        style: {
-            // 正多边形半径
-            radius: 2.5,
-            // 高度为 0 即可贴地面
-            height: 0.2,
-            fill: '#0eb1db',
-            lineWidth: 2,
-            stroke: 'rgba(255,255,255,.4)',
-            opacity: 0.4,
-        }
+        });
+        marker.on('mouseout', function (ev) {
+            v.name == "CC" ? infoWindow.close() : infoWindow2.close()
+        });
+        marker.setMap(map);
+    })
 
-    });
+
+
+
     //信息图层
     //构建自定义信息窗体
-    function createInfoWindow(title, content) {
+    function createInfoWindow(contentText) {
         var info = document.createElement("div");
         info.className = "info-window";
         //可以通过下面的方式修改自定义窗体的宽高
@@ -230,22 +246,44 @@ function step2(params) {
         // 定义顶部标题
         var content = document.createElement("div");
         var contentInner = document.createElement("div");
-        content.innerHTML = 'xxx 公司'
+        var icon = document.createElement("span");
+        var icon2 = document.createElement("span");
+        content.style.left = -contentText.length * 14 + 'px'
         var line = document.createElement("div");
+        var p = document.createElement("p");
+        p.innerHTML = contentText
         content.className = "info-content";
         line.className = "line";
+        contentInner.appendChild(p);
+        contentInner.appendChild(icon);
+        contentInner.appendChild(icon2);
         content.appendChild(contentInner);
         info.appendChild(content);
         info.appendChild(line);
         return info;
     }
-    var title = '',
-        content = [];
+    function createInfoWindow2(content) {
+        var info = document.createElement("div");
+        info.className = "info-window2";
+        for (let index = 0; index < content.length; index++) {
+            var p = document.createElement("p");
+            p.style.animationDelay = index + 's';
+            p.innerText = content[index]
+            info.appendChild(p);
+        }
+        return info;
+    }
+    var content = ['天地大厅有限公司', '就啊圣诞节街道', '咖色卡森那是的'];
 
     var infoWindow = new AMap.InfoWindow({
         isCustom: true,  //使用自定义窗体
-        content: createInfoWindow(title, content.join("<br/>")),
-        offset: new AMap.Pixel(-57, 0)
+        content: createInfoWindow('天地大厅有限公司'),
+        offset: new AMap.Pixel(-50, -15)
+    });
+    var infoWindow2 = new AMap.InfoWindow({
+        isCustom: true,  //使用自定义窗体
+        content: createInfoWindow2(content),
+        offset: new AMap.Pixel(8, -20)
     });
 
 
@@ -261,7 +299,7 @@ function step2(params) {
     // bottomLine.render();
     // layer5.render();
 
-    pointer.render();
+    // pointer.render();
     // layer4.render();
     setTimeout(() => {
         // fixedMap()
