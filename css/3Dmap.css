@@ -183,19 +183,7 @@ ul, li {
 }
 
 
-.step1 .menu-step1 {
-    background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
-    background-position: -20px -8px, 0px 0;
-    transform: translate3d(0, 0, 0);
-    -webkit-animation: run-light 15s linear infinite; /*Safari and Chrome*/
-}
-.step2 .menu-step2 {
-    background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
-    background-position: -20px -8px, 0px 0;
-    transform: translate3d(0, 0, 0);
-    -webkit-animation: run-light 15s linear infinite; /*Safari and Chrome*/
-}
-.step3 .menu-step3 {
+.step1 .menu-step1,.step2 .menu-step2,.step3 .menu-step3,.step4.menu-step4 {
     background: url(../img/light6.png) no-repeat, url(../img/header-btn.png);
     background-position: -20px -8px, 0px 0;
     transform: translate3d(0, 0, 0);
@@ -358,7 +346,7 @@ ul, li {
     opacity: 0;
     transition: all .5s;
 }
-.step3 .echart-lcon{
+.step4 .echart-lcon{
     opacity: 1;
     transform: translate3d(0,0,0)
 }
@@ -385,14 +373,15 @@ ul, li {
     perspective: 600px;
     transform-style: preserve-3d;
     height: 238px;
-    background: url(../img/step3_zone_border.png) no-repeat,url(../img/step3_zone_bg1.png) 27px 21px no-repeat;
+    background: url(../img/step3_zone_border.png) no-repeat,url(../img/step3_zone_bg1.png) no-repeat;
+    background-size: 100% 100%;
     overflow: hidden;
     transform: translate3d(0,500px,0);
     opacity: 0;
     transition: all .5s;
 }
 
-.step3 .echart-con{
+.step4 .echart-con{
     opacity: 1;
     transform: translate3d(0,0,0)
 }
@@ -400,19 +389,16 @@ ul, li {
 .echart-con .item {
     float: left;
     box-sizing: border-box;
-    width: calc(25% - 15px);
-    height: 150px;
-    margin-right: 20px;
-
-    /* border-radius: 0px; */
-    /* border: 1px solid rgba(101, 202, 202, 0.92);*/
-    /*box-shadow: 0 0 5px rgba(37, 156, 156, 0.73);*/
+    width: calc(20%);
+    height: 100%;
     transition: transform 1s;
     transform: rotateX(90deg);
-    background-image: url(../img/border2.png);
     background-size: cover;
-    padding: 27px 20px 0px 24px;
+    padding: 27px 17px 0px 23px;
     /*  */
+}
+.echart-con .item:last-child{
+    margin-right: 0px;
 }
 
 .itemdemo{
@@ -427,14 +413,8 @@ ul, li {
     transform: rotateX(0deg);
 }
 
-.echart-con .item:nth-of-type(4n) {
-    margin-right: 0;
-}
-
 .echart-con .item .chart {
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.31);
-
 }
 
 .con-panel {
@@ -536,7 +516,7 @@ ul, li {
 .step2 .con-statis .base-info .name{
     background: url(../img/step2_title.png) no-repeat;
 }
-.step3 .con-statis .base-info .name{
+.step4 .con-statis .base-info .name,.step3 .con-statis .base-info .name{
     background: url(../img/step3_title.png) no-repeat;
 }
 .con-statis .base-info .time {
@@ -556,7 +536,7 @@ ul, li {
     opacity: 1;
     transform:translate3d(0, 0, 0)
 }
-.step3  .turnover
+.step3  .turnover,.step4  .turnover
 {
     opacity: 0;
     transform:translate3d(-600px, 0, 0)
@@ -599,7 +579,7 @@ ul, li {
     opacity: 1;
     transform:translate3d(0, 0, 0)
 }
-.step3  .nums
+.step3 .nums,.step4 .nums
 {
     opacity: 0;
     transform:translate3d(-600px, 0, 0)
@@ -722,6 +702,6 @@ ul, li {
     opacity: 0;
     transition: opacity .3s;
 }
-.step3 .step3-mask{
+.step3 .step3-mask,.step4 .step3-mask{
     opacity: 1;
 }
