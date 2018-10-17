@@ -394,11 +394,11 @@ ul, li {
     transition: transform 1s;
     transform: rotateX(90deg);
     background-size: cover;
-    padding: 27px 17px 0px 23px;
+    padding: 27px 20px 0px 20px;
     /*  */
 }
-.echart-con .item:last-child{
-    margin-right: 0px;
+.echart-con .item:first-child{
+    padding: 27px 17px 0px 23px;
 }
 
 .itemdemo{

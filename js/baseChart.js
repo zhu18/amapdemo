@@ -67,9 +67,9 @@ function initEchart() {
     $('.echart-con .item').addClass('loaded');
     line1();
     line2();
-    radar();
+    bar1();
     line3();
-    line4();
+    bar2();
     window.onresize = function () {
         for (var i = 0; i < chartInstance.length; i++) {
             chartInstance[i].resize();
@@ -171,6 +171,116 @@ function line2() {
     };
 
     loadEChart("line2", option,true);
+}
+
+function bar1() {
+    var option = {
+        title: {
+            text: '出借人活跃度',
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(param){
+                var s =  param[0].name+'22';
+                var s1 = param[0].seriesName+': '+param[0].value + '亿';
+                var s2 = param[1].seriesName+': '+param[1].value + '亿';
+                return s + '<br>'+s1 + '<br>' + s2;
+            }
+        },
+        calculable: true,
+        xAxis: {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'],
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: '出借人数',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [5, 5, 0, 0],
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: 'rgba(26,130,194,.9)'},
+                            {offset: 1, color: 'rgba(26,130,194,.2)'}
+                        ]
+                    )
+                }
+            }
+        },{
+            name: '出借人次',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [5, 5, 0, 0],
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: 'rgba(188,195,49,.9)'},
+                            {offset: 1, color: 'rgba(188,195,49,.2)'}
+                        ]
+                    )
+                }
+            }
+        }]
+    };
+    loadEChart("bar1", option,true);
+}
+
+function bar2() {
+    var option = {
+        title:{
+          text:'资金流出入'
+        },
+        xAxis: {
+            data: ['9.27','9.28','9.29','9.30','10.1','10.2','10.3','10.4'],
+        },
+        series: [
+            {
+                name: '资金流出',
+                type: 'bar',
+                stack: 'one',
+                data: [-29,-10,-30,-18,-9,-11,-20,-10 ],
+                barMaxWidth:'15px',
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [ 0, 0,5,5],
+                        color:new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 1, color: 'rgba(31,148,177,1)'},
+                                {offset: 0, color: 'rgba(31,148,177,.5)'}
+                            ]
+                        )
+                    }
+                }
+            },
+            {
+                name: '资金流入',
+                type: 'bar',
+                stack: 'one',
+                data: [11,22,33,35,24,33,18,24],
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [5,5,0,0],
+                        color:new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(221,192,42,1)'},
+                                {offset: 1, color: 'rgba(221,192,42,.5)'}
+                            ]
+                        )
+                    }
+                }
+            }
+        ]
+    };
+    loadEChart("bar2", option,true);
 }
 
 function radar() {
