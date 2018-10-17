@@ -112,6 +112,13 @@ function step2(params) {
     //     });
     //     layer2.render()
     // })
+
+   
+
+
+
+
+
     // 带有高度的北京地图(线)
     topLine = Loca.visualLayer({
         container: map3,
@@ -173,6 +180,22 @@ function step2(params) {
     ], {
             lnglat: 'location'
         });
+
+    let lnglat = [{
+        location: [116.88131,40.215281],
+        name: 'BB'
+    },
+
+        {
+            location: [116.18131,40.415281],
+            name: 'AA'
+        },
+
+        {
+            location: [116.38131,40.215281],
+            name: 'CC'
+        }
+    ]
     pointer.setOptions({
         source: function (res) {
             console.log(res)
@@ -187,13 +210,33 @@ function step2(params) {
             opacity: 1
         }
     });
-
-    pointer.on('mouseenter', function (ev) {
-        infoWindow.open(map, (new AMap.LngLat(ev.lnglat[ev.rawData.index]._lng, ev.lnglat[ev.rawData.index]._lat, true)))
-    });
-    pointer.on('mouseleave', function (ev) {
-        infoWindow.close()
-    });
+    lnglat.forEach(v=>{
+        var content='';
+        v.name == "CC" ? content = "<div class= 'pointer-icon2'></div>" : content = "<div class= 'pointer-icon'>1</div>"
+        var marker = new AMap.Marker({
+            position: v.location,
+            bubble:true,
+            animation:"AMAP_ANIMATION_DROP",
+            label: { content: content},
+            icon: '../img/pointer0-iocn.png',
+        });
+        
+        marker.on('mouseover', function (ev) {
+            v.name == "CC" ? infoWindow.open(map, ev.lnglat) : infoWindow2.open(map, ev.lnglat)
+            
+        });
+        marker.on('mouseout', function (ev) {
+            v.name == "CC" ? infoWindow.close() : infoWindow2.close()
+        });
+        marker.setMap(map);
+    })
+    
+    // pointer.on('mouseenter', function (ev) {
+    //     infoWindow.open(map, (new AMap.LngLat(ev.lnglat[ev.rawData.index]._lng, ev.lnglat[ev.rawData.index]._lat, true)))
+    // });
+    // pointer.on('mouseleave', function (ev) {
+    //     infoWindow.close()
+    // });
     // 网格涂层
     layer5 = Loca.visualLayer({
         container: map3,
@@ -239,13 +282,29 @@ function step2(params) {
         info.appendChild(line);
         return info;
     }
+    function createInfoWindow2(content) {
+        var info = document.createElement("div");
+        info.className = "info-window2";
+        for (let index = 0; index < content.length; index++) {
+            var p = document.createElement("p");
+            p.style.animationDelay=index+'s';
+            p.innerText = content[index]
+            info.appendChild(p);
+        }
+        return info;
+    }
     var title = '',
-        content = [];
+        content = ['天地大厅有限公司', '就啊圣诞节街道', '咖色卡森那是的'];
 
     var infoWindow = new AMap.InfoWindow({
         isCustom: true,  //使用自定义窗体
-        content: createInfoWindow(title, content.join("<br/>")),
-        offset: new AMap.Pixel(-57, 0)
+        content: createInfoWindow(content),
+        // offset: new AMap.Pixel(-40, -10)
+    });
+    var infoWindow2 = new AMap.InfoWindow({
+        isCustom: true,  //使用自定义窗体
+        content: createInfoWindow2(content),
+        offset: new AMap.Pixel(0, -15)
     });
 
 
@@ -261,7 +320,7 @@ function step2(params) {
     // bottomLine.render();
     // layer5.render();
 
-    pointer.render();
+    // pointer.render();
     // layer4.render();
     setTimeout(() => {
         // fixedMap()
