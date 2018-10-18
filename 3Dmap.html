@@ -11,9 +11,9 @@
     <script language="javascript" src="http://webapi.amap.com/maps?v=1.4.10&key=8845df0c0040e4aa27ceb18ad84dfdf9&plugin=Map3D,AMap.DistrictLayer,AMap.ControlBar,AMap.DistrictSearch"></script>
     <script src="http://webapi.amap.com/loca?key=8845df0c0040e4aa27ceb18ad84dfdf9"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
-    <script src="http://a.amap.com/jsapi_demos/static/citys.js"></script>
     <script src="//a.amap.com/Loca/static/mock/bj_heat_grid.js"></script>
     <script src="./js/step1/step1.js"></script>
+    <script src="./js/step1/data.js"></script>
     <script src="./js/step2/step2.js"></script>
     <script src="./js/step3/step3.js"></script>
     <script src="./js/step2/data.js"></script>
@@ -56,7 +56,6 @@
     <div class="ring">
         <div>1</div>
         <div>2</div>
-        <div>3</div>
         <div>4</div>
         <div>5</div>
         <div>6</div>
@@ -66,7 +65,21 @@
     </div>
     <div id="container" style="width:100%; height:100%;resize:both;"></div>
     <div class="echart-lcon">
-        <div><img src="./img/step3-chart6.png" /></div>
+        <div class="item">
+            <div class="num">1</div><div class="pie" id="lpie1"></div><div class="line"><div  id="lline1"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">2</div><div class="pie" id="lpie2"></div><div class="line"><div  id="lline2"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">3</div><div class="pie" id="lpie3"></div><div class="line"><div  id="lline3"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">4</div><div class="pie" id="lpie4"></div><div class="line"><div  id="lline4"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">5</div><div class="pie" id="lpie5"></div><div class="line"><div  id="lline5"></div></div>
+        </div>
     </div>
     <div class="echart-con">
         <!--echarts图表-->

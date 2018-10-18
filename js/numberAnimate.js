@@ -130,8 +130,8 @@
 
 function showRealTime(clock) {
     var d = new Date();
-    var month =d.getMonth() + 1,date=d.getDate(),  hour = d.getHours(), min = d.getMinutes();
-    var now = d.getFullYear() + "-" + (month < 10 ? "0"+month : month) + "-" + (date < 10 ? "0"+date : date) + "     " + (hour < 10 ? "0"+hour : hour) + ":" + (min < 10 ? "0"+min : min);
+    var month =d.getMonth() + 1,date=d.getDate(),  hour = d.getHours(), min = d.getMinutes(),second = d.getSeconds();
+    var now = d.getFullYear() + "-" + (month < 10 ? "0"+month : month) + "-" + (date < 10 ? "0"+date : date) + "     " + (hour < 10 ? "0"+hour : hour) + ":" + (min < 10 ? "0"+min : min)+":" + (second < 10 ? "0"+second : second);
     clock.text(now);
 }
 
@@ -140,7 +140,7 @@ $(document).ready(function () {
     showRealTime($(".time"));
     setInterval(function () {
         showRealTime($(".time"));
-    }, 60000);
+    }, 1000);
 
     var numRun1 = $(".numberRun1").numberAnimate({num: '152358428', speed: 2000});
     var nums1 = 152353434;
