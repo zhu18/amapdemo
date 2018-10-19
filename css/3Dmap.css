@@ -901,3 +901,7 @@ ul, li {
     background:url(../img/pointer_icon.png) no-repeat center center transparent;
     background-size: cover;
 }
+
+.amap-e{
+    cursor: default;
+}
