@@ -877,3 +877,78 @@ ul, li {
     background:url(../img/pointer_icon.png) no-repeat center center transparent;
     background-size: cover;
 }
+
+
+
+
+
+.info3{
+    position: absolute;
+}
+
+.info3 .info3-line{
+    float: left;
+    width: 40px;
+    height: 100px;
+    border: 1px solid #fff;
+    transform:skew(-20deg,0deg);
+    right:0;
+    bottom: 0;
+    border-width: 1px 0px 0px 1px ;
+    /* animation: line 1.5s;
+    animation-fill-mode:forwards; */
+}
+.info3 .info3-content{
+    float: left;
+    min-width: 200px;
+    height: 80px;
+    background: rgba(0,114,255,.75);
+    border:1px solid #0fa4ea;
+    position: relative;
+    top:-40px;
+    left:18px;
+
+}
+
+.info3 .info3-content:after{
+    position: absolute;
+    width: 7px;
+    height: 8px;
+    content:'';
+    display: inline-block;
+    background: url(../img/bordericon.png) no-repeat;
+    right: -3px;
+    top:-4px;
+}
+.info3 .info3-content:before{
+    position: absolute;
+    width: 7px;
+    height: 8px;
+    content:'';
+    display: inline-block;
+    background: url(../img/bordericon.png) no-repeat;
+    right: -3px;
+    bottom:-4px;
+    transform: rotate(90deg)
+}
+
+.info3 .info3-content span{
+    display: inline-block;
+    position: absolute;
+    width: 7px;
+    height: 8px;
+    background: url(../img/bordericon.png) no-repeat;
+    left:-3.5px;
+    bottom:-4px;
+    transform: rotate(180deg)
+}
+.info3 .info3-content span:nth-child(2){
+    display: inline-block;
+    position: absolute;
+    width: 7px;
+    height: 8px;
+    background: url(../img/bordericon.png) no-repeat;
+    left:-3.5px;
+    top:-4px;
+    transform: rotate(270deg)
+}

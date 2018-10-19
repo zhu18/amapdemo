@@ -11,6 +11,10 @@ function fixedMap(params) {
 var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
 function step2(params) {
     $('.ring').show()
+    map.setStatus({
+        dragEnable:true,
+        doubleClickZoom:true
+    })
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
@@ -119,39 +123,8 @@ function step2(params) {
 
 
 
-    // 带有高度的北京地图(线)
-    topLine = Loca.visualLayer({
-        container: map3,
-        type: 'line',
-        shape: 'line'
-    });
-    topLine.setData(dd, {
-        lnglat: 'coordinates'
-    });
-    topLine.setOptions({
-        style: {
-            height: 70001,
-            opacity: 0.8,
-            stroke: 'rgba(255,255,255,.8)',
-            lineWidth: 1
-        }
-    });
-    bottomLine = Loca.visualLayer({
-        container: map3,
-        type: 'line',
-        shape: 'line'
-    });
-    bottomLine.setData(dd, {
-        lnglat: 'coordinates'
-    });
-    bottomLine.setOptions({
-        style: {
-            height: 0,
-            opacity: 0.4,
-            stroke: 'rgba(25,215,255,.8)',
-            lineWidth: 0
-        }
-    });
+
+  
 
 
     // 定位点图层
@@ -227,7 +200,7 @@ function step2(params) {
 
         });
         marker.on('mouseout', function (ev) {
-            v.name == "CC" ? infoWindow.close() : infoWindow2.close()
+            // v.name == "CC" ? infoWindow.close() : infoWindow2.close()
         });
         marker.setMap(map);
     })
@@ -320,6 +293,7 @@ function destroyStep2() {
     console.log(bgLayer)
     // bgLayer ? bgLayer.hide() : ''
     bgLayer ? map.remove(bgLayer) : ''
+    map.clearMap()
     map3 ? map3.destroy() : () => { }
 
 }
