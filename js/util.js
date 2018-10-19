@@ -102,10 +102,11 @@ class Util {
             pitchEnable: true,
         })
     }
-    function setZoom(index) {
+function setZoom(index, step = .09) {
+        
         return new Promise((resolve, reject) => {
             (function _setZoom() {
-                map.setZoom(map.getZoom() + .09)
+                map.setZoom(map.getZoom() + step)
                 if (map.getZoom() >= index) {
                     resolve('ok')
                     return
