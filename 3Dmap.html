@@ -11,13 +11,14 @@
     <script language="javascript" src="http://webapi.amap.com/maps?v=1.4.10&key=8845df0c0040e4aa27ceb18ad84dfdf9&plugin=Map3D,AMap.DistrictLayer,AMap.ControlBar,AMap.DistrictSearch"></script>
     <script src="http://webapi.amap.com/loca?key=8845df0c0040e4aa27ceb18ad84dfdf9"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
-    <script src="http://a.amap.com/jsapi_demos/static/citys.js"></script>
     <script src="//a.amap.com/Loca/static/mock/bj_heat_grid.js"></script>
     <script src="./js/step1/step1.js"></script>
+    <script src="./js/step1/data.js"></script>
     <script src="./js/step2/step2.js"></script>
     <script src="./js/step3/step3.js"></script>
     <script src="./js/step2/data.js"></script>
     <script src="./js/step2/data2.js"></script>
+    <script src="./js/step3/data3.js"></script>
     <script src="./js/tween.min.js"></script>
     <style>
         #clayer,#particles {
@@ -47,7 +48,7 @@
                 <a class="menu-step3" href="#step=3">朝阳地区</a>
             </li>
             <li>
-                <a href="#">信息统计</a>
+                <a class="menu-step4" href="#step=4">信息统计</a>
             </li>
             <li class="op-btn start" title="播放动画" onclick="playAnimation(this)">
             </li>
@@ -56,7 +57,6 @@
     <div class="ring">
         <div>1</div>
         <div>2</div>
-        <div>3</div>
         <div>4</div>
         <div>5</div>
         <div>6</div>
@@ -66,36 +66,38 @@
     </div>
     <div id="container" style="width:100%; height:100%;resize:both;"></div>
     <div class="echart-lcon">
-        <div><img src="./img/step3-chart6.png" /></div>
+        <div class="item">
+            <div class="num">1</div><div class="pie" id="lpie1"></div><div class="line"><div  id="lline1"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">2</div><div class="pie" id="lpie2"></div><div class="line"><div  id="lline2"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">3</div><div class="pie" id="lpie3"></div><div class="line"><div  id="lline3"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">4</div><div class="pie" id="lpie4"></div><div class="line"><div  id="lline4"></div></div>
+        </div>
+        <div class="item">
+            <div class="num">5</div><div class="pie" id="lpie5"></div><div class="line"><div  id="lline5"></div></div>
+        </div>
     </div>
     <div class="echart-con">
         <!--echarts图表-->
-        <!-- <div class="item" id="lineWarp">
-        <div id="line" class="chart"></div>
-    </div>
-    <div class="item" id="hbarWarp">
-        <div id="hbar" class="chart"></div>
-    </div>
-    <div class="item" id="baseLineWarp">
-        <div id="baseLine" class="chart"></div>
-    </div>
-    <div class="item" id="vbarWarp">
-        <div id="vbar" class="chart"></div>
-    </div> -->
-        <div class="itemdemo">
-            <img src="img/step3_chart1.png">
+         <div class="item">
+            <div id="line1" class="chart"></div>
         </div>
-        <div class="itemdemo">
-            <img src="img/step3_chart2.png">
+        <div class="item">
+                <div id="line2" class="chart"></div>
+            </div>
+        <div class="item">
+            <div id="bar1" class="chart"></div>
         </div>
-        <div class="itemdemo">
-            <img src="img/step3_chart3.png">
+        <div class="item">
+            <div id="line3" class="chart"></div>
         </div>
-        <div class="itemdemo">
-            <img src="img/step3_chart4.png">
-        </div>
-        <div class="itemdemo">
-            <img src="img/step3_chart5.png">
+        <div class="item">
+            <div id="bar2" class="chart"></div>
         </div>
     </div>
 
@@ -135,11 +137,12 @@
     <script src="js/jquery.min.js"></script>
     <script src="./js/util.js" type="text/javascript"></script>
     <script src="./js/baseChart.js" type="text/javascript"></script>
-    <script src="./js/mask2.js" type="text/javascript"></script>
+    <script src="./js/polygonizr.min.js" type="text/javascript"></script>
     <script src="./js/step3/particles.min.js"></script>
     <script src="./js/3Dmap.js" type="text/javascript"></script>
     <script src="./js/numberAnimate.js" type="text/javascript"></script>
     <script src="./js/autopaly.js"></script>
+    <script src="./js/zrender.js"></script>
 
 </body>
 

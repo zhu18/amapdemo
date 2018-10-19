@@ -1,11 +1,318 @@
 var chartInstance = [], intervalTime = 5000,
     baseOption = {
         title: {
-            text: '标题区域',
+            text: '标题名称',
             left: 'left',
             textStyle: {
-                color: '#ddd',
-                fontSize: 14
+                color: '#fff',
+                fontSize: 16
+            },
+            top: '3px'
+        },
+        grid: {
+            left: '8px',
+            right: '8px',
+            bottom: '8px',
+            top: '50px',
+            containLabel: true
+        },
+        legend: {
+            show: false
+        },
+        xAxis: {
+            splitLine: {
+                show: false
+            },
+            axisLine:{
+                lineStyle:{
+                    color:'#144382'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#d5efff',
+                    fontSize: 10
+                }
+            },
+            axisTick: {
+                show: false
+            },
+        },
+        yAxis: {
+            splitLine: {
+                show: false,
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#d5efff',
+                    fontSize: 10
+                }
+            },
+            axisLine:{
+                lineStyle:{
+                    color:'#144382'
+                }
+            },
+            axisTick: {
+                show: false
+            }
+        }
+    };
+
+function removeEchart(){
+    $('.echart-con .item').removeClass('loaded');
+    $('.echart-lcon .item').removeClass('loaded');
+}
+function initEchart() {
+
+    $('.echart-con .item').each((i,item)=>{
+
+        (function(obj,i) {
+            console.log('obj:',obj,'i:',i);
+            setTimeout(()=>{
+                $(obj).addClass('loaded');
+            },500+i*300)
+        })($(item),i);
+    });
+    pieLine();
+    setTimeout(()=>{
+        line1();
+    },1000);
+    setTimeout(()=>{
+        line2();
+    },1300);
+    setTimeout(()=>{
+        bar1();
+    },1600);
+    setTimeout(()=>{
+        line3();
+    },1900);
+    setTimeout(()=>{
+        bar2();
+    },2500);
+
+
+    window.onresize = function () {
+        for (var i = 0; i < chartInstance.length; i++) {
+            chartInstance[i].resize();
+        }
+    }
+}
+
+function line1() {
+    var option = {
+        title:{
+            text:'成交量曲线'
+        },
+        tooltip: {
+            show: true,
+            //trigger: 'axis',
+            formatter:'{c}',
+            backgroundColor:'rgba(0,0,0,0.65)',
+            borderColor:'rgba(0,0,0,0.65)',
+            borderWidth:1,
+            position:'top'
+        },
+        xAxis: {
+            type: 'category',
+            data : ['11-06','11-07','11-08','11-09']
+        },
+        yAxis: {
+            type: 'value',
+        },
+        color:['#ddc02a'],
+        series: [
+            {
+                name:'数量',
+                type:'line',
+                data:[50, 120, 100,150],
+                smooth: true,
+                symbol:'none',
+                areaStyle:{
+                    normal:{
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(221,192,42,.5)'
+                        }, {
+                            offset: .5,
+                            color: 'rgba(221,192,42,0)'
+                        }])
+
+                    }
+                }
+            }
+        ]
+    };
+
+    loadEChart("line1", option,true);
+}
+
+function line2() {
+    var option = {
+        title:{
+            text:'代还金额曲线'
+        },
+        tooltip: {
+            show: true,
+            //trigger: 'axis',
+            formatter:'{c}',
+            backgroundColor:'rgba(0,0,0,0.65)',
+            borderColor:'rgba(0,0,0,0.65)',
+            borderWidth:1,
+            position:'top'
+        },
+        xAxis: {
+            type: 'category',
+            data : ['11-06','11-07','11-08','11-09']
+        },
+        yAxis: {
+            type: 'value',
+        },
+        color:['#1da3dd'],
+        series: [
+            {
+                name:'金额',
+                type:'line',
+                data:[40, 90, 120,140],
+                smooth: true,
+                symbol:'none',
+                areaStyle:{
+                    normal:{
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(29,163,221,.5)'
+                        }, {
+                            offset: .5,
+                            color: 'rgba(29,163,221,0)'
+                        }])
+
+                    }
+                }
+            }
+        ]
+    };
+
+    loadEChart("line2", option,true);
+}
+
+function bar1() {
+    var option = {
+        title: {
+            text: '出借人活跃度',
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(param){
+                var s =  param[0].name+'22';
+                var s1 = param[0].seriesName+': '+param[0].value + '亿';
+                var s2 = param[1].seriesName+': '+param[1].value + '亿';
+                return s + '<br>'+s1 + '<br>' + s2;
+            }
+        },
+        calculable: true,
+        xAxis: {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'],
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: '出借人数',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [5, 5, 0, 0],
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: 'rgba(26,130,194,.9)'},
+                            {offset: 1, color: 'rgba(26,130,194,.2)'}
+                        ]
+                    )
+                }
+            }
+        },{
+            name: '出借人次',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [5, 5, 0, 0],
+                    color:new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: 'rgba(188,195,49,.9)'},
+                            {offset: 1, color: 'rgba(188,195,49,.2)'}
+                        ]
+                    )
+                }
+            }
+        }]
+    };
+    loadEChart("bar1", option,true);
+}
+
+function bar2() {
+    var option = {
+        title:{
+          text:'资金流出入'
+        },
+        xAxis: {
+            data: ['9.27','9.28','9.29','9.30','10.1','10.2','10.3','10.4'],
+        },
+        series: [
+            {
+                name: '资金流出',
+                type: 'bar',
+                stack: 'one',
+                data: [-29,-10,-30,-18,-9,-11,-20,-10 ],
+                barMaxWidth:'15px',
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [ 0, 0,5,5],
+                        color:new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 1, color: 'rgba(31,148,177,1)'},
+                                {offset: 0, color: 'rgba(31,148,177,.5)'}
+                            ]
+                        )
+                    }
+                }
+            },
+            {
+                name: '资金流入',
+                type: 'bar',
+                stack: 'one',
+                data: [11,22,33,35,24,33,18,24],
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [5,5,0,0],
+                        color:new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(221,192,42,1)'},
+                                {offset: 1, color: 'rgba(221,192,42,.5)'}
+                            ]
+                        )
+                    }
+                }
+            }
+        ]
+    };
+    loadEChart("bar2", option,true);
+}
+
+function radar() {
+    var option ={
+        title: {
+            text: '成交量占比',
+            left: 'left',
+            textStyle: {
+                color: '#fff',
+                fontSize: 16
             },
             top: '3px'
         },
@@ -19,93 +326,136 @@ var chartInstance = [], intervalTime = 5000,
         legend: {
             show: false
         },
-        xAxis: {
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: ['#333F2D']
-                }
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#fff',
-                    fontSize: 12
-                }
-            },
-            axisTick: {
-                show: false
+        tooltip: {
+            trigger: 'item',
+            padding:10,
+            formatter:function(params){
+                var list = '数据展示<br>';
+                var arr = option.radar.indicator;
+                params.data.value.forEach(function(v,i){
+                    list += '<span>'+arr[i].name+'：</span><span>'+v+'</span><br>'
+                });
+                return list
             }
         },
-        yAxis: {
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: ['#373C3F']
+        radar: {
+            name: {
+                textStyle:{
+                    fontsize:10,
+                    color:'#d5efff'
                 }
             },
-            axisLabel: {
-                textStyle: {
-                    color: '#fff',
-                    fontSize: 12
+            indicator: [
+                {name: '1', max: 6500},
+                {name: '2', max: 18000},
+                {name: '3', max: 30000},
+                {name: '4', max: 38000},
+                {name: '5', max: 32000},
+                {name: '6', max: 28000}
+            ],
+            splitLine:{
+                lineStyle:{
+                    color:'#092d5e'
                 }
             },
-            axisTick: {
-                show: false
-            }
+            axisLine:{
+                lineStyle:{
+                    color:'#092d5e'
+                }
+            },
+            splitArea:{
+                areaStyle:{
+                    color:['rgba(10,45,90,1)']
+                }
+            },
+            startAngle: 120
         },
+        series: [{
+            name: '数据展示1',
+            type: 'radar',
+            data: [
+                {
+                    value: [5200, 15000, 25000, 15000, 27000, 10000],
+                    name: '数据展示'
+                }
+            ],
+            symbol:'none',
+            itemStyle: {
+                normal: {
+                    lineStyle: {
+                        color:"rgba(26,130,194,1)" // 图表中各个图区域的边框线颜色
+                    }
+                }
+            },
+            areaStyle:{
+                normal:{
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgba(26,130,194,.9)' // 0% 处的颜色
+                        },
+                            {
+                                offset: 1, color: 'rgba(26,130,194,.2)' // 100% 处的颜色
+                            }],
+                        globalCoord: false // 缺省为 false
+                    },
+                    opacity:0.9
+                }
+            }
+        },{
+            name: '数据展示2',
+            type: 'radar',
+            data: [
+                {
+                    value: [3000, 8000, 20000, 32000, 20000, 24000],
+                    name: '数据展示'
+                }
+            ],
+            symbol:'none',
+            itemStyle: {
+                normal: {
+                    lineStyle: {
+                        color:"rgba(188,195,49,1)" // 图表中各个图区域的边框线颜色
+                    }
+                }
+            },
+            areaStyle:{
+                normal:{
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgba(188,195,49,.9)' // 0% 处的颜色
+                        },
+                            {
+                                offset: 1, color: 'rgba(188,195,49,.2)' // 100% 处的颜色
+                            }],
+                        globalCoord: false // 缺省为 false
+                    },
+                    opacity:0.9
+                }
+            }
+        }]
     };
 
-function removeEchart(){
-    $('#lineWarp').removeClass('loaded');
-    $('#hbarWarp').removeClass('loaded');
-    $('#baseLineWarp').removeClass('loaded');
-    $('#vbarWarp').removeClass('loaded');
-}
-function initEchart() {
-    //loadchartwarp
-    setTimeout(()=>{
-        $('#lineWarp').addClass('loaded');
-},500)
-    setTimeout(()=>{
-        $('#hbarWarp').addClass('loaded');
-},800);
-    setTimeout(()=>{
-        $('#baseLineWarp').addClass('loaded');
-},1100)
-    setTimeout(()=>{
-        $('#vbarWarp').addClass('loaded');
-},1400)
-    //loadchart
-    setTimeout(()=>{
-        line();
-    },1000)
-    setTimeout(()=>{
-        hbar();
-    },1200);
-    setTimeout(()=>{
-        baseLine();
-    },1600)
-    setTimeout(()=>{
-        scatter();
-    },1900)
-
-
-
-
-    window.onresize = function () {
-        for (var i = 0; i < chartInstance.length; i++) {
-            chartInstance[i].resize();
-        }
-    }
+    loadEChart("radar",option)
 }
 
-function line() {
+function line3() {
+
     var data = [
         {
-            "value": -1.1618426259,
+            "value": -0.7618426259,
             "date": "2012-08-28",
-            "l": -2.6017329022,
-            "u": 0.2949717757
+            "l": -1.6017329022,
+            "u": 0.1949717757
         },
         {
             "value": -0.5828247293,
@@ -295,8 +645,8 @@ function line() {
         }
     ];
     var option = _getLineOption(data);
-    loadEChart("line", option, function (_myChart) {
-        var allData = [
+    loadEChart("line3", option, true,function (_myChart) {
+        /*var allData = [
             {
                 "value": -1.1618426259,
                 "date": "2012-08-28",
@@ -849,269 +1199,170 @@ function line() {
                 data.splice(40, 40);
             data.push(allData[data.length]);
             _myChart.setOption(_getLineOption(data));
-        }, 1200)
+        }, 1200)*/
     });
 }
 
-function hbar() {
+function pieLine() {
 
-    var dataLeftS = {
-        year: ['1月', '2月', '3月', '4月', '5月', '6月'],
-        data: [10, 9, 3, 30, 48, 45]
-    };
-    var option = {
+    $('.echart-lcon .item').each((i,item)=>{
+
+        (function(obj,i) {
+            console.log('obj:',obj,'i:',i);
+            setTimeout(()=>{
+                $(obj).addClass('loaded');
+            },500+i*300)
+        })($(item),i);
+    });
+
+    setTimeout(()=>{
+        loadEChart("lpie1",getPieOption());
+        loadEChart("lline1",getLineOption());
+    },1200);
+    setTimeout(()=>{
+        loadEChart("lpie2",getPieOption());
+        loadEChart("lline2",getLineOption());
+    },1400);
+    setTimeout(()=>{
+        loadEChart("lpie3",getPieOption());
+        loadEChart("lline3",getLineOption());
+    },1800);
+    setTimeout(()=>{
+        loadEChart("lpie4",getPieOption());
+        loadEChart("lline4",getLineOption());
+    },2000);
+    setTimeout(()=>{
+        loadEChart("lpie5",getPieOption());
+        loadEChart("lline5",getLineOption());
+    },2200);
+}
+function getPieOption() {
+    var optionPie = {
+        legend: {show:false},
         tooltip: {
-            trigger: 'axis'
-        },
-        title: {
-            text: '渐变水平柱图'
-        },
-        xAxis: {
-            type: 'value',
-        },
-        yAxis: {
-            type: 'category',
-            data: dataLeftS.year
+            trigger: 'axis',
+            showContent: false
         },
         series: [
+
             {
-                name: '固定资产投资额',
-                type: 'bar',
-                barWidth:12,
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            1, 0, 0, 0,
-                            [
-                                {offset: 0, color: 'rgba(233,31,99,.9)'},
-                                {offset: 1, color: 'rgba(233,31,99,.3)'}
-                            ]
-                        ),
-                        shadowColor: 'rgba(233,31,99, 1)',
-                        shadowBlur: 2,
-                        barBorderRadius: 8,
-                    }
-                },
-                animationDurationUpdate:800,
-                data: dataLeftS.data
-            }
-        ]
-    };
-
-    loadEChart("hbar", option, function (_myChart) {
-        setInterval(function () {
-            var _data = [];
-            for (var i = 0; i < 6; i++) {
-                _data.push(parseInt(Math.random() * 50));
-            }
-            _myChart.setOption({
-                series: [{
-                    data: _data
-                }]
-            });
-        }, intervalTime)
-    });
-}
-
-function baseLine() {
-
-    var option = {
-        tooltip: {
-            backgroundColor: 'rgba(45,51,51,.9)',
-            borderColor: 'rgb(45,51,51)',
-            borderWidth: 1,
-            position: 'top',
-            trigger: 'axis',
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: (function () {
-                var now = new Date();
-                var res = [];
-                var len = 7;
-                while (len--) {
-                    res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
-                    now = new Date(now - 2000);
-                }
-                return res;
-            })()
-        },
-        yAxis: {
-            type: 'value',
-        },
-        series: [
-            {
-                name: '户籍',
-                type: 'line',
-                symbolSize: 0,
-                lineStyle: {
-                    normal: {
-                        color: 'rgb(37,157,210)',
-                        width: 2
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(37,157,210,.9)'
-                        }, {
-                            offset: 1,
-                            color: 'rgba(37,157,210,.1)'
-                        }])
-                    }
-                },
-                animationDurationUpdate:1000,
-                data: [0,0,0,0,600,50,50]
-            },
-            {
-                name: '非户籍',
-                type: 'line',
-                symbolSize: 0,
-                lineStyle: {
-                    normal: {
-                        color: '#fbce46',
-                        width: 2
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(249, 209, 72, .7)'
-                        }, {
-                            offset: 1,
-                            color: 'rgba(249, 209, 72, .1)'
-                        }])
-                    }
-
-                },
-                animationDurationUpdate:1000,
-                data: [50,50,50,750,0,0,0]
-            }
-        ]
-    };
-
-    loadEChart("baseLine", option, function (_myChart) {
-
-        setInterval(function () {
-            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-
-            if (option.xAxis.data.length > 12) {
-                option.xAxis.data.splice(6, 6);
-                option.series[0].data.splice(6, 6);
-                option.series[1].data.splice(6, 6);
-            }
-            option.xAxis.data.push(axisData);
-            option.series[0].data.push(50);
-            option.series[1].data.push(0);
-            _myChart.setOption(option);
-        }, 3000);
-    });
-}
-
-function scatter() {
-
-    function randomData() {
-        return Math.round(Math.random() * 250);
-    }
-
-    var option = {
-        title: {
-            text: '散点图'
-        },
-        tooltip: {
-            backgroundColor: 'rgba(45,51,51,.9)',
-            borderColor: 'rgb(45,51,51)',
-            borderWidth: 1,
-            position: 'top',
-            trigger: 'axis',
-        },
-        xAxis: {
-            data: ["1月", "2月", "3月", "5月", "8月", "11月", "12月"]
-        },
-        yAxis: {
-            type: 'value',
-            scale: true
-        },
-        series: [{
-            name: '第三方产品',
-            data: [randomData(), randomData(), randomData(), randomData(), randomData(), randomData(), randomData()],
-            type: 'scatter',
-            symbolSize: 22,
-            label: {
-                emphasis: {
-                    show: false
-                }
-            },
-            itemStyle: {
-                normal: {
-                    borderWidth: 2,
-                    color: 'rgba(233,31,99,.2)',
-                    borderColor: '#e91f63',
-                    shadowBlur: 20,
-                    shadowColor: 'rgba(233,31,99, 0.6)'
-                }
-            },
-            animationDurationUpdate:1500
-        }, {
-            name: '专题类',
-            data: [randomData(), randomData(), randomData(), randomData(), randomData(), randomData(), randomData()],
-            type: 'scatter',
-            symbolSize: 20,
-            label: {
-                emphasis: {
-                    show: false
-                }
-            },
-            itemStyle: {
-                normal: {
-                    borderWidth: 2,
-                    color: 'rgba(65,227,191,.2)',
-                    borderColor: '#41e3bf',
-                    shadowColor: 'rgba(65,227,191, 0.6)',
-                    shadowBlur: 20,
-                }
-            },
-            animationDurationUpdate:1500
-        },
-            {
-                name: '主题类',
-                data: [randomData(), randomData(), randomData(), randomData(), randomData(), randomData(), randomData()],
-                type: 'scatter',
-                symbolSize: 26,
+                type: 'pie',
+                radius: ['45%', '65%'],
+                center: ['50%', '50%'],
                 label: {
-                    emphasis: {
-                        show: false
+                    normal: {
+                        show: false,
                     }
                 },
                 itemStyle: {
                     normal: {
-                        borderWidth: 2,
-                        color: 'rgba(37,157,210,.2)',
-                        borderColor: '#259dd2',
-                        shadowColor: 'rgba(37,157,210, 0.6)',
-                        shadowBlur: 12,
+                        borderWidth: 5,
+                        borderType: 'solid',
+                        shadowBlur: 20
                     }
                 },
-                animationDurationUpdate:1500
-            }]
+                data: [{
+                    value: parseInt(Math.random()*100),
+                    name: '负面舆论',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(15,52,91,.8)',
+                            shadowColor: 'rrgba(15,52,91,.8)'
+                        }
+                    }
+                },
+
+                    {
+                        value: parseInt(Math.random()*100),
+                        name: '正面舆论',
+                        itemStyle: {
+                            normal: {
+                                shadowColor: 'rgba(29,90,221,.5)',
+                                color: {
+                                    type: 'linear',
+                                    x: 0.5,
+                                    y: 0,
+                                    colorStops: [{
+                                        offset: 0, color: 'rgba(29,90,221,1)' // 0% 处的颜色
+                                    }, {
+                                        offset: 1, color: 'rgba(29,165,221,.9)' // 100% 处的颜色
+                                    }],
+                                    globalCoord: false // 缺省为 false
+                                }
+
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
     };
 
-    loadEChart("vbar", option, function (_myChart) {
+    return optionPie;
+}
+function getLineOption() {
+    var lineDate =[];
+    for(var i=0;i<50;i++){
+        lineDate.push(Math.random());
+    }
+    var optionLine = {
+        legend: {show:false},
+        tooltip: {
+            trigger: 'axis',
+            showContent: false
+        },
+        xAxis: {
+            type: 'category',
+            splitLine: {
+                show: false,
+            },
+            axisLabel: {
+                show:false
+            },
+            axisLine:{
+                show:false
+            },
+            axisTick: {
+                show: false
+            }},
+        yAxis: {
+            data:[-2,-1,0,1,2,3],
+            splitLine: {
+                show: false,
+            },
+            axisLabel: {
+                show:false
+            },
+            axisLine:{
+                show:false
+            },
+            axisTick: {
+                show: false
+            }
+        },
+        series: [
+            {
+                type: 'line',
+                data:lineDate,
+                symbol:'none',
+                smooth: true,
+                color:'rgba(26,164,202,1)',
+                areaStyle:{
+                    normal:{
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(26,164,202,.5)'
+                        }, {
+                            offset: .5,
+                            color: 'rgba(26,164,202,0)'
+                        }])
 
-        setInterval(function () {
-
-            var num = parseInt(Math.random() * 7);
-            option.series[0].data[num] = randomData();
-            num = parseInt(Math.random() * 7)
-            option.series[1].data[num] = randomData();
-            num = parseInt(Math.random() * 7)
-            option.series[2].data[num] = randomData();
-            _myChart.setOption(option);
-        }, 4000);
-    });
+                    }
+                }
+            }
+        ]
+    };
+    return optionLine;
 }
 
 function _getLineOption(data) {
@@ -1121,10 +1372,9 @@ function _getLineOption(data) {
     }, Infinity);
     return option = {
         title: {
-            text: '折线图'
+            text: '逾期率曲线'
         },
         grid: {
-            containLabel: false
         },
         tooltip: {
             trigger: 'axis',
@@ -1153,6 +1403,11 @@ function _getLineOption(data) {
                 return item.date;
             }),
             axisLabel: {
+                show:true,
+                textStyle: {
+                    color: '#d5efff',
+                    fontSize: 10
+                },
                 formatter: function (value, idx) {
                     var date = new Date(value);
                     return idx === 0 ? value : [date.getMonth() + 1, date.getDate()].join('-');
@@ -1161,6 +1416,11 @@ function _getLineOption(data) {
         },
         yAxis: {
             axisLabel: {
+                show:true,
+                textStyle: {
+                    color: '#d5efff',
+                    fontSize: 10
+                },
                 formatter: function (val) {
                     return (val - base) * 100 + '%';
                 }
@@ -1201,10 +1461,10 @@ function _getLineOption(data) {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
-                        color: 'rgba(65,227,191,.2)'
+                        color: 'rgba(29,195,221,.2)'
                     }, {
                         offset: 1,
-                        color: 'rgba(65,227,191,.7)'
+                        color: 'rgba(29,195,221,.7)'
                     }])
                 }
             },
@@ -1219,7 +1479,7 @@ function _getLineOption(data) {
             symbolSize: 6,
             itemStyle: {
                 normal: {
-                    color: '#41e3bf'
+                    color: 'rgb(28,168,215)'
                 }
             },
             showSymbol: false
@@ -1227,9 +1487,10 @@ function _getLineOption(data) {
     };
 }
 
-function loadEChart(con, option, cb) {
+function loadEChart(con, option, merger,cb) {
 
-    option = $.extend(true, {}, baseOption, option);
+    if(merger)
+        option = $.extend(true, {}, baseOption, option);
     var myChart = echarts.init(document.getElementById(con));
     myChart.setOption(option);
     if (cb) cb(myChart);

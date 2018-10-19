@@ -1,32 +1,39 @@
 /**
  * step3 北京朝阳区
  */
-var particlesLayer;
+var particlesLayer, polygonizrLayer;
 
 /**
  * step3 北京朝阳区进入
  */
 function step3() {
 
-    //initEchart()
+    initEchart()
     map.setRotation(90)
-    map.setZoom(15)
-    setPitch(80)
+    map.setZoom(17)
+    setPitch(40)
     setRotation(0)
     initStatus();
+<<<<<<< HEAD
     map.panTo([116.432050, 39.935873]);
     addM();
     //addParticlesLayer();
     setp3Tips()
 
+=======
+    map.panTo([116.454925, 39.914705]);
+    addM();
+    addLine();
+    addPolygonizrLayer();
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
 }
 
 function initStatus() {
     //$(".turnover").removeClass('show')
     //$(".nums").removeClass('show')
     $(".word-container").hide();
-    $(".step3-mask").hide();
-    $(".echart-lcon").hide();
+    //$(".step3-mask").hide();
+    //$(".echart-lcon").hide();
 }
 
 function addParticlesLayer() {
@@ -141,14 +148,65 @@ function addPolygonizrLayer() {
 
 
     // 创建一个自定义图层
+<<<<<<< HEAD
     var polygonizrLayer = new AMap.CustomLayer(canvas, {
+=======
+    polygonizrLayer = new AMap.CustomLayer(canvas, {
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
         zIndex: 11,
         zooms: [1, 18] // 设置可见级别，[最小级别，最大级别]
     });
     polygonizrLayer.setMap(map);
     setTimeout(function () {
-        $(function () {
-            $('#clayer').polygonizr();
+        $('#clayer').polygonizr({
+            // How long to pause in between new node-movements.
+            restNodeMovements: 1,
+            // When the cluster up<a href="https://www.jqueryscript.net/time-clock/">date</a>s, this sets speed of nodes.
+            duration: 3,
+            // Define the maximum distance to move nodes.
+            nodeMovementDistance: 50,
+            // The number of node nodes to print out.
+            numberOfNodes: 25,
+            // Define the maximume size of each node dot.
+            nodeDotSize: 1,
+            // Sets the ease mode of the movement: linear, easeIn, easeOut, easeInOut, accelerateDecelerate.
+            nodeEase: "easeOut",
+            // If true, the nodes will descend into place on load.
+            nodeFancyEntrance: false,
+            // Makes the cluster forms an ellipse inspired formation, random if true.
+            randomizePolygonMeshNetworkFormation: true,
+            // Define a formula for how to initialize each node dot's position.
+            specifyPolygonMeshNetworkFormation: function (i) {
+                var forEachNode = {
+                    // Half a circle and randomized
+                    x: this.canvasWidth - ((this.canvasWidth / 2) + (this.canvasHeight / 2) * Math.cos(i * (2 * Math.PI / this.numberOfNodes))) * Math.random(),
+                    y: this.canvasHeight - (this.canvasHeight * (i / this.numberOfNodes))
+                };
+                console.log('forEachNode2:', forEachNode);
+                return forEachNode;
+            },
+            // Number of relations between nodes.
+            nodeRelations: 2,
+            // The FPS for the whole canvas.
+            animationFps: 50,
+            // Sets the color of the node dots in the network (RGB).
+            nodeDotColor: "6, 31, 64",
+            // Sets the color of the node lines in the network (RGB).
+            nodeLineColor: "6, 31, 64",
+            // Sets the color of the filled triangles in the network (RGB).
+            nodeFillColor: "240, 255, 250",
+            // If valid RGB color adds a linear gradient stroke (set null to remove).
+            nodeFillGradientColor: "7, 34, 73",
+            // Sets the alpha level for the colors (1-0).
+            nodeFillAlpha: .1,
+            // Sets the alpha level for the lines (1-0).
+            nodeLineAlpha: .1,
+            // Sets the alpha level for the dots (1-0).
+            nodeDotAlpha: .1,
+            // Defines if the triangles in the network should be shown.
+            nodeFillSapce: true,
+            // Define if the active animation should glow or not (not CPU friendly).
+            nodeGlowing: false
         })
     }, 2000);
 }
@@ -160,6 +218,7 @@ function destroyStep3() {
     removeEchart();
     $(".word-container").show();
     particlesLayer ? particlesLayer.hide() : null;
+    polygonizrLayer ? polygonizrLayer.hide() : null;
 }
 
 function addM() {
@@ -167,6 +226,7 @@ function addM() {
     var object3Dlayer = new AMap.Object3DLayer();
     map.add(object3Dlayer);
     // 顺时针坐标点
+<<<<<<< HEAD
     var paths = [
         [116.432044, 39.936292],
         [116.43239, 39.936315],
@@ -193,26 +253,97 @@ function addM() {
         [116.425007, 39.948953],
         [116.425047, 39.948446],
         [116.423808, 39.948385]
+=======
+    // 北京东方联合投资管理有限公司	网信	北京市朝阳区霄云路28号院2号楼7层701 1300:5
+    var paths0 = [
+        [116.465814, 39.958505],
+        [116.465626, 39.958271],
+        [116.466133, 39.957890],
+        [116.466401, 39.958146]
+    ];
+
+
+    //北京瓴岳信息技术有限公司	洋钱罐	北京市朝阳区东三环北路19号中青大厦19层 1500:15
+    var paths1 = [
+        [116.460435, 39.93005],
+        [116.460928, 39.930035],
+        [116.460837, 39.928958],
+        [116.460274, 39.928936],
+    ];
+
+    // 北京乐融多源信息技术有限公司	积木盒子	北京市朝阳区金桐西路10号远洋光华国际AB座5层A501-505 2200:5
+    var paths2 = [
+        [116.453805, 39.916099],
+        [116.454626, 39.916099],
+        [116.455347, 39.915438],
+        [116.455393, 39.914607],
+        [116.454868, 39.9146],
+        [116.454831, 39.915158],
+        [116.454262, 39.91552],
+        [116.454246, 39.915616],
+        [116.45381, 39.915628],
     ]
 
-    addbuild(paths);
-    addbuild(paths1);
-    addbuild(paths2);
+    // 贝壳金科控股有限公司	贝壳金科	北京市朝阳区朝外大街乙12号13层O-1612B 1300:13
+    var paths3 = [
+        [116.441719, 39.922859],
+        [116.442633, 39.922885],
+        [116.44265, 39.922674],
+        [116.441727, 39.922636],
+    ]
+
+    // 北京钱得乐科技有限公司	金蛋理财	北京市朝阳区北辰世纪中心B座17层 1700:17
+    var paths4 = [
+        [116.387691, 39.999278],
+        [116.388151, 39.999297],
+        [116.388387, 39.99915],
+        [116.388388, 39.998969],
+        [116.387929, 39.998934],
+        [116.387695, 39.999056],
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
+    ]
+    // 北京玖富普惠信息技术有限公司	玖富	北京市朝阳区阜通东大街1号院5号楼1单元310-306 2400
+    var paths5 = [
+        [116.479965, 39.996479],
+        [116.480392, 39.996611],
+        [116.48094, 39.996381],
+        [116.481308, 39.996069],
+        [116.481523, 39.995759],
+        [116.481325, 39.995609],
+        [116.481157, 39.995589],
+        [116.480529, 39.996036],
+    ]
+    var floorHeight = 100
+    buildPaths.forEach((item) => {
+        addbuild(item.ps, item.totalFloor * floorHeight);
+    })
+
 
     map.on('click', function (e) {
         console.log(e.lnglat + '')
     })
 
+<<<<<<< HEAD
     function addbuild(paths) {
         // 添加建筑物
         addMesh(paths, 0, 1000, [1, 1, 1, .5], [.86, .65, .95, .8])
+=======
+    function addbuild(paths, height) {
+        height = height || 1000
+        // 添加建筑物
+        addMesh(paths, 0, height, [1, 1, 1, .5], [.86, .65, .95, .8])
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
 
         // 添加发光楼层
         // 改变paths范围，建议小于0.0001
         zoomPaths(paths, 0.0001)
         addMeshLayers(paths, 500, 5, [.8, .95, 1, .5], [.3, .7])
         // 添加灯光效果
+<<<<<<< HEAD
         var mesh = addMesh(paths, 0, 100, [1, 1, 1, .3], [1, 1, 1, 0], 'back')
+=======
+        var mesh = addMesh(paths, 0, 10000, [1, 1, 1, .3], [1, 1, 1, 0], 'front')
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
     }
 
 
@@ -234,7 +365,10 @@ function addM() {
 
         for (var i = 0; i < count; i++) {
             var _a = (a / count) * (count - i)
+<<<<<<< HEAD
             console.log("r:" + r + ',g:' + g + ',b:' + b + ',a:' + _a)
+=======
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
             addMesh(paths, layerHeight * i, layerHeight * i + layerThick, [r, g, b, _a])
         }
     }
@@ -291,7 +425,11 @@ function addM() {
         var vertexColors = geometry.vertexColors;
         var faces = geometry.faces;
         var vertexLength = bounds.length * 2;
+<<<<<<< HEAD
         mesh.textures.push('https://a.amap.com/jsapi_demos/static/texture3d/shuilifang.png');
+=======
+
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
         var verArr = [];
 
         // 设置侧面
@@ -342,5 +480,237 @@ function addM() {
 
 }
 
+<<<<<<< HEAD
 
 
+=======
+function addLine() {
+    var canvas = document.createElement('div');
+    canvas.id = 'ccc01'
+    canvas.className = 'ccc01'
+    canvas.style.width = '1000px';
+    canvas.style.height = '1000px';
+    var zr = zrender.init(canvas, { renderer: 'canvas' });
+
+    var line1 = new zrender.Line({
+        position: [0, 0],
+        scale: [1, 1],
+        shape: {
+            x1: 320,
+            y1: 150,
+            x2: 320,
+            y2: 600,
+        },
+        style: {
+            lineDash: [100, 400],
+            stroke: 'rgba(255,60,50,.8)',
+            shadowBlur: 1,
+            shadowColor: 'rgba(255,150,50,1)',
+            lineWidth: .3,
+            blend: 'lighter'
+        }
+    })
+    var line2 = new zrender.Line({
+        position: [0, 0],
+        scale: [1, 1],
+        shape: {
+            x1: 340,
+            y1: 150,
+            x2: 340,
+            y2: 600,
+        },
+        style: {
+            lineDash: [100, 400],
+            stroke: 'rgba(255,255,255,.8)',
+            shadowBlur: 1,
+            shadowColor: 'rgba(255,150,50,1)',
+            lineWidth: .3,
+            blend: 'lighter'
+        }
+    })
+
+    zr.add(line1);
+    zr.add(line2);
+
+    var linePath3 = [];
+
+    var line3 = new zrender.Polyline({
+        position: [0, 0],
+        scale: [1, 1],
+        shape: {
+            points: linePath3,
+            smooth: 0.5
+        },
+        style: {
+            lineDash: [100, 400],
+            stroke: 'rgba(255,255,255,.8)',
+            shadowBlur: 1,
+            shadowColor: 'rgba(255,150,50,1)',
+            lineWidth: .1,
+            blend: 'lighter'
+        }
+    })
+    zr.add(line3);
+    line3.animate('style', true)
+        .when(2000, {
+            lineDashOffset: 500
+        }).start();
+    // var count = 80;
+    // $.get('./js/step3/roadPoints.csv', function (data) {
+
+    //     var LF = String.fromCharCode(10);
+    //     var lineText = data.split(LF);
+    //     lineText.slice(1)
+    //     lineText.forEach((item) => {
+    //         var c = item.split(',')
+    //         if(c[2]=='50052')
+    //         {
+    //             count--
+    //             if (count > 0) {
+                    
+    //                 linePath3.push(coordConvert([c[0], c[1]]))
+    //             }
+    //         }
+    //     })
+    //     console.log(linePath3)
+
+    //     var line3 = new zrender.Polyline({
+    //         position: [0, 0],
+    //         scale: [1, 1],
+    //         shape: {
+    //             points: linePath3,
+    //             smooth: 0.5
+    //         },
+    //         style: {
+    //             lineDash: [100, 400],
+    //             stroke: 'rgba(255,255,255,.8)',
+    //             shadowBlur: 1,
+    //             shadowColor: 'rgba(255,150,50,1)',
+    //             lineWidth: .1,
+    //             blend: 'lighter'
+    //         }
+    //     })
+    //     zr.add(line3);
+    //     line3.animate('style', true)
+    //         .when(2000, {
+    //             lineDashOffset: 500
+    //         }).start();
+    // })
+
+
+
+    line1.animate('style', true)
+        .when(1000, {
+            lineDashOffset: 500
+        }).start();
+    line2.animate('style', true)
+        .when(2000, {
+            lineDashOffset: 500
+        }).start();
+
+    zr.configLayer(0, {
+        // clearColor: 'rgba(255, 255, 255, 0.1)',
+        motionBlur: true,
+        lastFrameAlpha: 0.8
+    });
+
+    var mincrood = [116.097159, 39.698386]//+0.54
+    var coordSize = 0.54
+    var maxcrood = [mincrood[0] + coordSize, mincrood[1] + coordSize]
+    var canvasSize = 1000
+    var rate = canvasSize / (maxcrood[0] - mincrood[0])
+
+    // 坐标转成canvas内部位置
+    function coordConvert(coord) {
+        return [(coord[0] - mincrood[0]) * rate, (coord[1] - mincrood[1]) * rate]
+
+    }
+
+    setTimeout(function () {
+        var canvas = zr.dom.getElementsByTagName('canvas')[0];
+        var CanvasLayer = new AMap.CanvasLayer({
+            map: map,
+            canvas: canvas,
+            bounds: new AMap.Bounds(
+                mincrood,
+                maxcrood
+            ),
+            zooms: [3, 18],
+        });
+        function draw() {
+            CanvasLayer.reFresh()//2D视图时可以省略
+            AMap.Util.requestAnimFrame(draw)
+        }
+        draw()
+
+
+    }, 3000)
+
+
+}
+
+function addPoints(){
+    var colors = [
+        '#fff',
+        '#008aeb',
+        '#04d',
+        '#9bf',
+        '#28f'
+    ];
+    
+    $.get('./js/step3/roadPoints.csv', function (csv) {
+        var step1Loca = new Loca(map)
+        var layer = Loca.visualLayer({
+            container: step1Loca,
+            type: 'point',
+            shape: 'circle'
+        });
+
+        layer.setData(csv, {
+            lnglat: function (obj) {
+                var value = obj.value;
+                return [value['lng'], value['lat']];
+            },
+            type: 'csv'
+        });
+
+        layer.setOptions({
+            style: {
+                radius: function (obj) {
+                    var value = obj.value;
+                    switch (parseInt(value.type)) {
+                        case 3:
+                            return 2;
+                        case 4:
+                            return 3;
+                        case 41:
+                            return 5;
+                        case 5:
+                            return 4;
+                        default:
+                            return 2;
+                    }
+                },
+                color: function (obj) {
+                    var value = obj.value;
+                    switch (parseInt(value.type)) {
+                        case 3:
+                            return colors[0];
+                        case 4:
+                            return colors[1];
+                        case 41:
+                            return colors[2];
+                        case 5:
+                            return colors[3];
+                        default:
+                            return colors[4];
+                    }
+                },
+                opacity: 0.3
+            }
+        });
+
+        layer.render();
+    });
+}
+>>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
