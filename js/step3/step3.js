@@ -14,6 +14,9 @@ function step3() {
     setPitch(40)
     setRotation(0)
     initStatus();
+
+    setp3Tips()
+
     map.panTo([116.454925, 39.914705]);
     addM();
     addLine();
@@ -228,7 +231,6 @@ function addM() {
         height = height || 1000
         // 添加建筑物
         addMesh(paths, 0, height, [1, 1, 1, .5], [.86, .65, .95, .8])
-
         // 添加发光楼层
         // 改变paths范围，建议小于0.0001
         zoomPaths(paths, 0.0001)
@@ -312,7 +314,6 @@ function addM() {
         var vertexColors = geometry.vertexColors;
         var faces = geometry.faces;
         var vertexLength = bounds.length * 2;
-
         var verArr = [];
 
         // 设置侧面
