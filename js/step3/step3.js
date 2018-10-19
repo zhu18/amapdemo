@@ -24,8 +24,8 @@ function initStatus() {
     //$(".turnover").removeClass('show')
     //$(".nums").removeClass('show')
     $(".word-container").hide();
-    $(".step3-mask").hide();
-    $(".echart-lcon").hide();
+    //$(".step3-mask").hide();
+    //$(".echart-lcon").hide();
 }
 
 function addParticlesLayer() {

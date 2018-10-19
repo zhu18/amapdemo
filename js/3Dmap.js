@@ -160,9 +160,7 @@ function hashChange() {
         stepTwo()
     } else if (step == 3) {
         stepThree()
-    } else if(step == 4){
-        stepThree()
-    }else{
+    } else{
         stepOne()
     }
 }

@@ -17,6 +17,22 @@ class Util {
         })
         return newArray
     }
+    restructureData2(array, opt) {
+        let newArray = []
+        let item
+        array.forEach(v => {
+            var obj = v.xy.split(',');
+            if(obj.length== 2 && obj[0] && obj[1]) {
+                item = Object.assign({
+                    lnglat: v.xy.split(','),
+                    name: v.name,
+                    style: 2
+                }, opt)
+                newArray.push(item)
+            }
+        })
+        return newArray
+    }
     resizeData(array, multiples) {
         let newArray = []
         for (let index = 0; index < multiples; index++) {
@@ -31,9 +47,9 @@ class Util {
         return newArray
     }
     randomLnglat(lnglat) {
-        lnglat[0] = lnglat[0] + (Math.random() * (9 - 1) + 1) * 0.01;
+        lnglat[0] = lnglat[0]*1 + (Math.random() * (9 - 1) + 1) * 0.01;
         lnglat[1] = lnglat[1] - (Math.random() * (9 - 1) + 1) * 0.01;
-        return lnglat
+        return lnglat;
     }
     addTask(task) {
         this.tasks.push(task)
