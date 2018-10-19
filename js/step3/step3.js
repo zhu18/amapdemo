@@ -28,6 +28,14 @@ function initStatus() {
     //$(".echart-lcon").hide();
 }
 
+function mapPanto(index) {
+
+    var ent = buildPaths[index];
+    var lnglat = ent.ps[0];
+
+    map.setCenter(lnglat);
+}
+
 function addParticlesLayer() {
 
     if (particlesLayer) {

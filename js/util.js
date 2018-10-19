@@ -17,16 +17,16 @@ class Util {
         })
         return newArray
     }
-    restructureData2(array, opt) {
+    restructureData2(array, opt, isNewData) {
         let newArray = []
         let item
         array.forEach(v => {
             var obj = v.xy.split(',');
             if(obj.length== 2 && obj[0] && obj[1]) {
                 item = Object.assign({
-                    lnglat: v.xy.split(','),
+                    lnglat: isNewData ? this.randomLnglat(v.xy.split(',')) : v.xy.split(','),
                     name: v.name,
-                    style: 2
+                    style: isNewData ? Math.ceil(Math.random() * 3) : 2
                 }, opt)
                 newArray.push(item)
             }

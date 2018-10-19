@@ -383,6 +383,7 @@ ul, li {
     line-height: 46px;
     text-align: center;
     opacity: 0;
+    cursor: pointer;
 }
 .echart-lcon .item.loaded .num{
     opacity: 1;

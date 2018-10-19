@@ -91,7 +91,6 @@ function initEchart() {
         bar2();
     },2500);
 
-
     window.onresize = function () {
         for (var i = 0; i < chartInstance.length; i++) {
             chartInstance[i].resize();

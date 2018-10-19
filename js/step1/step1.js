@@ -37,7 +37,8 @@ function addLocaMap() {
         lnglat: 'lnglat'
     });*/
     var haloCitys = util.restructureData2(allCitys, {type: 'halo'})
-
+    /*var solidCitys = util.restructureData2(allCitys, {type: 'solid'}, true)
+    var newCitys = haloCitys.concat(solidCitys)*/
     layer.setData(haloCitys, {
         lnglat: 'lnglat'
     });
@@ -63,7 +64,7 @@ function addLocaMap() {
                 } else if (style == 1) {
                     r = isHalo ? 8 : 2;
                 } else {
-                    r = isHalo ? 12 : 1;
+                    r = isHalo ? 10 : 1;
                 }
                 return r;
             },
