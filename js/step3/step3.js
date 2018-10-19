@@ -14,18 +14,13 @@ function step3() {
     setPitch(40)
     setRotation(0)
     initStatus();
-<<<<<<< HEAD
-    map.panTo([116.432050, 39.935873]);
-    addM();
-    //addParticlesLayer();
+
     setp3Tips()
 
-=======
     map.panTo([116.454925, 39.914705]);
     addM();
     addLine();
     addPolygonizrLayer();
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
 }
 
 function initStatus() {
@@ -148,11 +143,7 @@ function addPolygonizrLayer() {
 
 
     // 创建一个自定义图层
-<<<<<<< HEAD
-    var polygonizrLayer = new AMap.CustomLayer(canvas, {
-=======
     polygonizrLayer = new AMap.CustomLayer(canvas, {
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
         zIndex: 11,
         zooms: [1, 18] // 设置可见级别，[最小级别，最大级别]
     });
@@ -226,34 +217,6 @@ function addM() {
     var object3Dlayer = new AMap.Object3DLayer();
     map.add(object3Dlayer);
     // 顺时针坐标点
-<<<<<<< HEAD
-    var paths = [
-        [116.432044, 39.936292],
-        [116.43239, 39.936315],
-        [116.432435, 39.935884],
-        [116.43207, 39.935853]
-    ];
-
-    var paths1 = [
-        [116.436042, 39.942209],
-        [116.43738, 39.942234],
-        [116.4374, 39.941626],
-        [116.436067, 39.941619]
-    ];
-
-    var paths1 = [
-        [116.436042, 39.942209],
-        [116.43738, 39.942234],
-        [116.4374, 39.941626],
-        [116.436067, 39.941619]
-    ]
-
-    var paths2 = [
-        [116.423683, 39.948919],
-        [116.425007, 39.948953],
-        [116.425047, 39.948446],
-        [116.423808, 39.948385]
-=======
     // 北京东方联合投资管理有限公司	网信	北京市朝阳区霄云路28号院2号楼7层701 1300:5
     var paths0 = [
         [116.465814, 39.958505],
@@ -300,7 +263,6 @@ function addM() {
         [116.388388, 39.998969],
         [116.387929, 39.998934],
         [116.387695, 39.999056],
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
     ]
     // 北京玖富普惠信息技术有限公司	玖富	北京市朝阳区阜通东大街1号院5号楼1单元310-306 2400
     var paths5 = [
@@ -323,27 +285,17 @@ function addM() {
         console.log(e.lnglat + '')
     })
 
-<<<<<<< HEAD
-    function addbuild(paths) {
-        // 添加建筑物
-        addMesh(paths, 0, 1000, [1, 1, 1, .5], [.86, .65, .95, .8])
-=======
+
     function addbuild(paths, height) {
         height = height || 1000
         // 添加建筑物
         addMesh(paths, 0, height, [1, 1, 1, .5], [.86, .65, .95, .8])
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
-
         // 添加发光楼层
         // 改变paths范围，建议小于0.0001
         zoomPaths(paths, 0.0001)
         addMeshLayers(paths, 500, 5, [.8, .95, 1, .5], [.3, .7])
         // 添加灯光效果
-<<<<<<< HEAD
-        var mesh = addMesh(paths, 0, 100, [1, 1, 1, .3], [1, 1, 1, 0], 'back')
-=======
         var mesh = addMesh(paths, 0, 10000, [1, 1, 1, .3], [1, 1, 1, 0], 'front')
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
     }
 
 
@@ -365,10 +317,6 @@ function addM() {
 
         for (var i = 0; i < count; i++) {
             var _a = (a / count) * (count - i)
-<<<<<<< HEAD
-            console.log("r:" + r + ',g:' + g + ',b:' + b + ',a:' + _a)
-=======
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
             addMesh(paths, layerHeight * i, layerHeight * i + layerThick, [r, g, b, _a])
         }
     }
@@ -425,11 +373,6 @@ function addM() {
         var vertexColors = geometry.vertexColors;
         var faces = geometry.faces;
         var vertexLength = bounds.length * 2;
-<<<<<<< HEAD
-        mesh.textures.push('https://a.amap.com/jsapi_demos/static/texture3d/shuilifang.png');
-=======
-
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5
         var verArr = [];
 
         // 设置侧面
@@ -480,10 +423,6 @@ function addM() {
 
 }
 
-<<<<<<< HEAD
-
-
-=======
 function addLine() {
     var canvas = document.createElement('div');
     canvas.id = 'ccc01'
@@ -713,4 +652,3 @@ function addPoints(){
         layer.render();
     });
 }
->>>>>>> ec49aa6fff2ac084856a1141f93b650e77ff56d5

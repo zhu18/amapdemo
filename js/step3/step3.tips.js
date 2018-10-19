@@ -19,8 +19,8 @@ function setp3Tips() {
     var points3D = new AMap.Object3D.RoundPoints();
     points3D.transparent = true;
     var pointsGeo = points3D.geometry;
-    var center = lnglatToG20([116.436865, 39.941948]);
-    var height = -1300
+    var center = lnglatToG20([116.454481, 39.916943]);
+    var height = -2300
     // points3D.textures.push('https://a.amap.com/jsapi_demos/static/demo-center/3d_texture_tiananmen_256.png');
     points3D.textures.push('http://127.0.0.1:5500/img/pointer4-icon.png');
 
@@ -46,9 +46,7 @@ function setp3Tips() {
         if (obj) {
             console.log(e)
             console.log(obj)
-            setTimeout(() => {
-                creatInfo(pixel)
-            }, 300);
+            creatInfo(pixel)
             // infoWindow3.open(map, [116.436865, 39.941948], true)
         }else{
             $(".info3").remove()
@@ -69,7 +67,7 @@ function creatInfo(p){
         $("body").append("<div class='info3' style='position: absolute;left:" + left + "px;top:" + top + "px'>" +
             "<div class='info3-line'></div>" +
             "<div class='info3-content'>"+
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+
+                "<div class='text'>天地大厅有限公司</div>"+
                 "<span></span>"+
                 "<span></span>"+
             "</div>" +

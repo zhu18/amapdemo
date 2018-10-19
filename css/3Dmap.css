@@ -226,7 +226,14 @@ ul, li {
     background: url(../img/c0.png) no-repeat center;
     background-size: contain;
     /* background-color: #000; */
+    transform: translate3d(0,0,0);
+    transform: scale(0);
+    transition: all 1s ease-in-out;
 }
+.showBox{
+    transform: scale(1)
+}
+
 .ring div{
     position: absolute;
     left: 0;
@@ -911,29 +918,60 @@ ul, li {
 }
 
 .info3 .info3-line{
+    opacity: 0;
     float: left;
-    width: 40px;
-    height: 100px;
+    width: 1px;
+    height: 0px;
     border: 1px solid #fff;
     transform:skew(-20deg,0deg);
-    right:0;
+     position: absolute;
+    left:0;
     bottom: 0;
+    transform-origin: left bottom;
     border-width: 1px 0px 0px 1px ;
-    /* animation: line 1.5s;
-    animation-fill-mode:forwards; */
+    animation: line2 1.5s; 
+    animation-fill-mode:forwards; 
+}
+@-webkit-keyframes line2{
+    0%   { height: 0;opacity: 0;}
+    50%  {height: 100px;width:1px;opacity: 1;}
+    100%  {height: 100px;width:40px;opacity: 1;}
 }
 .info3 .info3-content{
+    margin-left:60px;
+    opacity: 0;
     float: left;
-    min-width: 200px;
+    width: 0;
     height: 80px;
     background: rgba(0,114,255,.75);
     border:1px solid #0fa4ea;
     position: relative;
-    top:-40px;
+    top:-60px;
     left:18px;
+    animation: content2 .8s;
+    animation-delay: 1.5s;
+    animation-fill-mode:forwards;
 
 }
+@-webkit-keyframes content2{
+    0%   {opacity: 0;}
+    100%  {width:100%;opacity: 1;}
+}
 
+
+.info3 .info3-content .text{
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    width: 0;
+    opacity: 0;
+    position: relative;
+     overflow: hidden;
+    white-space: nowrap;
+    animation: print 1s steps(16, end);
+    animation-delay: 2.5s;
+    animation-fill-mode:forwards;
+}
 .info3 .info3-content:after{
     position: absolute;
     width: 7px;
