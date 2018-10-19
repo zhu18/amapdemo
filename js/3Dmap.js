@@ -34,7 +34,7 @@ function initMap() {
         viewMode: '3D',//开启3D视图,默认为关闭
         buildingAnimation: true,//楼块出现是否带动画
         features: ['bg', 'road', 'point'],//隐藏默认楼块
-        showLabel: false,
+        showLabel: true,
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         expandZoomRange: true,
         layers: [
