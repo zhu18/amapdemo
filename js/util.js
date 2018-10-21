@@ -17,16 +17,16 @@ class Util {
         })
         return newArray
     }
-    restructureData2(array, opt) {
+    restructureData2(array, opt, isNewData) {
         let newArray = []
         let item
         array.forEach(v => {
             var obj = v.xy.split(',');
             if(obj.length== 2 && obj[0] && obj[1]) {
                 item = Object.assign({
-                    lnglat: v.xy.split(','),
+                    lnglat: isNewData ? this.randomLnglat(v.xy.split(',')) : v.xy.split(','),
                     name: v.name,
-                    style: 2
+                    style: isNewData ? Math.ceil(Math.random() * 3) : 2
                 }, opt)
                 newArray.push(item)
             }
@@ -107,6 +107,7 @@ function setZoom(index, step = .09) {
         return new Promise((resolve, reject) => {
             (function _setZoom() {
                 map.setZoom(map.getZoom() + step)
+                map2.setZoom(map2.getZoom() + step)
                 if (map.getZoom() >= index) {
                     resolve('ok')
                     return

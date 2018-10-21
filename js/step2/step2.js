@@ -8,23 +8,18 @@ function fixedMap(params) {
         pitchEnable: false,
     })
 }
-var map3, layer2, topLine, bottomLine, layer4, layer5,
-bgLayer = new AMap.ImageLayer({
-    //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-    bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-    //url: '../../img/step2_F.png',
-    url: '../../img/step2_F2.png',
-    opacity: 1,
-    map:map,
-    height: 70000,
-    visible: false,
-    rejectMapMask: true
-})
+var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
+
 function step2(params) {
     map.setStatus({
         dragEnable: true,
         doubleClickZoom: true
     })
+    // setTimeout(() => {
+    //     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+    // }, 5000);
+    navigation2(map)
+
     // 可视化图
     map3 = new Loca(map)
     // 带有高度的北京地图(面)
@@ -80,8 +75,7 @@ function step2(params) {
 }
 
 
-
-function destroyStep2() {
+function destroyStep2(cb) {
     map.clearMap()
     setTimeout(() => {
         bgLayer.hide() 
@@ -96,11 +90,11 @@ function destroyStep2() {
     setTimeout(() => {
         $('.ring').removeClass('showBox')
     }, 2000);
-    
-    
+
+    setTimeout(function () {
+        if(cb)cb();
+    })
     // bgLayer ? map.remove(bgLayer) : ''
-   
-    
 
 }
 
@@ -109,6 +103,7 @@ function destroyStep2() {
 
 
 var tasks2 = []
+
 function navigation2(map, scallback) {
     tasks2 = [f1, f2, f3, f4, f5, f6, f7,f8]
     next()
@@ -124,7 +119,8 @@ function navigation2(map, scallback) {
         tasks2.push(task);
     }
     function f1() {
-        map.setCenter([114.149726, 40.211949])
+        map.setCenter([116.311558,39.85414])
+        map2.setCenter([116.311558,39.85414])
         setTimeout(() => {
             next()
         }, 300);
@@ -134,30 +130,37 @@ function navigation2(map, scallback) {
             setZoom(6, 0.05).then(_ => {
                 setZoom(7, 0.05).then(_ => {
                     setZoom(8, 0.05).then(_ => {
-                        setZoom(9, 0.05).then(_ => {
-                              next()
-                        })
+                            setZoom(9, 0.05).then(_ => {
+                                setTimeout(() => {
+                                    next()
+                                    // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                                    // $('.ring').addClass('showBox')
+                                }, 300);
+                            })
                     })
                 })
             })
-        })
-       
+        });
+        //map2.setZoom(9.6);
     }
+
     function f3() {
-        setTimeout(() => {
-            map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
-        }, 1000);
+
         setTimeout(() => {
             next()
         }, 500);
     }
     function f4() {
         map.setRotation(0)
+        map2.setRotation(0)
         setTimeout(() => {
             next()
         }, 300);
     }
     function f5() {
+        $("#container2").removeClass('loaded');
+        $("#container").addClass('loaded');
+        map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
         $('.ring').addClass('showBox')
         setTimeout(() => {
             next()
@@ -165,6 +168,18 @@ function navigation2(map, scallback) {
 
     }
     function f6() {
+        //layer2.render();
+        bgLayer = new AMap.ImageLayer({
+            //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+            bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+            //url: '../../img/step2_F.png',
+            url: '../../img/step2_F2.png',
+            opacity: 1,
+            height: 70000,
+            map: map,
+            visible: true,
+            rejectMapMask: true
+        })
         bgLayer.show()
         setTimeout(() => {
             next()

@@ -1,4 +1,4 @@
-var map, util = new Util();
+var map,map2,lastStep, lastMove,util = new Util();
 
 $(document).ready(function () {
 
@@ -13,11 +13,20 @@ $(document).ready(function () {
     }
     $("#container").addClass('loaded');
 
-    $(document).mouseover(function () {
+    $(window).mousemove(function () {
+        lastMove = new Date().getTime();
         $(".nav").addClass("nav-active");
     }).mouseout(function () {
         $(".nav").removeClass("nav-active");
     });
+
+    window.setInterval(function() {
+        var now = new Date().getTime();
+        if(lastMove && now - lastMove > 5000) {
+            $(".nav").removeClass("nav-active");
+        }
+    }, 1000)
+
 });
 
 
@@ -53,6 +62,38 @@ function initMap() {
         zoom: 4,
         center: [116.372169, 40.041315]
     });
+
+    map2 = new AMap.Map('container2', {
+        resizeEnable: true,
+        rotateEnable: true,
+        pitchEnable: true,
+        showIndoorMap: false,
+        isHotspot: false,
+        pitch: 0,
+        rotation: 0,
+        viewMode: '3D',//开启3D视图,默认为关闭
+        buildingAnimation: true,//楼块出现是否带动画
+        features: ['bg', 'road', 'point'],//隐藏默认楼块
+        showLabel: true,
+        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
+        expandZoomRange: true,
+        layers: [
+            new AMap.TileLayer({
+                zooms: [3, 18],    //可见级别
+                visible: true,    //是否可见
+                opacity: 1,       //透明度
+                zIndex: 0         //叠加层级
+            }),
+            new AMap.Buildings({
+                zooms: [5, 18],
+                zIndex: 10,
+                heightFactor: 2//2倍于默认高度，3D下有效
+            })//楼块图层
+        ],
+        zoom: 4,
+        center: [116.372169, 40.041315]
+    });
+
 }
 
 function addMapControl() {
@@ -76,35 +117,41 @@ function addMapControl() {
     })
 }
 
-function setPosition(ps, callback) {
+function setPosition(ps, time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.getPitch() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
+            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
-function setPitch(deg, callback) {
+function setPitch(deg,time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.getPitch() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
+            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
-function setRotation(deg, callback) {
+function setRotation(deg, time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.setRotation() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
+            map2.setRotation(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
@@ -118,22 +165,36 @@ function animate() {
 
 
 function stepOne() {
-    destroyStep2();
-    destroyStep3();
-    step1();
+
+    destroyStep(step1);
 }
 
 function stepTwo() {
-    destroyStep1();
-    destroyStep3();
-    step2()
+
+    destroyStep(step2);
 }
 
 function stepThree() {
-    destroyStep1();
-    destroyStep2();
-    step3();
 
+    destroyStep(step3);
+}
+
+function destroyStep(cb) {
+
+    switch (lastStep) {
+        case '1':
+            destroyStep1(cb);
+            break;
+        case '2':
+            destroyStep2(cb);
+            break;
+        case '3':
+            destroyStep3(cb);
+            break;
+        default:
+            cb();
+            break;
+    }
 }
 
 function playAnimation(domNode) {
@@ -163,6 +224,7 @@ function hashChange() {
     } else{
         stepOne()
     }
+    lastStep = step;
 }
 
 
