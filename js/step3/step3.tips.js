@@ -19,10 +19,10 @@ function setp3Tips() {
     var points3D = new AMap.Object3D.RoundPoints();
     points3D.transparent = true;
     var pointsGeo = points3D.geometry;
-    var center = lnglatToG20([116.454481, 39.916943]);
-    var height = -2300
+    var center = lnglatToG20([116.454763,39.91552]);
+    var height = -1100
     // points3D.textures.push('https://a.amap.com/jsapi_demos/static/demo-center/3d_texture_tiananmen_256.png');
-    points3D.textures.push('http://127.0.0.1:5500/img/pointer4-icon.png');
+    //points3D.textures.push('http://127.0.0.1:5500/img/pointer4-icon.png');
 
     // 连线
     // lineGeo.vertices.push(center.x, center.y, 0);
@@ -30,7 +30,7 @@ function setp3Tips() {
     // lineGeo.vertices.push(center.x, center.y, height);
     // lineGeo.vertexColors.push(0, 1, 1, 1);
     pointsGeo.vertices.push(center.x, center.y, height); // 空中点
-    pointsGeo.vertexColors.push(1 * 0.029, 1 * 0.015, 1 * 0.01, 0.5);
+    pointsGeo.vertexColors.push(1 * 0.29, 1 * 0.8, 1 * 0.9, 0.8);
     pointsGeo.pointAreas.push(0, 0, 1, 1);
     pointsGeo.pointSizes.push(32);
     pointsGeo.vertexUVs.push(0, 0, 1, 1);

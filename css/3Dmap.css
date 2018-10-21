@@ -542,6 +542,7 @@ ul, li {
     color: #fff;
     padding: 36px 0 0 55px;
     font-size: 16px;
+    pointer-events: none;
     z-index: 101;
 }
 .con-statis .base-info{
@@ -669,11 +670,7 @@ ul, li {
     }
 }
 
-.step1 .overview, .step2 .overview
-{
-    opacity: 0;
-    transform:translate3d(600px, 0, 0)
-}
+
 .step3 .overview
 {
     opacity: 1;
@@ -681,9 +678,10 @@ ul, li {
 }
 .overview{
     position: absolute;
-    top:140px;
-    left:40px;
-    opacity: 1;
+    top:265px;
+    left:60px;
+    opacity: 0;
+    transform:translate3d(600px, 0, 0);
     transition: transform .5s,opacity .3s;
 }
 .overview .map{
