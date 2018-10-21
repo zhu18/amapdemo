@@ -9,7 +9,8 @@ function fixedMap(params) {
     })
 }
 var map3, layer2, topLine, bottomLine, layer4, layer5, bgLayer;
-function step2(params) {
+function step2(_cb) {
+
     map.setStatus({
         dragEnable: true,
         doubleClickZoom: true
@@ -18,7 +19,7 @@ function step2(params) {
     // setTimeout(() => {
     //     map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
     // }, 5000);
-    navigation2(map)
+    navigation2(map,_cb)
 
     // 可视化图
     map3 = new Loca(map)
@@ -149,13 +150,16 @@ function step2(params) {
 
 }
 
-function destroyStep2() {
+function destroyStep2(cb) {
     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     $('.ring').removeClass('showBox')
-    // bgLayer ? bgLayer.hide() : ''
+    //bgLayer ? bgLayer.hide() : ''
     bgLayer ? map.remove(bgLayer) : ''
     map.clearMap()
     map3 ? map3.destroy() : () => { }
+    setTimeout(function () {
+        if(cb)cb();
+    })
 
 }
 
@@ -164,7 +168,7 @@ function destroyStep2() {
 
 
 var tasks2 = []
-function navigation2(map, scallback) {
+function navigation2(map, _cb) {
     tasks2 = [f1, f2, f3, f4, f5, f6, f7]
     next()
     function next() {
@@ -179,29 +183,53 @@ function navigation2(map, scallback) {
         tasks2.push(task);
     }
     function f1() {
-        map.setCenter([114.149726, 40.211949])
+        map.setCenter([116.311558,39.85414])
+        map2.setCenter([116.311558,39.85414])
         setTimeout(() => {
             next()
         }, 300);
     }
     function f2() {
-        setZoom(9.6, 1.1).then(_ => {
-            next()
-        })
+        /*setZoom(5,0.05).then(_ => {
+            setZoom(6, 0.05).then(_ => {
+                setZoom(7, 0.05).then(_ => {
+                    setZoom(8, 0.05).then(_ => {
+                        setZoom(9, 0.05).then(_ => {
+                            setZoom(9.6, 0.05).then(_ => {
+                                setTimeout(() => {
+                                    next()
+                                    // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                                    // $('.ring').addClass('showBox')
+                                }, 300);
+                            })
+                        })
+                    })
+                })
+            })
+        })*/
+         setZoom(9.6, 1.1).then(_ => {
+             next()
+             if(_cb)_cb();
+         })
+        //map2.setZoom(9.6);
     }
     function f3() {
         map.setPitch(60)
+        map2.setPitch(60)
         setTimeout(() => {
             next()
         }, 300);
     }
     function f4() {
         map.setRotation(0)
+        map2.setRotation(0)
         setTimeout(() => {
             next()
         }, 300);
     }
     function f5() {
+        $("#container2").removeClass('loaded');
+        $("#container").addClass('loaded');
         map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
         $('.ring').addClass('showBox')
         setTimeout(() => {
@@ -210,7 +238,7 @@ function navigation2(map, scallback) {
 
     }
     function f6() {
-        layer2.render();
+        //layer2.render();
         bgLayer = new AMap.ImageLayer({
             //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
             bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),

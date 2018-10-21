@@ -107,6 +107,7 @@ function setZoom(index, step = .09) {
         return new Promise((resolve, reject) => {
             (function _setZoom() {
                 map.setZoom(map.getZoom() + step)
+                map2.setZoom(map2.getZoom() + step)
                 if (map.getZoom() >= index) {
                     resolve('ok')
                     return

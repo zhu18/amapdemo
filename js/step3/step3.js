@@ -217,11 +217,14 @@ function addPolygonizrLayer() {
 /**
  * 销毁事件
  */
-function destroyStep3() {
+function destroyStep3(cb) {
     removeEchart();
     $(".word-container").show();
     particlesLayer ? particlesLayer.hide() : null;
     polygonizrLayer ? polygonizrLayer.hide() : null;
+    setTimeout(function () {
+        if(cb)cb();
+    })
 }
 
 function addM() {
