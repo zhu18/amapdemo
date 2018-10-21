@@ -151,14 +151,12 @@ function destroyStep1(cb) {
 
     $("#container").removeClass('loaded');;
     $("#container2").addClass('loaded');
-    bgLayer ? bgLayer.hide() : {};
-    layer ? layer.remove() : {};
-    mapBorderLayer ? mapBorderLayer.hide() : {};
-    setTimeout(function () {
-        if(cb)cb(
-            function () {
 
-            }
-        );
-    })
+    setTimeout(function () {
+        bgLayer ? bgLayer.hide() : {};
+        layer ? layer.remove() : {};
+        mapBorderLayer ? mapBorderLayer.hide() : {};
+        if(cb)cb();
+
+    },1000)
 }
