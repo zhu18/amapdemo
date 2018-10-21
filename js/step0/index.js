@@ -3,7 +3,16 @@
 setStepInstance(0,{
     destroyTime:300,
     load(){
-        $('#login').addClass('loaded')
+        $('#login').removeClass('ok').addClass('loaded')
+        $('#btn-login').on("click",function(){
+            login()
+        })
+        $(document).keyup(function(event){
+            var step = util.getQueryString('step')||0
+            if(event.keyCode ==13 && step==0){
+                login()
+            }
+          });
         initBackground();
         console.log('init0');
     },
@@ -13,6 +22,10 @@ setStepInstance(0,{
     }
 });
 
+function login(){
+    $('#login').addClass('ok')
+    location = '3dmap.html#step=1'
+}
 
 function initBackground(){
     particlesJS('login',

@@ -215,7 +215,7 @@ function playAnimation(domNode) {
 //监听触发操作
 function hashChange() {
 
-    var step = util.getQueryString('step')
+    var step = util.getQueryString('step')||0
     clearTimeout(timer)
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;
