@@ -14,7 +14,7 @@ $(document).ready(function () {
     if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
         window.onhashchange = hashChange;
     }
-    $("#container").addClass('loaded');
+    //$("#container").addClass('loaded');
 
     $(window).mousemove(function () {
         lastMove = new Date().getTime();
@@ -234,7 +234,7 @@ function hashChange() {
     stepInstance[step].load();
 
 
-    if (step == 1) {
+    /*if (step == 1) {
         stepOne()
     } else if (step == 2) {
         stepTwo()
@@ -242,7 +242,7 @@ function hashChange() {
         stepThree()
     } else{
         stepOne()
-    }
+    }*/
 
 }
 
