@@ -18,7 +18,7 @@ ul, li {
     list-style: none;
     margin: 0;
 }
-#login{
+.login{
     position:absolute;
     top:0;
     left: 0;
@@ -27,13 +27,24 @@ ul, li {
     background: rgba(0,0,0,.8);
     transition: all 1s;
     opacity: 0;
-    z-index: 999;
+    z-index: 1001;
     pointer-events: none;
 }
-#login.loaded{
+.login.loaded{
     opacity: 1;
     pointer-events:unset;
 }
+.login-ctx{
+    position: absolute;
+    right: 20%;
+    top: 20%;
+    background: rgba(255,255,255,0.3);
+    width: 300px;
+    height: 400px;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
 .header {
     line-height: 100px;
     width: 100%;
