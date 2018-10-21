@@ -124,6 +124,7 @@ function addMapControl() {
     })
 }
 
+
 function setPosition(ps, time, callback) {
     time=time||1000;
     callback = callback || function () {
@@ -132,12 +133,11 @@ function setPosition(ps, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
-function setPitch(deg,time, callback) {
+function setPitch(deg, time, callback) {
     time=time||1000;
     callback = callback || function () {
     }
@@ -145,7 +145,6 @@ function setPitch(deg,time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
@@ -158,7 +157,6 @@ function setRotation(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
-            map2.setRotation(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
