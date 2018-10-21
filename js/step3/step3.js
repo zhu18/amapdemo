@@ -8,9 +8,9 @@ var particlesLayer, polygonizrLayer;
  */
 function step3() {
 
-    initEchart()
+    // initEchart()
     map.setRotation(90)
-    map.setZoom(17)
+    map.setZoom(13)
     setPitch(40)
     setRotation(0)
     initStatus();
@@ -20,6 +20,7 @@ function step3() {
     map.panTo([116.454925, 39.914705]);
     addM();
     addLine();
+    addPoints();
     addPolygonizrLayer();
 }
 
@@ -27,8 +28,11 @@ function initStatus() {
     //$(".turnover").removeClass('show')
     //$(".nums").removeClass('show')
     $(".word-container").hide();
-    //$(".step3-mask").hide();
-    //$(".echart-lcon").hide();
+    $(".step3-mask").hide();
+    $(".echart-lcon").hide();
+    $(".con-statis").hide();
+    $(".echart-con").hide();
+
 }
 
 function mapPanto(index) {
@@ -225,72 +229,9 @@ function addM() {
     var object3Dlayer = new AMap.Object3DLayer();
     map.add(object3Dlayer);
     // 顺时针坐标点
-    // 北京东方联合投资管理有限公司	网信	北京市朝阳区霄云路28号院2号楼7层701 1300:5
-    var paths0 = [
-        [116.465814, 39.958505],
-        [116.465626, 39.958271],
-        [116.466133, 39.957890],
-        [116.466401, 39.958146]
-    ];
-
-
-    //北京瓴岳信息技术有限公司	洋钱罐	北京市朝阳区东三环北路19号中青大厦19层 1500:15
-    var paths1 = [
-        [116.460435, 39.93005],
-        [116.460928, 39.930035],
-        [116.460837, 39.928958],
-        [116.460274, 39.928936],
-    ];
-
-    // 北京乐融多源信息技术有限公司	积木盒子	北京市朝阳区金桐西路10号远洋光华国际AB座5层A501-505 2200:5
-    var paths2 = [
-        [116.453805, 39.916099],
-        [116.454626, 39.916099],
-        [116.455347, 39.915438],
-        [116.455393, 39.914607],
-        [116.454868, 39.9146],
-        [116.454831, 39.915158],
-        [116.454262, 39.91552],
-        [116.454246, 39.915616],
-        [116.45381, 39.915628],
-    ]
-
-    // 贝壳金科控股有限公司	贝壳金科	北京市朝阳区朝外大街乙12号13层O-1612B 1300:13
-    var paths3 = [
-        [116.441719, 39.922859],
-        [116.442633, 39.922885],
-        [116.44265, 39.922674],
-        [116.441727, 39.922636],
-    ]
-
-    // 北京钱得乐科技有限公司	金蛋理财	北京市朝阳区北辰世纪中心B座17层 1700:17
-    var paths4 = [
-        [116.387691, 39.999278],
-        [116.388151, 39.999297],
-        [116.388387, 39.99915],
-        [116.388388, 39.998969],
-        [116.387929, 39.998934],
-        [116.387695, 39.999056],
-    ]
-    // 北京玖富普惠信息技术有限公司	玖富	北京市朝阳区阜通东大街1号院5号楼1单元310-306 2400
-    var paths5 = [
-        [116.479965, 39.996479],
-        [116.480392, 39.996611],
-        [116.48094, 39.996381],
-        [116.481308, 39.996069],
-        [116.481523, 39.995759],
-        [116.481325, 39.995609],
-        [116.481157, 39.995589],
-        [116.480529, 39.996036],
-    ]
     var floorHeight = 100
     buildPaths.forEach((item) => {
         addbuild(item.ps, item.totalFloor * floorHeight);
-    })
-
-
-    map.on('click', function (e) {
-        console.log(e.lnglat + '')
     })
 
 
@@ -432,128 +373,101 @@ function addM() {
 }
 
 function addLine() {
+    var mincoord = [116.097159, 39.698386]//+0.54
+    var coordSize = 0.54
+    var maxcoord = [mincoord[0] + coordSize, mincoord[1] + coordSize]
+    var canvasSize = 1000 //越大越高清，性能越低
+    var rate = canvasSize / coordSize
+
     var canvas = document.createElement('div');
     canvas.id = 'ccc01'
     canvas.className = 'ccc01'
-    canvas.style.width = '1000px';
-    canvas.style.height = '1000px';
-    var zr = zrender.init(canvas, { renderer: 'canvas' });
+    canvas.style.width = canvasSize + 'px';
+    canvas.style.height = canvasSize + 'px';
+    var zr = zrender.init(canvas, { renderer: 'canvas', devicePixelRatio: 2 });
 
-    var line1 = new zrender.Line({
-        position: [0, 0],
-        scale: [1, 1],
-        shape: {
-            x1: 320,
-            y1: 150,
-            x2: 320,
-            y2: 600,
-        },
-        style: {
-            lineDash: [100, 400],
-            stroke: 'rgba(255,60,50,.8)',
-            shadowBlur: 1,
-            shadowColor: 'rgba(255,150,50,1)',
-            lineWidth: .3,
-            blend: 'lighter'
-        }
-    })
-    var line2 = new zrender.Line({
-        position: [0, 0],
-        scale: [1, 1],
-        shape: {
-            x1: 340,
-            y1: 150,
-            x2: 340,
-            y2: 600,
-        },
-        style: {
-            lineDash: [100, 400],
-            stroke: 'rgba(255,255,255,.8)',
-            shadowBlur: 1,
-            shadowColor: 'rgba(255,150,50,1)',
-            lineWidth: .3,
-            blend: 'lighter'
-        }
-    })
 
-    zr.add(line1);
-    zr.add(line2);
 
-    var linePath3 = [];
 
+
+
+
+
+    //可视区范围
     var line3 = new zrender.Polyline({
         position: [0, 0],
         scale: [1, 1],
         shape: {
-            points: linePath3,
-            smooth: 0.5
+            points: [[5, 5], [995, 5], [995, 995], [5, 995], [5, 5]],
+            smooth: 0
         },
         style: {
-            lineDash: [100, 400],
+            lineDash: [10, 50],
             stroke: 'rgba(255,255,255,.8)',
             shadowBlur: 1,
             shadowColor: 'rgba(255,150,50,1)',
-            lineWidth: .1,
+            lineWidth: 1,
             blend: 'lighter'
         }
     })
+
     zr.add(line3);
+
     line3.animate('style', true)
         .when(2000, {
-            lineDashOffset: 500
+            lineDashOffset: -60
         }).start();
-    // var count = 80;
-    // $.get('./js/step3/roadPoints.csv', function (data) {
 
-    //     var LF = String.fromCharCode(10);
-    //     var lineText = data.split(LF);
-    //     lineText.slice(1)
-    //     lineText.forEach((item) => {
-    //         var c = item.split(',')
-    //         if(c[2]=='50052')
-    //         {
-    //             count--
-    //             if (count > 0) {
-                    
-    //                 linePath3.push(coordConvert([c[0], c[1]]))
-    //             }
-    //         }
-    //     })
-    //     console.log(linePath3)
+    // random colors
+    var lineColors = ['rgba(255,40,20,.8)','rgba(255,255,255,.8)','rgba(255,60,30,.8)','rgba(230,100,10,.8)']
+    var lineDashs = [[100,200],[100,500],[50,200],[200,600],[30,50]]
+    var lineRunTime = []
+  
+    roadPaths.forEach((line) => {
+        var lineDash = lineDashs[rangeRandom(lineDashs.length,0,true)]
+        var color =  lineColors[rangeRandom(lineColors.length,0,true)]
+        var lineWidth = .2//Math.random()
+        console.log(lineDash)
+        console.log(color)
+        console.log(lineWidth)
+        var line4 = new zrender.Polyline({
+            position: [0, 0],
+            scale: [1, 1],
+            shape: {
+                points: line.map(coordConvert),
+                smooth: 0.1
+            },
+            style: {
+                lineDash: lineDash,
+                stroke: color,
+                shadowBlur: 1,
+                shadowColor: 'rgba(255,150,50,1)',
+                lineWidth: lineWidth,
+                blend: 'lighter'
+            }
+        })
 
-    //     var line3 = new zrender.Polyline({
-    //         position: [0, 0],
-    //         scale: [1, 1],
-    //         shape: {
-    //             points: linePath3,
-    //             smooth: 0.5
-    //         },
-    //         style: {
-    //             lineDash: [100, 400],
-    //             stroke: 'rgba(255,255,255,.8)',
-    //             shadowBlur: 1,
-    //             shadowColor: 'rgba(255,150,50,1)',
-    //             lineWidth: .1,
-    //             blend: 'lighter'
-    //         }
-    //     })
-    //     zr.add(line3);
-    //     line3.animate('style', true)
-    //         .when(2000, {
-    //             lineDashOffset: 500
-    //         }).start();
-    // })
+        zr.add(line4);
+
+        line4.animate('style', true)
+            .when(2000, {
+                lineDashOffset: -(lineDash[0]+lineDash[1])
+            }).start();
+
+    })
 
 
 
-    line1.animate('style', true)
-        .when(1000, {
-            lineDashOffset: 500
-        }).start();
-    line2.animate('style', true)
-        .when(2000, {
-            lineDashOffset: 500
-        }).start();
+
+    map.on('click', function (e) {
+        ppp.push([e.lnglat.lng, e.lnglat.lat])
+        console.log(e.lnglat + '')
+        console.log(coordConvert([e.lnglat.lng, e.lnglat.lat]))
+    })
+
+
+
+
 
     zr.configLayer(0, {
         // clearColor: 'rgba(255, 255, 255, 0.1)',
@@ -561,15 +475,18 @@ function addLine() {
         lastFrameAlpha: 0.8
     });
 
-    var mincrood = [116.097159, 39.698386]//+0.54
-    var coordSize = 0.54
-    var maxcrood = [mincrood[0] + coordSize, mincrood[1] + coordSize]
-    var canvasSize = 1000
-    var rate = canvasSize / (maxcrood[0] - mincrood[0])
 
+
+    function pointsConvert(ps) {
+        ps.map((p) => {
+            return coordConvert(p)
+        })
+        return ps;
+        console.log(ps)
+    }
     // 坐标转成canvas内部位置
     function coordConvert(coord) {
-        return [(coord[0] - mincrood[0]) * rate, (coord[1] - mincrood[1]) * rate]
+        return [(coord[0] - mincoord[0]) * rate, canvasSize - ((coord[1] - mincoord[1]) * rate)]
 
     }
 
@@ -579,8 +496,8 @@ function addLine() {
             map: map,
             canvas: canvas,
             bounds: new AMap.Bounds(
-                mincrood,
-                maxcrood
+                mincoord,
+                maxcoord
             ),
             zooms: [3, 18],
         });
@@ -591,20 +508,22 @@ function addLine() {
         draw()
 
 
-    }, 3000)
+    }, 2000)
 
 
 }
 
-function addPoints(){
+var ppp = [];
+
+function addPoints() {
     var colors = [
         '#fff',
-        '#008aeb',
-        '#04d',
+        '#eb008a',
+        '#fd3',
         '#9bf',
         '#28f'
     ];
-    
+
     $.get('./js/step3/roadPoints.csv', function (csv) {
         var step1Loca = new Loca(map)
         var layer = Loca.visualLayer({
@@ -659,4 +578,10 @@ function addPoints(){
 
         layer.render();
     });
+}
+
+function rangeRandom(max, min, isInt) {
+    min = min || 0;
+    var rdm = Math.random() * (max - min) + min
+    return isInt?Math.floor(rdm):rdm;
 }

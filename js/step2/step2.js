@@ -23,7 +23,7 @@ function step2(params) {
     // 可视化图
     map3 = new Loca(map)
     map.on('click', function (e) {
-        console.log(`${e.lnglat.lng},${e.lnglat.lat}`)
+     //   console.log(`${e.lnglat.lng},${e.lnglat.lat}`)
     })
     // 带有高度的北京地图(面)
     layer2 = Loca.visualLayer({
