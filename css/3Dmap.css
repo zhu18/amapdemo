@@ -377,19 +377,21 @@ ul, li {
     to{-webkit-transform: rotate(-360deg)}
 }
 
-#container.loaded {
-    opacity: 1;
-}
-#container2,#container{
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
+#container{
+
+    transition: all 1s;
     opacity: 0;
 }
 
-#container2.loaded,#container.loaded{
+#container.loaded{
+    opacity: 1;
+}
+
+#container2{
+    transition: all 1s;
+    opacity: 0;
+}
+#container2.loaded{
     opacity: 1;
 }
 

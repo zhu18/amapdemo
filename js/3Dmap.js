@@ -1,6 +1,9 @@
 var map,map2,lastStep, lastMove,util = new Util();
 
+var stepInstance = new Array(4);
+
 $(document).ready(function () {
+
 
     initMap();
     animate();
@@ -29,6 +32,10 @@ $(document).ready(function () {
 
 });
 
+function setStepInstance(index,instance) {
+
+    stepInstance[index] = instance;
+}
 
 function initMap() {
 
@@ -215,6 +222,19 @@ function hashChange() {
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;
 
+
+    if(lastStep != undefined) {
+        setTimeout(function () {
+            stepInstance[lastStep].destory();
+            lastStep = step;
+        }, stepInstance[lastStep].destoryTime)
+    }
+    else{
+        lastStep = step;
+    }
+    stepInstance[step].load();
+
+
     if (step == 1) {
         stepOne()
     } else if (step == 2) {
@@ -224,7 +244,7 @@ function hashChange() {
     } else{
         stepOne()
     }
-    lastStep = step;
+
 }
 
 
