@@ -20,8 +20,8 @@ var stepInstance1={
     },
     destroy(){
 
-        $("#container").removeClass('loaded');;
-        $("#container2").addClass('loaded');
+        $("#container").addClass('loaded');;
+        $("#container2").removeClass('loaded');
         bgLayer ? bgLayer.hide() : {};
         layer ? layer.destroy() : {};
         mapBorderLayer ? mapBorderLayer.hide() : {};
