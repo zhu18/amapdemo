@@ -116,13 +116,8 @@ ul, li {
 
 .nav {
     float: right;
-    margin-right: -760px;
-    margin-top: -30px;
-    -webkit-transform: scale3d(.3,.3,.3);
-    -moz-transform: scale3d(.3,.3,.3);
-    -ms-transform: scale3d(.3,.3,.3);
-    -o-transform: scale3d(.3,.3,.3);
-    transform: scale3d(.3,.3,.3);
+    transform: translate3d(870px,0,0);
+    margin-top:15px;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     -ms-transition: all .5s;
@@ -131,13 +126,7 @@ ul, li {
 }
 
 .nav-active{
-    margin-right: 45px;
-    margin-top: 15px;
-    -webkit-transform: scale3d(1,1,1);
-    -moz-transform:  scale3d(1,1,1);
-    -ms-transform:  scale3d(1,1,1);
-    -o-transform:  scale3d(1,1,1);
-    transform:  scale3d(1,1,1);
+    transform: translate3d(-40px,0,0);
 }
 
 .nav li {
@@ -391,6 +380,18 @@ ul, li {
 #container.loaded {
     opacity: 1;
 }
+#container2,#container{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    opacity: 0;
+}
+
+#container2.loaded,#container.loaded{
+    opacity: 1;
+}
 
 .echart-lcon{
     position: fixed;
@@ -444,6 +445,7 @@ ul, li {
     line-height: 46px;
     text-align: center;
     opacity: 0;
+    cursor: pointer;
 }
 .echart-lcon .item.loaded .num{
     opacity: 1;

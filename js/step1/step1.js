@@ -1,9 +1,11 @@
-var step1Loca, mapBorderLayer, bgLayer;
+var step1Loca, layer,mapBorderLayer, bgLayer;
 function step1() {
 
     tasks = [];
     map.setCenter([99.515396, 39.998597]);
     map.setZoom(4.4);
+    map2.setCenter([99.515396, 39.998597]);
+    map2.setZoom(4.4);
     setPitch(0);
     setRotation(0);
 
@@ -15,8 +17,12 @@ function step1() {
 
 function addLocaMap() {
 
+    if(layer){
+        layer.addTo(step1Loca);
+        return;
+    }
     step1Loca = new Loca(map)
-    var layer = Loca.visualLayer({
+    layer = Loca.visualLayer({
         container: step1Loca,
         type: 'point',
         shape: 'circle'
@@ -37,7 +43,8 @@ function addLocaMap() {
         lnglat: 'lnglat'
     });*/
     var haloCitys = util.restructureData2(allCitys, {type: 'halo'})
-
+    /*var solidCitys = util.restructureData2(allCitys, {type: 'solid'}, true)
+    var newCitys = haloCitys.concat(solidCitys)*/
     layer.setData(haloCitys, {
         lnglat: 'lnglat'
     });
@@ -63,7 +70,7 @@ function addLocaMap() {
                 } else if (style == 1) {
                     r = isHalo ? 8 : 2;
                 } else {
-                    r = isHalo ? 12 : 1;
+                    r = isHalo ? 10 : 1;
                 }
                 return r;
             },
@@ -140,8 +147,18 @@ function addMapBorderLayer() {
     mapBorderLayer.setMap(map);
 }
 
-function destroyStep1() {
-    mapBorderLayer ? mapBorderLayer.hide() : {};
+function destroyStep1(cb) {
+
+    $("#container").removeClass('loaded');;
+    $("#container2").addClass('loaded');
     bgLayer ? bgLayer.hide() : {};
-    step1Loca ? step1Loca.destroy() : {};
+    layer ? layer.remove() : {};
+    mapBorderLayer ? mapBorderLayer.hide() : {};
+    setTimeout(function () {
+        if(cb)cb(
+            function () {
+
+            }
+        );
+    })
 }

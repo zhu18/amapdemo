@@ -56,6 +56,14 @@ function initStatus() {
 
 }
 
+function mapPanto(index) {
+
+    var ent = buildPaths[index];
+    var lnglat = ent.ps[0];
+
+    map.setCenter(lnglat);
+}
+
 function addParticlesLayer() {
 
     if (particlesLayer) {
@@ -230,15 +238,18 @@ function addPolygonizrLayer() {
 /**
  * 销毁事件
  */
-function destroyStep3() {
+function destroyStep3(cb) {
     removeEchart();
     $(".word-container").show();
-    particlesLayer ? particlesLayer.hide() : null;
+    //particlesLayer ? particlesLayer.hide() : null;
     polygonizrLayer ? polygonizrLayer.hide() : null;
     buildObject3Dlayer && map.remove(buildObject3Dlayer);
     lineCanvasLayer && map.remove(lineCanvasLayer);
     step3Loca && step3Loca.destroy();
     step3PointsLayer && step3PointsLayer.destroy();
+    setTimeout(function () {
+        if(cb)cb();
+    })
 }
 
 /**
