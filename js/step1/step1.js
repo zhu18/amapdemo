@@ -13,6 +13,8 @@ function step1() {
     addMapBorderLayer();
     addLocaMap();
     //addCircleLayer();
+    $("#container").addClass('loaded');;
+    $("#container2").removeClass('loaded');
 }
 
 function addLocaMap() {
@@ -132,6 +134,7 @@ function addCircleLayer() {
 }
 
 function addMapBorderLayer() {
+
     if(mapBorderLayer){
         mapBorderLayer.show();
         return;
