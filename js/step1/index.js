@@ -1,9 +1,9 @@
 var stepInstance1={
-    destoryTime:300,
+    destroyTime:300,
     load(){
         console.log('init1');
     },
-    destory(){
+    destroy(){
         console.log("destory1");
     }
 }

@@ -226,9 +226,9 @@ function hashChange() {
     if(lastStep != undefined) {
         var desInstance = stepInstance[lastStep];
         setTimeout(function () {
-            desInstance.destory();
+            desInstance.destroy();
             lastStep = step;
-        }, desInstance.destoryTime)
+        }, desInstance.destroyTime)
     }
     else{
         lastStep = step;
