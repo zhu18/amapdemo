@@ -229,16 +229,64 @@ ul, li {
     top:0;
     bottom:0;
     right:0;
+    opacity: 0;
     -webkit-transition-property: -webkit-transform;
     pointer-events: none;
-    transform: translate3d(0,0,0)
+    transform: translate3d(0,0,0) scale(0);
 } 
 .ring div:nth-child(1){
     background: url(../img/c1.png) no-repeat center;
     background-size: contain;
     animation: rotate 15s linear infinite;
 }
+.ring.showBox div:nth-child(1){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 1s;
+}
+.ring.showBox div:nth-child(2){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 1.2s;
+}
 
+.ring.showBox div:nth-child(3){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 1.4s;
+}
+.ring.showBox div:nth-child(4){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 1.6s;
+}
+
+.ring.showBox div:nth-child(5){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 1.8s;
+}
+.ring.showBox div:nth-child(6){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 2s;
+}
+
+.ring.showBox div:nth-child(7){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 2.2s;
+}
+.ring.showBox div:nth-child(8){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 2.4s;
+}
+.ring.showBox div:nth-child(9){
+    transform:scale(1);
+    opacity: 1;
+    transition: all 1s ease-in-out 2.6s;
+}
 .ring div:nth-child(2){
     background: url(../img/c2.png) no-repeat center;
     background-size: contain;
@@ -299,6 +347,12 @@ ul, li {
     -webkit-animation: rotate 15s linear infinite;
     animation: rotate 15s linear infinite;
 }
+
+
+@-webkit-keyframes opactiy{
+    from{opacity: 0;transform: scale(0)}
+    to{opacity: 1;transform: scale(1)}
+}
 @-webkit-keyframes rotate{from{-webkit-transform: rotate(0deg)}
     to{-webkit-transform: rotate(360deg)}
 }
@@ -319,7 +373,7 @@ ul, li {
     -webkit-animation: rotate2 9s linear infinite;
     animation: rotate2 9s linear infinite;}
 @-webkit-keyframes rotate2{
-    from{-webkit-transform: rotate(0deg)}
+    from{-webkit-transform: rotate(0deg);}
     to{-webkit-transform: rotate(-360deg)}
 }
 
@@ -544,6 +598,7 @@ ul, li {
     color: #fff;
     padding: 36px 0 0 55px;
     font-size: 16px;
+    pointer-events: none;
     z-index: 101;
 }
 .con-statis .base-info{
@@ -671,11 +726,7 @@ ul, li {
     }
 }
 
-.step1 .overview, .step2 .overview
-{
-    opacity: 0;
-    transform:translate3d(600px, 0, 0)
-}
+
 .step3 .overview
 {
     opacity: 1;
@@ -683,9 +734,10 @@ ul, li {
 }
 .overview{
     position: absolute;
-    top:140px;
-    left:40px;
-    opacity: 1;
+    top:265px;
+    left:60px;
+    opacity: 0;
+    transform:translate3d(600px, 0, 0);
     transition: transform .5s,opacity .3s;
 }
 .overview .map{

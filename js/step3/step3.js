@@ -1,7 +1,7 @@
 /**
  * step3 北京朝阳区
  */
-var particlesLayer, polygonizrLayer;
+var particlesLayer, polygonizrLayer, buildObject3Dlayer;
 
 /**
  * step3 北京朝阳区进入
@@ -18,10 +18,11 @@ function step3() {
     setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
-    addM();
-    addLine();
-    addPoints();
+    initBuild();
+    initLine();
+    initPoints();
     addPolygonizrLayer();
+    // addParticlesLayer();
 }
 
 function initStatus() {
@@ -32,6 +33,7 @@ function initStatus() {
     $(".echart-lcon").hide();
     $(".con-statis").hide();
     $(".echart-con").hide();
+    $(".overview").hide();
 
 }
 
@@ -220,17 +222,29 @@ function addPolygonizrLayer() {
 function destroyStep3(cb) {
     removeEchart();
     $(".word-container").show();
-    particlesLayer ? particlesLayer.hide() : null;
+    //particlesLayer ? particlesLayer.hide() : null;
     polygonizrLayer ? polygonizrLayer.hide() : null;
+    buildObject3Dlayer && map.remove(buildObject3Dlayer);
+    lineCanvasLayer && map.remove(lineCanvasLayer);
+    step3Loca && step3Loca.destroy();
+    step3PointsLayer && step3PointsLayer.destroy();
     setTimeout(function () {
         if(cb)cb();
     })
 }
 
-function addM() {
+/**
+ * 初始化建筑物
+ */
+function initBuild() {
+    if (buildObject3Dlayer) {
+        map.add(buildObject3Dlayer);
+        return;
+    }
     // 添加 Object3DLayer 图层，用于添加 3DObject 对象
-    var object3Dlayer = new AMap.Object3DLayer();
-    map.add(object3Dlayer);
+    buildObject3Dlayer = new AMap.Object3DLayer();
+    map.add(buildObject3Dlayer);
+
     // 顺时针坐标点
     var floorHeight = 100
     buildPaths.forEach((item) => {
@@ -241,7 +255,7 @@ function addM() {
     function addbuild(paths, height) {
         height = height || 1000
         // 添加建筑物
-        addMesh(paths, 0, height, [1, 1, 1, .5], [.86, .65, .95, .8])
+        addMesh(paths, 0, height, [1, 1, 1, .5], [.3, .65, .95, .8])
         // 添加发光楼层
         // 改变paths范围，建议小于0.0001
         zoomPaths(paths, 0.0001)
@@ -367,15 +381,19 @@ function addM() {
         mesh.backOrFront = backOrFront;
         //mesh.needUpdate=true;
         // 添加至 3D 图层
-        object3Dlayer.add(mesh);
+        buildObject3Dlayer.add(mesh);
         return mesh;
     }
-
-    //116.432273,39.936081
-
 }
 
-function addLine() {
+/**
+ * 初始化线
+ */
+function initLine() {
+    if (lineCanvasLayer) {
+        map.add(lineCanvasLayer);
+        return
+    }
     var mincoord = [116.097159, 39.698386]//+0.54
     var coordSize = 0.54
     var maxcoord = [mincoord[0] + coordSize, mincoord[1] + coordSize]
@@ -383,53 +401,38 @@ function addLine() {
     var rate = canvasSize / coordSize
 
     var canvas = document.createElement('div');
-    canvas.id = 'ccc01'
-    canvas.className = 'ccc01'
     canvas.style.width = canvasSize + 'px';
     canvas.style.height = canvasSize + 'px';
     var zr = zrender.init(canvas, { renderer: 'canvas', devicePixelRatio: 2 });
 
-
-
-
-
-
-
-
     //可视区范围
-    var line3 = new zrender.Polyline({
-        position: [0, 0],
-        scale: [1, 1],
-        shape: {
-            points: [[5, 5], [995, 5], [995, 995], [5, 995], [5, 5]],
-            smooth: 0
-        },
-        style: {
-            lineDash: [10, 50],
-            stroke: 'rgba(255,255,255,.8)',
-            shadowBlur: 1,
-            shadowColor: 'rgba(255,150,50,1)',
-            lineWidth: 1,
-            blend: 'lighter'
-        }
-    })
-
-    zr.add(line3);
-
-    line3.animate('style', true)
-        .when(2000, {
-            lineDashOffset: -60
-        }).start();
+    // var line3 = new zrender.Polyline({
+    //     position: [0, 0],
+    //     scale: [1, 1],
+    //     shape: {
+    //         points: [[5, 5], [995, 5], [995, 995], [5, 995], [5, 5]],
+    //         smooth: 0
+    //     },
+    //     style: {
+    //         //lineDash: [10, 50],
+    //         stroke: 'rgba(255,255,255,1)',
+    //         shadowBlur: 1,
+    //         shadowColor: 'rgba(255,150,50,1)',
+    //         lineWidth: 1,
+    //         blend: 'lighter'
+    //     }
+    // })
+    // zr.add(line3);
 
     // random colors
-    var lineColors = ['rgba(255,40,20,.8)','rgba(255,255,255,.8)','rgba(255,60,30,.8)','rgba(230,100,10,.8)']
-    var lineDashs = [[100,200],[100,500],[50,200],[200,600],[30,50]]
+    var lineColors = ['rgba(255,40,20,.8)', 'rgba(255,255,255,.8)', 'rgba(255,60,30,.8)', 'rgba(230,100,10,.8)']
+    var lineDashs = [[100, 200], [100, 500], [50, 200], [200, 600], [30, 50]]
     var lineRunTime = []
-  
+
     roadPaths.forEach((line) => {
-        var lineDash = lineDashs[rangeRandom(lineDashs.length,0,true)]
-        var color =  lineColors[rangeRandom(lineColors.length,0,true)]
-        var lineWidth = .2//Math.random()
+        var lineDash = lineDashs[rangeRandom(lineDashs.length, 0, true)]
+        var color = lineColors[rangeRandom(lineColors.length, 0, true)]
+        var lineWidth = .1//Math.random()
         console.log(lineDash)
         console.log(color)
         console.log(lineWidth)
@@ -454,7 +457,7 @@ function addLine() {
 
         line4.animate('style', true)
             .when(2000, {
-                lineDashOffset: -(lineDash[0]+lineDash[1])
+                lineDashOffset: -(lineDash[0] + lineDash[1])
             }).start();
 
     })
@@ -485,7 +488,6 @@ function addLine() {
             return coordConvert(p)
         })
         return ps;
-        console.log(ps)
     }
     // 坐标转成canvas内部位置
     function coordConvert(coord) {
@@ -493,9 +495,9 @@ function addLine() {
 
     }
 
-    setTimeout(function () {
+    lineStartTime = setTimeout(function () {
         var canvas = zr.dom.getElementsByTagName('canvas')[0];
-        var CanvasLayer = new AMap.CanvasLayer({
+        lineCanvasLayer = new AMap.CanvasLayer({
             map: map,
             canvas: canvas,
             bounds: new AMap.Bounds(
@@ -505,37 +507,47 @@ function addLine() {
             zooms: [3, 18],
         });
         function draw() {
-            CanvasLayer.reFresh()//2D视图时可以省略
+            lineCanvasLayer.reFresh()//2D视图时可以省略
             AMap.Util.requestAnimFrame(draw)
         }
         draw()
 
 
     }, 2000)
-
-
 }
+var lineStartTime = null
+var lineCanvasLayer;
 
 var ppp = [];
-
-function addPoints() {
+var step3PointsLayer, step3Loca;
+/**
+ * 初始化点
+ */
+function initPoints() {
+    if (step3Loca) {
+        step3Loca.destroy();
+    }
+    if (step3PointsLayer) {
+        step3PointsLayer.destroy();
+    }
     var colors = [
+        '#f93',
+        '#eb008a',
         '#fff',
         '#eb008a',
-        '#fd3',
-        '#9bf',
-        '#28f'
+        '#cef'
     ];
 
     $.get('./js/step3/roadPoints.csv', function (csv) {
-        var step1Loca = new Loca(map)
-        var layer = Loca.visualLayer({
-            container: step1Loca,
+        step3Loca = new Loca(map)
+        step3PointsLayer = Loca.visualLayer({
+            container: step3Loca,
             type: 'point',
             shape: 'circle'
         });
+        //step3PointsLayer.addTo(step3Loca)
 
-        layer.setData(csv, {
+        step3PointsLayer.setData(csv, {
             lnglat: function (obj) {
                 var value = obj.value;
                 return [value['lng'], value['lat']];
@@ -543,7 +555,7 @@ function addPoints() {
             type: 'csv'
         });
 
-        layer.setOptions({
+        step3PointsLayer.setOptions({
             style: {
                 radius: function (obj) {
                     var value = obj.value;
@@ -553,11 +565,11 @@ function addPoints() {
                         case 4:
                             return 3;
                         case 41:
-                            return 5;
+                            return 3;
                         case 5:
                             return 4;
                         default:
-                            return 2;
+                            return 1;
                     }
                 },
                 color: function (obj) {
@@ -579,12 +591,12 @@ function addPoints() {
             }
         });
 
-        layer.render();
+        step3PointsLayer.render();
     });
 }
 
 function rangeRandom(max, min, isInt) {
     min = min || 0;
     var rdm = Math.random() * (max - min) + min
-    return isInt?Math.floor(rdm):rdm;
+    return isInt ? Math.floor(rdm) : rdm;
 }
