@@ -79,6 +79,7 @@ function step2(params) {
     navigation2(map)
 }
 
+
 function destroyStep2(cb) {
     map.clearMap()
     setTimeout(() => {
