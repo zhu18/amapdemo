@@ -76,33 +76,36 @@ function addMapControl() {
     })
 }
 
-function setPosition(ps, callback) {
+function setPosition(ps, time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.getPitch() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
-function setPitch(deg, callback) {
+function setPitch(deg,time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.getPitch() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
 
-function setRotation(deg, callback) {
+function setRotation(deg, time, callback) {
+    time=time||1000;
     callback = callback || function () {
     }
     var form = { v: map.setRotation() }
-    return new TWEEN.Tween(form).to({ v: deg }, 1000).start().onUpdate(
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
             // console.log('Rotation:' + this.v);

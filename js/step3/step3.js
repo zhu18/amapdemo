@@ -9,12 +9,31 @@ var particlesLayer, polygonizrLayer, buildObject3Dlayer;
 function step3() {
 
     // initEchart()
-    map.setRotation(90)
-    map.setZoom(13)
-    setPitch(40)
-    setRotation(0)
+    //map.setRotation(180)
+    setZoom(10,0.05).then(_ => {
+        setZoom(11, 0.05).then(_ => {
+            setZoom(12, 0.05).then(_ => {
+                setZoom(13, 0.05).then(_ => {
+                    setPitch(80,10000)
+                    setZoom(14, 0.05).then(_ => {
+                        setZoom(15, 0.05).then(_ => {
+                            setTimeout(() => {
+                                // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                                // $('.ring').addClass('showBox')
+                                
+    
+                            }, 300);
+                        })
+                    })
+                })
+            })
+        })
+    })
+    setRotation(360,16000)
+   
+    //setRotation(0)
     initStatus();
-
+    
     setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
