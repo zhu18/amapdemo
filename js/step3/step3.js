@@ -9,12 +9,12 @@ var particlesLayer, polygonizrLayer, buildObject3Dlayer;
 function step3() {
 
     // initEchart()
-    //map.setRotation(180)
-    setZoom(10,0.05).then(_ => {
+    // map.setRotation(180)
+    map.panTo([116.454925, 39.914705]);
+    setZoom(15,0.05).then(_ => {
         setZoom(11, 0.05).then(_ => {
             setZoom(12, 0.05).then(_ => {
                 setZoom(13, 0.05).then(_ => {
-                    setPitch(80,10000)
                     setZoom(14, 0.05).then(_ => {
                         setZoom(15, 0.05).then(_ => {
                             setTimeout(() => {
@@ -29,6 +29,7 @@ function step3() {
             })
         })
     })
+    setPitch(80,16000)
     setRotation(360,16000)
    
     //setRotation(0)
@@ -557,6 +558,7 @@ function initPoints() {
         '#cef'
     ];
 
+    
     $.get('./js/step3/roadPoints.csv', function (csv) {
         step3Loca = new Loca(map)
         step3PointsLayer = Loca.visualLayer({
@@ -610,7 +612,10 @@ function initPoints() {
             }
         });
 
-        step3PointsLayer.render();
+       // setTimeout(function(){
+            step3PointsLayer.render();
+        //},3000)
+        
     });
 }
 
