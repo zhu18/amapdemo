@@ -28,8 +28,6 @@ var stepInstance1 = {
                 console.log("weather", data);
             });
         });
-
-
     },
     destroy() {
 
