@@ -212,14 +212,20 @@ function playAnimation(domNode) {
     }
 }
 
+var isLogin=false;
 //监听触发操作
 function hashChange() {
 
     var step = util.getQueryString('step')||0
+
     clearTimeout(timer)
+    if(!isLogin&&step!=0) {
+        lastStep=step;
+        location.hash = 'step=0';
+        return
+    }
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;
-
 
     if(lastStep != undefined) {
         var desInstance = stepInstance[lastStep];
@@ -232,18 +238,6 @@ function hashChange() {
         lastStep = step;
     }
     stepInstance[step].load();
-
-
-    /*if (step == 1) {
-        stepOne()
-    } else if (step == 2) {
-        stepTwo()
-    } else if (step == 3) {
-        stepThree()
-    } else{
-        stepOne()
-    }*/
-
 }
 
 

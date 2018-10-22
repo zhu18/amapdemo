@@ -23,8 +23,9 @@ setStepInstance(0,{
 });
 
 function login(){
+    isLogin=true;
     $('#login').addClass('ok')
-    location = '3dmap.html#step=1'
+    location.hash = 'step=1'
 }
 
 function initBackground(){

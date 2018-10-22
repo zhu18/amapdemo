@@ -25,7 +25,7 @@ var particlesLayer, polygonizrLayer, buildObject3Dlayer;
  */
 function step3() {
 
-    // initEchart()
+    // 
     // map.setRotation(180)
     map.panTo([116.454925, 39.914705]);
     setZoom(15,0.05).then(_ => {
@@ -55,6 +55,7 @@ function step3() {
     setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
+    initEchart();
     initBuild();
     initLine();
     initPoints();
@@ -67,10 +68,10 @@ function initStatus() {
     //$(".nums").removeClass('show')
     $(".word-container").hide();
     $(".step3-mask").hide();
-    $(".echart-lcon").hide();
-    $(".con-statis").hide();
-    $(".echart-con").hide();
-    $(".overview").hide();
+    //$(".echart-lcon").hide();
+    //$(".con-statis").hide();
+    //$(".echart-con").hide();
+    //$(".overview").hide();
 
 }
 
@@ -470,9 +471,7 @@ function initLine() {
         var lineDash = lineDashs[rangeRandom(lineDashs.length, 0, true)]
         var color = lineColors[rangeRandom(lineColors.length, 0, true)]
         var lineWidth = .1//Math.random()
-        console.log(lineDash)
-        console.log(color)
-        console.log(lineWidth)
+        
         var line4 = new zrender.Polyline({
             position: [0, 0],
             scale: [1, 1],
