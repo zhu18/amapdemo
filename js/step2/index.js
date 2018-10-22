@@ -1,25 +1,15 @@
 var stepInstance2 = {
     destroyTime: 300,
     load() {
-        // map.setStatus({
-        //     dragEnable: true,
-        //     doubleClickZoom: true
-        // })
-        $('#container').removeClass('loaded')
-        $('#container2').addClass('loaded')
-        setLayer2()
-        // bgLayer = new AMap.ImageLayer({
-        //     //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-        //     bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        //     //url: '../../img/step2_F.png',
-        //     url: '../../img/step2_F2.png',
-        //     opacity: 1,
-        //     map: map2,
-        //     height: 70000,
-        //     visible: false,
-        //     rejectMapMask: true
-        // })
-        navigation2(map2)
+            // map.setStatus({
+            //     dragEnable: true,
+            //     doubleClickZoom: true
+            // })
+            $('#container').removeClass('loaded')
+            $('#container2').addClass('loaded')
+            setLayer2()
+            navigation2(map2)
+
     },
     destroy() {
         destroyStep2()
@@ -28,60 +18,7 @@ var stepInstance2 = {
 
 setStepInstance(2, stepInstance2);
 
-var map3, layer2, topLine, bottomLine, layer4, layer5,
-    bgLayer = new AMap.ImageLayer({
-        //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        //url: '../../img/step2_F.png',
-        url: '../../img/step2_F2.png',
-        opacity: 1,
-        map: map,
-        height: 70000,
-        visible: false,
-        rejectMapMask: true
-    })
-
-function setLayer2(params) {
-    // 可视化图
-    map3 = new Loca(map2)
-    // 带有高度的北京地图(面)
-    layer2 = Loca.visualLayer({
-        eventSupport: true,
-        fitView: true,
-        container: map3,
-        type: 'polygon',
-        shape: 'polygon'
-    });
-
-    layer2.setData(dd, {
-        lnglat: 'coordinates'
-    });
-
-    layer2.setOptions({
-        style: {
-            height: 70000,
-            lineWidth: 1,
-            stroke: '#eceff1',
-            fill: function (res) {
-                // return 'rgba(0,0,0,1)';
-                return 'rgba(0,0,0,0)';
-                // return colors[index % colors.length];
-            },
-            fillOpacity: 0.5
-        },
-        selectStyle: {
-            color: '#ffffff',
-            fill: function (res) {
-                return '#ff9900';
-            },
-            lineWidth: 2,
-            fillOpacity: 0.6,
-        }
-    });
-    layer2.render()
-}
-//固定地图 禁止拖拽 旋转等
-function setImgLayer(){
+var map3, layer2, topLine, bottomLine, layer4, layer5,marks=[],tasks=[],
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
@@ -93,16 +30,80 @@ function setImgLayer(){
         visible: false,
         rejectMapMask: true
     })
+
+function setLayer2() {
+    // 可视化图
+    map3 = new Loca(map2)
+    map3.on('mapload',()=>{
+        // 带有高度的北京地图(面)
+        layer2 = Loca.visualLayer({
+            eventSupport: false,
+            fitView: false,
+            container: map3,
+            type: 'polygon',
+            shape: 'polygon'
+        });
+
+        layer2.setData(dd, {
+            lnglat: 'coordinates'
+        });
+
+        layer2.setOptions({
+            style: {
+                height: 1,
+                lineWidth: 1,
+                stroke: '#eceff1',
+                fill: function (res) {
+                    // return 'rgba(0,0,0,1)';
+                    return 'rgba(0,0,0,0)';
+                    // return colors[index % colors.length];
+                },
+                fillOpacity: 0.5
+            },
+            selectStyle: {
+                color: '#ffffff',
+                fill: function (res) {
+                    return '#ff9900';
+                },
+                lineWidth: 2,
+                fillOpacity: 0.6,
+            }
+        });
+        layer2.render()
+        setImgLayer(map2)
+    })
+   
+
+    
+    // bgLayer.setMap(map2)
+}
+//固定地图 禁止拖拽 旋转等
+function setImgLayer(map){
+    bgLayer = new AMap.ImageLayer({
+        //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        bounds: new AMap.Bounds([115.3000, 39.164537], [117.34728, 41.31606]),
+        //url: '../../img/step2_F.png',
+        url: '../../img/step2_F2.png',
+        opacity: 1,
+        height: 70000,
+        visible: true,
+        zooms:[8-10]
+    })
+    bgLayer.setMap(map)
+    bgLayer.show()
 } 
 //出场
 function destroyStep2() {
-    map2.clearMap()
-    setTimeout(() => {
-        bgLayer.hide()
-    }, 500);
-    setTimeout(() => {
-        map3 ? map3.destroy() : () => { }
-    }, 1000);
+        tasks=[]
+        map2.setPitch(0)
+        marks.forEach(v=>{
+            setTimeout(() => {
+                map2.remove(v);
+            }, 300);
+        })
+        setTimeout(() => {
+            bgLayer.hide()
+        }, 1200);
     setTimeout(() => {
         map2.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     }, 1500);
@@ -122,9 +123,6 @@ function destroyStep2() {
 
 
 
-
-var tasks2 = [];
-
 //入场动画
 function navigation2(map, scallback) {
     tasks2 = [f1, f2, f3, f4, f5, f6]
@@ -141,23 +139,22 @@ function navigation2(map, scallback) {
         tasks2.push(task);
     }
     function f1() {
-        map.setCenter([116.397428, 39.90929])
-        map2.setCenter([116.397428, 39.90929])
-        return
+        // map2.setCenter([116.397428, 39.90929])
+        map.setZoomAndCenter(5, [116.397428, 39.90929])
+        map2.setZoomAndCenter(5, [116.397428, 39.90929])
+        bgLayer.hide()
         next()
         // setTimeout(() => {
         //     next()
         // }, 300);
     }
     function f2() {
-        setZoom(5, 0.06).then(_ => {
-            setZoom(6, 0.06).then(_ => {
-                setZoom(7, 0.06).then(_ => {
-                    setZoom(8, 0.06).then(_ => {
-                        setZoom(9, 0.06).then(_ => {
-                            map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+        setZoom(6, 0.09).then(_ => {
+            setZoom(7, 0.09).then(_ => {
+                setZoom(8, 0.09).then(_ => {
+                    setZoom(9, 0.09).then(_ => {
+                            map2.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                             next()
-                        })
                     })
                 })
             })
@@ -165,19 +162,16 @@ function navigation2(map, scallback) {
     }
     function f3() {
         setTimeout(next, 800)
-
-
     }
     function f4() {
         $('.ring').addClass('showBox')
         setTimeout(() => {
             next()
-        }, 500);
-
+        }, 300);
     }
     function f5() {
         bgLayer.show()
-        pitch(60);
+        pitch(58);
         setTimeout(() => {
             next()
         }, 500);
@@ -252,10 +246,10 @@ function setPoniters() {
             label: { content: content },
             icon: '../img/pointer0-iocn.png',
         });
-
+        marks.push(marker)
         marker.on('mouseover', function (ev) {
             console.log('in')
-            v.name == "CC" ? infoWindow.open(map, v.location, true) : infoWindow2.open(map, v.location, true)
+            v.name == "CC" ? infoWindow.open(map2, v.location, true) : infoWindow2.open(map2, v.location, true)
 
         });
         marker.on('mouseout', function (ev) {
@@ -263,7 +257,7 @@ function setPoniters() {
             v.name == "CC" ? infoWindow.close() : infoWindow2.close()
         });
         setTimeout(() => {
-            marker.setMap(map);
+            marker.setMap(map2);
         }, 1000 + i * 100);
     })
 }

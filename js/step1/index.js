@@ -1,24 +1,25 @@
-var step1Loca, layer,mapBorderLayer, bgLayer;
-var stepInstance1={
-    destroyTime:300,
-    load(){
+var step1Loca, layer, mapBorderLayer, bgLayer;
+var stepInstance1 = {
+    destroyTime: 700,
+    load(t) {
+        setTimeout(function () {
+            tasks = [];
+            map.setCenter([99.515396, 39.998597]);
+            map.setZoom(4.4);
+            map2.setCenter([99.515396, 39.998597]);
+            map2.setZoom(4.4);
+            setPitch(0);
+            setRotation(0);
 
-        tasks = [];
-        map.setCenter([99.515396, 39.998597]);
-        map.setZoom(4.4);
-        map2.setCenter([99.515396, 39.998597]);
-        map2.setZoom(4.4);
-        setPitch(0);
-        setRotation(0);
-
-        addBGLayer();
-        addMapBorderLayer();
-        addLocaMap();
-        //addCircleLayer();
-        $("#container").addClass('loaded');;
-        $("#container2").removeClass('loaded');
+            addBGLayer();
+            addMapBorderLayer();
+            addLocaMap();
+            //addCircleLayer();
+            $("#container").addClass('loaded');;
+            $("#container2").removeClass('loaded');
+        }, t - 200)
     },
-    destroy(){
+    destroy() {
 
         $("#container").addClass('loaded');;
         $("#container2").removeClass('loaded');
@@ -53,7 +54,7 @@ function addLocaMap() {
     layer.setData(newCitys, {
         lnglat: 'lnglat'
     });*/
-    var haloCitys = util.restructureData2(allCitys, {type: 'halo'})
+    var haloCitys = util.restructureData2(allCitys, { type: 'halo' })
     /*var solidCitys = util.restructureData2(allCitys, {type: 'solid'}, true)
     var newCitys = haloCitys.concat(solidCitys)*/
     layer.setData(haloCitys, {
@@ -122,7 +123,7 @@ function addLocaMap() {
 function addBGLayer() {
 
     bgLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([39.637711,5.598022], [170.793603,62.672368]),
+        bounds: new AMap.Bounds([39.637711, 5.598022], [170.793603, 62.672368]),
         url: '../../img/big-bg3.png',
         opacity: 1,
         visible: true
@@ -133,7 +134,7 @@ function addBGLayer() {
 function addCircleLayer() {
 
     var circleLayer = new AMap.ImageLayer({
-        bounds: new AMap.Bounds([63.28813,5.598022], [146.076575,62.672368]),
+        bounds: new AMap.Bounds([63.28813, 5.598022], [146.076575, 62.672368]),
         url: '../../img/circle0.png',
         opacity: 1,
         visible: true,
@@ -143,7 +144,7 @@ function addCircleLayer() {
 }
 
 function addMapBorderLayer() {
-    if(mapBorderLayer){
+    if (mapBorderLayer) {
         mapBorderLayer.show();
         return;
     }
@@ -158,4 +159,4 @@ function addMapBorderLayer() {
     mapBorderLayer.setMap(map);
 }
 
-setStepInstance(1,stepInstance1);
+setStepInstance(1, stepInstance1);
