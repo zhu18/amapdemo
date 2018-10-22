@@ -120,7 +120,7 @@ function setZoom(index, step = .09) {
     function pitch(deg) {
         return new Promise((resolve, reject) => {
             (function _pitch() {
-                if (map.getPitch() > deg) {
+                if (map2.getPitch() > deg) {
                     map.setPitch(map.getPitch() - 3)
                     map2.setPitch(map2.getPitch()-3)
                     if (map2.getPitch() <= deg) {
