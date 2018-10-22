@@ -169,39 +169,6 @@ function animate() {
 }
 
 
-function stepOne() {
-
-    destroyStep(step1);
-}
-
-function stepTwo() {
-
-    destroyStep(step2);
-}
-
-function stepThree() {
-
-    destroyStep(step3);
-}
-
-function destroyStep(cb) {
-
-    switch (lastStep) {
-        case '1':
-            destroyStep1(cb);
-            break;
-        case '2':
-            destroyStep2(cb);
-            break;
-        case '3':
-            destroyStep3(cb);
-            break;
-        default:
-            cb();
-            break;
-    }
-}
-
 function playAnimation(domNode) {
     if($(domNode).hasClass('start')){
         $(domNode).removeClass('start').addClass("stop").attr("title","停止播放");
@@ -215,7 +182,7 @@ function playAnimation(domNode) {
 //监听触发操作
 function hashChange() {
 
-    var step = util.getQueryString('step')
+    var step = util.getQueryString('step')||0
     clearTimeout(timer)
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;

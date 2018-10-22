@@ -1,10 +1,10 @@
 var stepInstance3={
-    destoryTime:300,
+    destroyTime:300,
     load(){
         step3();
         console.log("init3");
     },
-    destory(){
+    destroy(){
         destroyStep3();
         console.log("destory3");
     }
