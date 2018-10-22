@@ -221,29 +221,14 @@ function hashChange() {
     $('html')[0].className = 'step' + step;
 
 
-    if(lastStep != undefined) {
-        var desInstance = stepInstance[lastStep];
-        setTimeout(function () {
-            desInstance.destroy();
-            lastStep = step;
-        }, desInstance.destroyTime)
-    }
-    else{
-        lastStep = step;
-    }
-    stepInstance[step].load();
+    if(lastStep != undefined)
+        stepInstance[lastStep].destroy();
 
+    setTimeout(function () {
+        stepInstance[step].load();
+    }, stepInstance[step].destroyTime)
 
-    /*if (step == 1) {
-        stepOne()
-    } else if (step == 2) {
-        stepTwo()
-    } else if (step == 3) {
-        stepThree()
-    } else{
-        stepOne()
-    }*/
-
+    lastStep = step;
 }
 
 
