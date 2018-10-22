@@ -169,39 +169,6 @@ function animate() {
 }
 
 
-function stepOne() {
-
-    destroyStep(step1);
-}
-
-function stepTwo() {
-
-    destroyStep(step2);
-}
-
-function stepThree() {
-
-    destroyStep(step3);
-}
-
-function destroyStep(cb) {
-
-    switch (lastStep) {
-        case '1':
-            destroyStep1(cb);
-            break;
-        case '2':
-            destroyStep2(cb);
-            break;
-        case '3':
-            destroyStep3(cb);
-            break;
-        default:
-            cb();
-            break;
-    }
-}
-
 function playAnimation(domNode) {
     if($(domNode).hasClass('start')){
         $(domNode).removeClass('start').addClass("stop").attr("title","停止播放");
@@ -227,17 +194,16 @@ function hashChange() {
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;
 
-    if(lastStep != undefined) {
-        var desInstance = stepInstance[lastStep];
-        setTimeout(function () {
-            desInstance.destroy();
-            lastStep = step;
-        }, desInstance.destoryTime)
-    }
-    else{
-        lastStep = step;
-    }
-    stepInstance[step].load();
+
+    // 销毁上一步骤
+    if(lastStep != undefined)
+        stepInstance[lastStep].destroy();
+
+    // 加载当前步骤，上一步骤所需销毁时间通过参数告知当前步骤，当前步骤可以选择行通过setTimeout()延迟加载
+    // 列如：step1销毁时间1000， step2 可以选择 setTimeout(step2Load, 800) 进行部分动画重叠
+    stepInstance[step].load(stepInstance[step].destroyTime);
+
+    lastStep = step;
 }
 
 
