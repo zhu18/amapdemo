@@ -23,11 +23,11 @@ class Util {
         array.forEach(v => {
             var obj = v.xy.split(',');
             if(obj.length== 2 && obj[0] && obj[1]) {
-                item = Object.assign({
-                    lnglat: isNewData ? this.randomLnglat(v.xy.split(',')) : v.xy.split(','),
+                item = {
+                    lnglat: obj,
                     name: v.name,
-                    style: isNewData ? Math.ceil(Math.random() * 3) : 2
-                }, opt)
+                    style: 4
+                };
                 newArray.push(item)
             }
         })

@@ -1,4 +1,4 @@
-var step1Loca, layer, mapBorderLayer, bgLayer;
+var layer, mapBorderLayer, bgLayer,intervalLocalMap;
 var stepInstance1 = {
     destroyTime: 700,
     load(t) {
@@ -23,6 +23,7 @@ var stepInstance1 = {
 
         $("#container").addClass('loaded');;
         $("#container2").removeClass('loaded');
+        clearInterval(intervalLocalMap);
         bgLayer ? bgLayer.hide() : {};
         layer ? layer.destroy() : {};
         mapBorderLayer ? mapBorderLayer.hide() : {};
@@ -32,13 +33,50 @@ var stepInstance1 = {
 
 function addLocaMap() {
 
-
-    step1Loca = new Loca(map)
+    var step1Loca = new Loca(map)
     layer = Loca.visualLayer({
         container: step1Loca,
         type: 'point',
         shape: 'circle'
     });
+
+    var realEnts = util.restructureData2(allCitys);
+    var allEnts = citys.concat(realEnts);
+    layer.setData(allEnts, {
+        lnglat: 'lnglat'
+    });
+
+    intervalLocalMap = setInterval(function () {
+
+        layer.setOptions({
+            style: {
+                // 支持动态回调，为每一个点设置半径
+                radius: function (obj) {
+                    // 城市类型，0：省会直辖市，1：地级市，2：区县
+                    var style = obj.value.style;
+                    var r;
+                    if (style == 0) {
+                        r = 6;
+                    } else if (style == 1) {
+                        r = parseInt(Math.random()*4);
+                    }else if(style == 4){
+                        r=8;
+                    } else {
+                        r = parseInt(Math.random()*3);
+                    }
+
+                    return r;
+                },
+                color: '#47aff7',
+                borderColor: '#c3faff',
+                borderWidth: 1,
+                opacity: 0.8
+            }
+        });
+        layer.render();
+    },500);
+
+    return;
     layer.setOptions({
         mode: 'count',
         colorScale: 'quantile',
@@ -48,16 +86,10 @@ function addLocaMap() {
             lineWidth: 3
         }
     });
-    /*var haloCitys = util.restructureData(citys, {type: 'halo'})
+    var haloCitys = util.restructureData(citys, {type: 'halo'})
     var solidCitys = util.restructureData(citys, {type: 'solid'}, true)
     var newCitys = haloCitys.concat(solidCitys)
     layer.setData(newCitys, {
-        lnglat: 'lnglat'
-    });*/
-    var haloCitys = util.restructureData2(allCitys, { type: 'halo' })
-    /*var solidCitys = util.restructureData2(allCitys, {type: 'solid'}, true)
-    var newCitys = haloCitys.concat(solidCitys)*/
-    layer.setData(haloCitys, {
         lnglat: 'lnglat'
     });
     var colors = {
@@ -82,7 +114,7 @@ function addLocaMap() {
                 } else if (style == 1) {
                     r = isHalo ? 8 : 2;
                 } else {
-                    r = isHalo ? 10 : 1;
+                    r = isHalo ? 5 : 1;
                 }
                 return r;
             },
