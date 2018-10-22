@@ -122,15 +122,15 @@ function setZoom(index, step = .09) {
             (function _pitch() {
                 if (map.getPitch() > deg) {
                     map.setPitch(map.getPitch() - 1)
-                    map2.setPitch(map.getPitch())
-                    if (map.getPitch() <= deg) {
+                    map2.setPitch(map2.getPitch()-1)
+                    if (map2.getPitch() <= deg) {
                         resolve('ok')
                         return
                     }
                 } else {
                     map.setPitch(map.getPitch() + 1)
-                    map2.setPitch(map.getPitch())
-                    if (map.getPitch() >= deg) {
+                    map2.setPitch(map2.getPitch()+1)
+                    if (map2.getPitch() >= deg) {
                         resolve('ok')
                         return
                     }
