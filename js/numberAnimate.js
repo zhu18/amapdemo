@@ -5,7 +5,8 @@
             num: "", //初始化值
             iniAnimate: true, //是否要初始化动画效果
             symbol: '',//默认的分割符号，千，万，千万
-            dot: 0 //保留几位小数点
+            dot: 0, //保留几位小数点
+            length:9
         }
         //如果setting为空，就取default的值
         var setting = $.extend(defaults, setting);
@@ -22,6 +23,19 @@
             return;
         }
         var nHtml = '<div class="mt-number-animate-dom" data-num="{{num}}">\
+            <span class="mt-number-animate-span"><img src="../img/num/0.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/1.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/2.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/3.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/4.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/5.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/6.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/7.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/8.png" /></span>\
+            <span class="mt-number-animate-span"><img src="../img/num/9.png" /></span>\
+            <span class="mt-number-animate-span">.</span>\
+          </div>';
+        /*var nHtml = '<div class="mt-number-animate-dom" data-num="{{num}}">\
             <span class="mt-number-animate-span">0</span>\
             <span class="mt-number-animate-span">1</span>\
             <span class="mt-number-animate-span">2</span>\
@@ -33,7 +47,7 @@
             <span class="mt-number-animate-span">8</span>\
             <span class="mt-number-animate-span">9</span>\
             <span class="mt-number-animate-span">.</span>\
-          </div>';
+          </div>';*/
 
         //数字处理
         var numToArr = function (num) {
@@ -44,7 +58,7 @@
                 var arrStr = num.split("");
             }
             //console.log(arrStr);
-            while (arrStr.length < 9) {
+            while (arrStr.length < setting.length) {
                 arrStr.unshift(0);
             }
             return arrStr;
@@ -142,17 +156,17 @@ $(document).ready(function () {
         showRealTime($(".time"));
     }, 1000);
 
-    var numRun1 = $(".numberRun1").numberAnimate({num: '152358428', speed: 2000});
+    var numRun1 = $(".numberRun1").numberAnimate({num: '152358428', speed: 2000,length:9});
     var nums1 = 152353434;
     setInterval(function () {
         nums1 += 3454;
         numRun1.resetData(nums1);
     }, 4000);
 
-    var numRun2 = $(".numberRun2").numberAnimate({num: '072452436', speed: 2000});
-    var nums2 = 72452436;
-    setInterval(function () {
+    var numRun2 = $(".numberRun2").numberAnimate({num: '6435', speed: 2000,length:6});
+    var nums2 = 6435;
+    /*setInterval(function () {
         nums2 += 1452;
         numRun2.resetData(nums2);
-    }, 4000);
+    }, 4000);*/
 });
