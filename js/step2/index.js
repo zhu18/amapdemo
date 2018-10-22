@@ -21,7 +21,9 @@ setStepInstance(2, stepInstance2);
 var map3, layer2, topLine, bottomLine, layer4, layer5,marks=[],tasks=[],
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        bounds: new AMap.Bounds(new AMap.LngLat(115.3000, 39.164537),
+            new AMap.LngLat(117.35728, 41.09606)),
+        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
         //url: '../../img/step2_F.png',
         url: '../../img/step2_F2.png?'+Math.random(),
         opacity: 1,
@@ -105,6 +107,7 @@ function destroyStep2() {
         }, 800);
     setTimeout(() => {
         bgLayer.hide()
+        map2.remove(bgLayer);
         $('.ring').removeClass('showBox')
     }, 1200);
    
@@ -171,7 +174,7 @@ function navigation2(map, scallback) {
         }, 300);
     }
     function f5() {
-        bgLayer.show()
+        setImgLayer(map2)
         pitch(58);
         setTimeout(() => {
             next()

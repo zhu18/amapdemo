@@ -121,15 +121,15 @@ function setZoom(index, step = .09) {
         return new Promise((resolve, reject) => {
             (function _pitch() {
                 if (map.getPitch() > deg) {
-                    map.setPitch(map.getPitch() - 2)
-                    map2.setPitch(map2.getPitch()-2)
+                    map.setPitch(map.getPitch() - 3)
+                    map2.setPitch(map2.getPitch()-3)
                     if (map2.getPitch() <= deg) {
                         resolve('ok')
                         return
                     }
                 } else {
-                    map.setPitch(map.getPitch() + 2)
-                    map2.setPitch(map2.getPitch()+2)
+                    map.setPitch(map.getPitch() + 3)
+                    map2.setPitch(map2.getPitch()+3)
                     if (map2.getPitch() >= deg) {
                         resolve('ok')
                         return
