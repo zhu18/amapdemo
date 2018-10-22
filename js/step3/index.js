@@ -1,7 +1,7 @@
 var stepInstance3={
     destroyTime:300,
-    load(){
-        step3();
+    load(t){
+        setTimeout(step3,t-100);
         console.log("init3");
     },
     destroy(){
@@ -28,12 +28,12 @@ function step3() {
     // 
     // map.setRotation(180)
     map.panTo([116.454925, 39.914705]);
-    setZoom(15,0.05).then(_ => {
-        setZoom(11, 0.05).then(_ => {
-            setZoom(12, 0.05).then(_ => {
-                setZoom(13, 0.05).then(_ => {
-                    setZoom(14, 0.05).then(_ => {
-                        setZoom(15, 0.05).then(_ => {
+   
+        setZoom(11, 0.1).then(_ => {
+            setZoom(12, 0.1).then(_ => {
+                setZoom(13, 0.1).then(_ => {
+                    setZoom(14, 0.1).then(_ => {
+                        setZoom(15, 0.1).then(_ => {
                             setTimeout(() => {
                                 // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                                 // $('.ring').addClass('showBox')
@@ -45,9 +45,9 @@ function step3() {
                 })
             })
         })
-    })
-    setPitch(80,16000)
-    setRotation(360,16000)
+    
+    setPitch(80,8000)
+    setRotation(360,8000)
    
     //setRotation(0)
     initStatus();
@@ -55,11 +55,17 @@ function step3() {
     setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
-    initEchart();
-    initBuild();
-    initLine();
-    initPoints();
-    addPolygonizrLayer();
+    setTimeout(function(){
+        initPoints();
+    },2000)
+    setTimeout(function(){
+        initEchart();
+        initBuild();
+        initLine();
+       // initPoints();
+        addPolygonizrLayer();
+    },5000);
+   
     // addParticlesLayer();
 }
 
