@@ -744,7 +744,17 @@ ul, li {
     color: rgba(255,255,255,.8);
     top: 80px;
 }
-
+.con-statis .base-info .weather {
+    line-height: 38px;
+    color: #fff;
+    top: 80px;
+    left: 245px;
+    position: absolute;
+    display: none;
+}
+.con-statis .base-info .weather i{
+    font-weight: bold;
+}
 .con-statis .lbl-name {
     font-size: 18px;
     line-height: 56px;
