@@ -1,71 +1,33 @@
-var stepInstance2={
-    destroyTime:300,
-    load(){
-        map.setStatus({
-            dragEnable: true,
-            doubleClickZoom: true
-        })
-        // 可视化图
-        map3 = new Loca(map)
-        // 带有高度的北京地图(面)
-        layer2 = Loca.visualLayer({
-            eventSupport: true,
-            fitView: true,
-            container: map3,
-            type: 'polygon',
-            shape: 'polygon'
-        });
-
-        layer2.setData(dd, {
-            lnglat: 'coordinates'
-        });
-
-        layer2.setOptions({
-            style: {
-                height: 70000,
-                lineWidth: 1,
-                stroke: '#eceff1',
-                fill: function (res) {
-                    // return 'rgba(0,0,0,1)';
-                    return 'rgba(0,0,0,0)';
-                    // return colors[index % colors.length];
-                },
-                fillOpacity: 0.5
-            },
-            selectStyle: {
-                color: '#ffffff',
-                fill: function (res) {
-                    return '#ff9900';
-                },
-                lineWidth: 2,
-                fillOpacity: 0.6,
-            }
-        });
-
-        layer2.show ? layer2.show() : layer2.render()
-
-        bgLayer = new AMap.ImageLayer({
-            //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
-            bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-            //url: '../../img/step2_F.png',
-            url: '../../img/step2_F2.png',
-            opacity: 1,
-            map: map,
-            height: 70000,
-            visible: false,
-            rejectMapMask: true
-        })
-        navigation2(map)
+var stepInstance2 = {
+    destroyTime: 300,
+    load() {
+        // map.setStatus({
+        //     dragEnable: true,
+        //     doubleClickZoom: true
+        // })
+        $('#container').removeClass('loaded')
+        $('#container2').addClass('loaded')
+        setLayer2()
+        // bgLayer = new AMap.ImageLayer({
+        //     //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        //     bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        //     //url: '../../img/step2_F.png',
+        //     url: '../../img/step2_F2.png',
+        //     opacity: 1,
+        //     map: map2,
+        //     height: 70000,
+        //     visible: false,
+        //     rejectMapMask: true
+        // })
+        navigation2(map2)
     },
-    destroy(){
+    destroy() {
         destroyStep2()
     }
 }
 
-setStepInstance(2,stepInstance2);
+setStepInstance(2, stepInstance2);
 
-
-//固定地图 禁止拖拽 旋转等
 var map3, layer2, topLine, bottomLine, layer4, layer5,
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
@@ -78,12 +40,63 @@ var map3, layer2, topLine, bottomLine, layer4, layer5,
         visible: false,
         rejectMapMask: true
     })
-function step2(params) {
-}
 
+function setLayer2(params) {
+    // 可视化图
+    map3 = new Loca(map2)
+    // 带有高度的北京地图(面)
+    layer2 = Loca.visualLayer({
+        eventSupport: true,
+        fitView: true,
+        container: map3,
+        type: 'polygon',
+        shape: 'polygon'
+    });
+
+    layer2.setData(dd, {
+        lnglat: 'coordinates'
+    });
+
+    layer2.setOptions({
+        style: {
+            height: 70000,
+            lineWidth: 1,
+            stroke: '#eceff1',
+            fill: function (res) {
+                // return 'rgba(0,0,0,1)';
+                return 'rgba(0,0,0,0)';
+                // return colors[index % colors.length];
+            },
+            fillOpacity: 0.5
+        },
+        selectStyle: {
+            color: '#ffffff',
+            fill: function (res) {
+                return '#ff9900';
+            },
+            lineWidth: 2,
+            fillOpacity: 0.6,
+        }
+    });
+    layer2.render()
+}
+//固定地图 禁止拖拽 旋转等
+function setImgLayer(){
+    bgLayer = new AMap.ImageLayer({
+        //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+        bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        //url: '../../img/step2_F.png',
+        url: '../../img/step2_F2.png',
+        opacity: 1,
+        map: map2,
+        height: 70000,
+        visible: false,
+        rejectMapMask: true
+    })
+} 
 //出场
 function destroyStep2() {
-    map.clearMap()
+    map2.clearMap()
     setTimeout(() => {
         bgLayer.hide()
     }, 500);
@@ -91,13 +104,15 @@ function destroyStep2() {
         map3 ? map3.destroy() : () => { }
     }, 1000);
     setTimeout(() => {
-        map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
+        map2.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     }, 1500);
     setTimeout(() => {
         $('.ring').removeClass('showBox')
     }, 2000);
 
-    
+
+    $('#container2').removeClass('loaded')
+    $('#container').addClass('loaded')
     // bgLayer ? map.remove(bgLayer) : ''
 
 
@@ -126,23 +141,21 @@ function navigation2(map, scallback) {
         tasks2.push(task);
     }
     function f1() {
-        map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
         map.setCenter([116.397428, 39.90929])
         map2.setCenter([116.397428, 39.90929])
+        return
         next()
         // setTimeout(() => {
         //     next()
         // }, 300);
     }
     function f2() {
-        setZoom(5, 0.01).then(_ => {
-            setZoom(6, 0.01).then(_ => {
-                setZoom(7, 0.01).then(_ => {
-                    $("#container").addClass('loaded');
-                    $("#container2").removeClass('loaded');
-                    pitch(60);
-                    setZoom(8, 0.01).then(_ => {
-                        setZoom(9, 0.01).then(_ => {
+        setZoom(5, 0.06).then(_ => {
+            setZoom(6, 0.06).then(_ => {
+                setZoom(7, 0.06).then(_ => {
+                    setZoom(8, 0.06).then(_ => {
+                        setZoom(9, 0.06).then(_ => {
+                            map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                             next()
                         })
                     })
@@ -151,7 +164,6 @@ function navigation2(map, scallback) {
         })
     }
     function f3() {
-        $('#container').addClass('loaded')
         setTimeout(next, 800)
 
 
@@ -165,6 +177,7 @@ function navigation2(map, scallback) {
     }
     function f5() {
         bgLayer.show()
+        pitch(60);
         setTimeout(() => {
             next()
         }, 500);
@@ -175,7 +188,7 @@ function navigation2(map, scallback) {
     }
 }
 //设置点
-function setPoniters(params) {
+function setPoniters() {
     // 定位点图层
     pointer = Loca.visualLayer({
         container: map3,
@@ -183,18 +196,15 @@ function setPoniters(params) {
         shape: 'image',
         eventSupport: true
     });
-
     pointer.setData([
         {
             location: '116.88131,40.215281',
             name: 'BB'
         },
-
         {
             location: '116.18131,40.415281',
             name: 'AA'
         },
-
         {
             location: '116.38131,40.215281',
             name: 'CC'
@@ -254,7 +264,6 @@ function setPoniters(params) {
         });
         setTimeout(() => {
             marker.setMap(map);
-
         }, 1000 + i * 100);
     })
 }

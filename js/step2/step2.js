@@ -1,13 +1,4 @@
 //固定地图 禁止拖拽 旋转等
-function fixedMap(params) {
-    map.setStatus({
-        animateEnable: false,
-        rotateEnable: false,
-        dragEnable: false,
-        zoomEnable: false,
-        pitchEnable: false,
-    })
-}
 var map3, layer2, topLine, bottomLine, layer4, layer5,
     bgLayer = new AMap.ImageLayer({
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
@@ -15,7 +6,7 @@ var map3, layer2, topLine, bottomLine, layer4, layer5,
         //url: '../../img/step2_F.png',
         url: '../../img/step2_F2.png',
         opacity: 1,
-        map:map,
+        map: map,
         height: 70000,
         visible: false,
         rejectMapMask: true
@@ -97,7 +88,7 @@ function destroyStep2(cb) {
     }, 2000);
 
     setTimeout(function () {
-        if(cb)cb();
+        if (cb) cb();
     });
     // bgLayer ? map.remove(bgLayer) : ''
 
@@ -111,7 +102,7 @@ function destroyStep2(cb) {
 
 var tasks2 = []
 function navigation2(map, scallback) {
-    tasks2 = [f1, f2, f3, f4, f5, f6, f7,f8]
+    tasks2 = [f1, f2, f3, f4, f5, f6, f7, f8]
     next()
     function next() {
         if (tasks2.length > 0) {
@@ -134,7 +125,7 @@ function navigation2(map, scallback) {
         // }, 300);
     }
     function f2() {
-        setZoom(5,0.01).then(_ => {
+        setZoom(5, 0.01).then(_ => {
             setZoom(6, 0.01).then(_ => {
                 setZoom(7, 0.01).then(_ => {
                     $("#container").addClass('loaded');
@@ -151,7 +142,7 @@ function navigation2(map, scallback) {
     }
     function f3() {
         $('#container').addClass('loaded')
-        setTimeout(next,800)
+        setTimeout(next, 800)
 
 
     }
@@ -207,23 +198,23 @@ function setPoniters(params) {
             name: 'CC'
         }
     ], {
-        lnglat: 'location'
-    });
+            lnglat: 'location'
+        });
 
     let lnglat = [{
         location: [116.88131, 40.215281],
         name: 'BB'
     },
 
-        {
-            location: [116.18131, 40.415281],
-            name: 'AA'
-        },
+    {
+        location: [116.18131, 40.415281],
+        name: 'AA'
+    },
 
-        {
-            location: [116.38131, 40.215281],
-            name: 'CC'
-        }
+    {
+        location: [116.38131, 40.215281],
+        name: 'CC'
+    }
     ]
     pointer.setOptions({
         source: function (res) {
@@ -239,7 +230,7 @@ function setPoniters(params) {
             opacity: 1
         }
     });
-    lnglat.forEach((v,i) => {
+    lnglat.forEach((v, i) => {
         var content = '';
         v.name == "CC" ? content = "<div class= 'pointer-icon2'></div>" : content = "<div class= 'pointer-icon'>1</div>"
         var marker = new AMap.Marker({
@@ -262,7 +253,7 @@ function setPoniters(params) {
         setTimeout(() => {
             marker.setMap(map);
 
-        }, 1000+i*100);
+        }, 1000 + i * 100);
     })
 }
 
