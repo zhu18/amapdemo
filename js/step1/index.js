@@ -17,7 +17,8 @@ var stepInstance1 = {
             //addCircleLayer();
             $("#container").addClass('loaded');;
             $("#container2").removeClass('loaded');
-        }, t - 200)
+        // }, t - 200)
+        }, 4000)
     },
     destroy() {
 

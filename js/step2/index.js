@@ -23,7 +23,7 @@ var map3, layer2, topLine, bottomLine, layer4, layer5,marks=[],tasks=[],
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
         //url: '../../img/step2_F.png',
-        url: '../../img/step2_F2.png',
+        url: '../../img/step2_F2.png?'+Math.random(),
         opacity: 1,
         map: map2,
         height: 70000,
@@ -95,25 +95,26 @@ function setImgLayer(map){
 //出场
 function destroyStep2() {
         tasks=[]
-        map2.setPitch(0)
-        marks.forEach(v=>{
+        marks.forEach((v,i)=>{
             setTimeout(() => {
                 map2.remove(v);
-            }, 300);
+            }, 200 * i);
         })
         setTimeout(() => {
-            bgLayer.hide()
-        }, 1200);
+            pitch(0)
+        }, 800);
+    setTimeout(() => {
+        bgLayer.hide()
+        $('.ring').removeClass('showBox')
+    }, 1200);
+   
     setTimeout(() => {
         map2.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
     }, 1500);
-    setTimeout(() => {
-        $('.ring').removeClass('showBox')
-    }, 2000);
 
 
-    $('#container2').removeClass('loaded')
-    $('#container').addClass('loaded')
+    // $('#container2').removeClass('loaded')
+    // $('#container').addClass('loaded')
     // bgLayer ? map.remove(bgLayer) : ''
 
 
