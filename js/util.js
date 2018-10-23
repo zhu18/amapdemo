@@ -103,15 +103,23 @@ class Util {
         })
     }
 function setZoom(index, step = .09) {
-        
+        console.log(map.getZoom())
         return new Promise((resolve, reject) => {
             (function _setZoom() {
                 map.setZoom(map.getZoom() + step)
-                map2.setZoom(map.getZoom())
-                if (map.getZoom() >= index) {
-                    resolve('ok')
-                    return
+                map2.setZoom(map2.getZoom() + step)
+                if (step>0) {
+                    if (map.getZoom() >= index) {
+                        resolve('ok')
+                        return
+                    } 
+                }else{
+                    if (map.getZoom() <= index) {
+                        resolve('ok')
+                        return
+                    } 
                 }
+                
                 requestAnimationFrame(_setZoom)
             })()
             // _setZoom(this)
@@ -120,16 +128,18 @@ function setZoom(index, step = .09) {
     function pitch(deg) {
         return new Promise((resolve, reject) => {
             (function _pitch() {
+                console.log(map.getPitch())
+
                 if (map2.getPitch() > deg) {
-                    map.setPitch(map.getPitch() - 3)
-                    map2.setPitch(map2.getPitch()-3)
+                    map.setPitch(map.getPitch() - 4)
+                    map2.setPitch(map2.getPitch()-4)
                     if (map2.getPitch() <= deg) {
                         resolve('ok')
                         return
                     }
                 } else {
-                    map.setPitch(map.getPitch() + 3)
-                    map2.setPitch(map2.getPitch()+3)
+                    map.setPitch(map.getPitch() + 4)
+                    map2.setPitch(map2.getPitch()+4)
                     if (map2.getPitch() >= deg) {
                         resolve('ok')
                         return
