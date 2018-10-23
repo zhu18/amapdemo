@@ -1,12 +1,10 @@
-var map,map2,lastStep,currStep=1, lastMove,util = new Util();
+var map,map2,lastStep,currStep=0, lastMove,util = new Util();
 
 var stepInstance = new Array(4);
 
 $(document).ready(function () {
 
-
     initMap();
-    setWeather();
     animate();
     //addMapControl();
 
@@ -15,59 +13,18 @@ $(document).ready(function () {
     if (('onhashchange' in window) && ((typeof document.documentMode === 'undefined') || document.documentMode == 8)) {
         window.onhashchange = hashChange;
     }
-    //$("#container").addClass('loaded');
+    setTimeout(function () {
+        $("#container").addClass('loaded');
+    },1000)
 
-    $(window).mousemove(function () {
-        lastMove = new Date().getTime();
-        $(".nav").addClass("nav-active");
-    }).mouseout(function () {
-        $(".nav").removeClass("nav-active");
-    });
-
-    window.setInterval(function() {
-        var now = new Date().getTime();
-        if(lastMove && now - lastMove > 5000) {
-            $(".nav").removeClass("nav-active");
-        }
-    }, 1000)
+    setWeather();
+    mouseEvent();
 
 });
 
 function setStepInstance(index,instance) {
 
     stepInstance[index] = instance;
-}
-
-function setWeather(){
-
-    if(currStep == 1) {
-        $('.weather').hide();
-        return;
-    }
-    AMap.plugin('AMap.Weather', function() {
-        //创建天气查询实例
-        var weather = new AMap.Weather();
-
-        var code = currStep==2?110000:110105;
-        //执行实时天气信息查询
-        weather.getLive(code, function(err, data) {
-
-           var icon='icon-fine_icon';
-           var weather =data.weather;
-           if(weather.indexOf('晴') !=-1)icon="icon-fine_icon";
-           else if(weather.indexOf('阴') !=-1)icon="icon-yintian";
-           else if(weather.indexOf('云') !=-1)icon="icon-duoyun";
-           else if(weather.indexOf('雨') !=-1)icon="icon-yu1";
-           else if(weather.indexOf('雪') !=-1)icon="icon-xue";
-           else if(weather.indexOf('雾') !=-1)icon="icon-icon-test6";
-           else if(weather.indexOf('霾') !=-1)icon="icon-mai";
-           else if(weather.indexOf('风') !=-1)icon="icon-dafeng";
-           $("#iconWeather").removeClass().addClass('iconfont '+icon).attr("title",weather)
-           $('#temperature').html(data.temperature);
-
-           $('.weather').show();
-        });
-    });
 }
 
 function initMap() {
@@ -82,7 +39,7 @@ function initMap() {
         rotation: 0,
         viewMode: '3D',//开启3D视图,默认为关闭
         buildingAnimation: true,//楼块出现是否带动画
-        features: ['bg', 'road'],//隐藏默认楼块
+        features: ['bg', 'road','point'],//隐藏默认楼块
         showLabel: true,
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         expandZoomRange: true,
@@ -224,6 +181,7 @@ function hashChange() {
         location.hash = 'step=0';
         return
     }
+
     //统一step 样式， 如：.step1 .base-info .name,.step2 .base-info .name
     $('html')[0].className = 'step' + step;
     setWeather();
@@ -239,5 +197,53 @@ function hashChange() {
     lastStep = step;
 }
 
+
+function setWeather(){
+
+    if(currStep == 1) {
+        $('.weather').hide();
+        return;
+    }
+    AMap.plugin('AMap.Weather', function() {
+        //创建天气查询实例
+        var weather = new AMap.Weather();
+
+        var code = currStep==2?110000:110105;
+        //执行实时天气信息查询
+        weather.getLive(code, function(err, data) {
+
+            var icon='icon-fine_icon';
+            var weather =data.weather;
+            if(weather.indexOf('晴') !=-1)icon="icon-fine_icon";
+            else if(weather.indexOf('阴') !=-1)icon="icon-yintian";
+            else if(weather.indexOf('云') !=-1)icon="icon-duoyun";
+            else if(weather.indexOf('雨') !=-1)icon="icon-yu1";
+            else if(weather.indexOf('雪') !=-1)icon="icon-xue";
+            else if(weather.indexOf('雾') !=-1)icon="icon-icon-test6";
+            else if(weather.indexOf('霾') !=-1)icon="icon-mai";
+            else if(weather.indexOf('风') !=-1)icon="icon-dafeng";
+            $("#iconWeather").removeClass().addClass('iconfont '+icon).attr("title",weather)
+            $('#temperature').html(data.temperature);
+            $('.weather').show();
+        });
+    });
+}
+
+function mouseEvent() {
+
+    $(window).mousemove(function () {
+        lastMove = new Date().getTime();
+        $(".nav").addClass("nav-active");
+    }).mouseout(function () {
+        $(".nav").removeClass("nav-active");
+    });
+
+    window.setInterval(function() {
+        var now = new Date().getTime();
+        if(lastMove && now - lastMove > 5000) {
+            $(".nav").removeClass("nav-active");
+        }
+    }, 1000)
+}
 
 

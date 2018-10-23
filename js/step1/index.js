@@ -1,5 +1,5 @@
 var layer, mapBorderLayer, bgLayer,intervalLocalMap;
-var stepInstance1 = {
+setStepInstance(1,{
     destroyTime: 700,
     load(t) {
         setTimeout(function () {
@@ -17,18 +17,18 @@ var stepInstance1 = {
             //addCircleLayer();
             $("#container").addClass('loaded');;
             $("#container2").removeClass('loaded');
-        }, t - 200)
+        }, lastStep==2?5000:(t - 200))
     },
     destroy() {
 
-        $("#container").addClass('loaded');;
+        $("#container").addClass('loaded');
         $("#container2").removeClass('loaded');
         clearInterval(intervalLocalMap);
         bgLayer ? bgLayer.hide() : {};
         layer ? layer.destroy() : {};
         mapBorderLayer ? mapBorderLayer.hide() : {};
     }
-}
+});
 
 
 function addLocaMap() {
@@ -190,5 +190,3 @@ function addMapBorderLayer() {
     });
     mapBorderLayer.setMap(map);
 }
-
-setStepInstance(1, stepInstance1);
