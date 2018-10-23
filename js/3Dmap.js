@@ -116,20 +116,8 @@ function initMap() {
         features: ['bg', 'road', 'point'],//隐藏默认楼块
         showLabel: true,
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
+        // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
         expandZoomRange: true,
-        layers: [
-            new AMap.TileLayer({
-                zooms: [3, 18],    //可见级别
-                visible: true,    //是否可见
-                opacity: 1,       //透明度
-                zIndex: 0         //叠加层级
-            }),
-            new AMap.Buildings({
-                zooms: [5, 18],
-                zIndex: 10,
-                heightFactor: 2//2倍于默认高度，3D下有效
-            })//楼块图层
-        ],
         zoom: 4,
         center: [116.372169, 40.041315]
     });
@@ -178,6 +166,7 @@ function setPitch(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
+            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
@@ -190,10 +179,22 @@ function setRotation(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
+            map.setRotation(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
-
+function setZooms(deg, time, callback) {
+    time = time || 1000;
+    callback = callback || function () {
+    }
+    var form = { v: map.setRotation() }
+    return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
+        function () {
+            map.setZoom(this.v)
+            map2.setZoom(this.v)
+            // console.log('Rotation:' + this.v);
+        }).onComplete(callback)
+}
 function animate() {
     requestAnimationFrame(animate);
     // [...]
