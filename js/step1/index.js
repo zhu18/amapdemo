@@ -1,4 +1,4 @@
-var layer, mapBorderLayer, bgLayer,intervalLocalMap;
+var step1Loca,layer, mapBorderLayer, bgLayer,intervalLocalMap;
 setStepInstance(1,{
     destroyTime: 700,
     load(t) {
@@ -21,19 +21,19 @@ setStepInstance(1,{
     },
     destroy() {
 
-        $("#container").addClass('loaded');
-        $("#container2").removeClass('loaded');
+        //$("#container").addClass('loaded');
+        //$("#container2").removeClass('loaded');
         clearInterval(intervalLocalMap);
-        bgLayer ? bgLayer.hide() : {};
-        layer ? layer.destroy() : {};
-        mapBorderLayer ? mapBorderLayer.hide() : {};
+        bgLayer ? bgLayer.hide() : null;
+        step1Loca?step1Loca.destroy():null;
+        mapBorderLayer ? mapBorderLayer.hide() : null;
     }
 });
 
 
 function addLocaMap() {
 
-    var step1Loca = new Loca(map)
+    step1Loca = new Loca(map)
     layer = Loca.visualLayer({
         container: step1Loca,
         type: 'point',

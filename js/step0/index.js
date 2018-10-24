@@ -25,7 +25,7 @@ function step0() {
             login()
         }
     });
-    initBackground();
+    //initBackground();
 }
 function login() {
     isLogin = true;
