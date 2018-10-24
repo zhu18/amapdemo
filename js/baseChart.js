@@ -68,7 +68,6 @@ function initEchart() {
     $('.echart-con .item').each((i,item)=>{
 
         (function(obj,i) {
-            console.log('obj:',obj,'i:',i);
             setTimeout(()=>{
                 $(obj).addClass('loaded');
             },500+i*300)
@@ -1207,7 +1206,6 @@ function pieLine() {
     $('.echart-lcon .item').each((i,item)=>{
 
         (function(obj,i) {
-            console.log('obj:',obj,'i:',i);
             setTimeout(()=>{
                 $(obj).addClass('loaded');
             },500+i*300)
@@ -1234,6 +1232,10 @@ function pieLine() {
         loadEChart("lpie5",getPieOption());
         loadEChart("lline5",getLineOption());
     },2200);
+    setTimeout(()=>{
+        loadEChart("lpie6",getPieOption());
+        loadEChart("lline6",getLineOption());
+    },2400);
 }
 function getPieOption() {
     var optionPie = {

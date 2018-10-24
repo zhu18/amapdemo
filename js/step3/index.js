@@ -2,11 +2,9 @@ var stepInstance3={
     destroyTime:300,
     load(t){
         setTimeout(step3,t-100);
-        console.log("init3");
     },
     destroy(){
         destroyStep3();
-        console.log("destory3");
     }
 }
 
@@ -51,13 +49,16 @@ function step3() {
     //setRotation(0)
     initStatus();
     
-    setp3Tips()
+    //setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
     setTimeout(function(){
         initPoints();
     },2000)
     setTimeout(function(){
+        $('.echart-con').addClass('loaded');
+        $('.echart-lcon').addClass('loaded');
+        $('.overview').addClass('loaded');
         initEchart();
         initBuild();
         initLine();
@@ -212,11 +213,11 @@ function addPolygonizrLayer() {
             // When the cluster up<a href="https://www.jqueryscript.net/time-clock/">date</a>s, this sets speed of nodes.
             duration: 3,
             // Define the maximum distance to move nodes.
-            nodeMovementDistance: 50,
+            nodeMovementDistance: 20,
             // The number of node nodes to print out.
-            numberOfNodes: 25,
+            numberOfNodes: 50,
             // Define the maximume size of each node dot.
-            nodeDotSize: 1,
+            nodeDotSize: 2,
             // Sets the ease mode of the movement: linear, easeIn, easeOut, easeInOut, accelerateDecelerate.
             nodeEase: "easeOut",
             // If true, the nodes will descend into place on load.
@@ -238,19 +239,19 @@ function addPolygonizrLayer() {
             // The FPS for the whole canvas.
             animationFps: 50,
             // Sets the color of the node dots in the network (RGB).
-            nodeDotColor: "6, 31, 64",
+            nodeDotColor: "8, 33, 87",
             // Sets the color of the node lines in the network (RGB).
-            nodeLineColor: "6, 31, 64",
+            nodeLineColor: "8, 33, 87",
             // Sets the color of the filled triangles in the network (RGB).
-            nodeFillColor: "240, 255, 250",
+            nodeFillColor: "8, 33, 87",
             // If valid RGB color adds a linear gradient stroke (set null to remove).
-            nodeFillGradientColor: "7, 34, 73",
+            nodeFillGradientColor: "0,0,0",
             // Sets the alpha level for the colors (1-0).
-            nodeFillAlpha: .1,
+            nodeFillAlpha: .3,
             // Sets the alpha level for the lines (1-0).
-            nodeLineAlpha: .1,
+            nodeLineAlpha: .5,
             // Sets the alpha level for the dots (1-0).
-            nodeDotAlpha: .1,
+            nodeDotAlpha: .6,
             // Defines if the triangles in the network should be shown.
             nodeFillSapce: true,
             // Define if the active animation should glow or not (not CPU friendly).
@@ -263,6 +264,10 @@ function addPolygonizrLayer() {
  * 销毁事件
  */
 function destroyStep3(cb) {
+
+    $('.echart-con').removeClass('loaded');
+    $('.echart-lcon').removeClass('loaded');
+    $('.overview').removeClass('loaded');
     removeEchart();
     $(".word-container").show();
     //particlesLayer ? particlesLayer.hide() : null;

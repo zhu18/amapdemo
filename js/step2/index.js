@@ -106,7 +106,7 @@ function setImgLayer(map) {
 }
 //出场
 function destroyStep2() {
-    
+
     tasks = []
     marks.forEach((v, i) => {
         setTimeout(() => {
@@ -114,7 +114,7 @@ function destroyStep2() {
         }, 200 * i);
     })
     setTimeout(() => {
-        
+
         setPitch(0)
     }, 800);
     setTimeout(() => {
@@ -155,9 +155,6 @@ function destroyStep2() {
 
 
 
-    //  $('#container2').removeClass('loaded')
-    //  $('#container').addClass('loaded')
-    // bgLayer ? map.remove(bgLayer) : ''
 
 
 
@@ -297,23 +294,23 @@ function setPoniters() {
             name: 'CC'
         }
     ], {
-            lnglat: 'location'
-        });
+        lnglat: 'location'
+    });
 
     let lnglat = [{
         location: [116.88131, 40.215281],
         name: 'BB'
     },
 
-    {
-        location: [116.18131, 40.415281],
-        name: 'AA'
-    },
+        {
+            location: [116.18131, 40.415281],
+            name: 'AA'
+        },
 
-    {
-        location: [116.38131, 40.215281],
-        name: 'CC'
-    }
+        {
+            location: [116.38131, 40.215281],
+            name: 'CC'
+        }
     ]
     pointer.setOptions({
         source: function (res) {
