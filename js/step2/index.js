@@ -147,15 +147,16 @@ function destroyStep2() {
                 })
             })
         })
-    }else{
+    } else if (lastStep == 2 && currStep == 3){
         $('#container2').removeClass('loaded')
         $('#container').addClass('loaded')
+      
     }
 
 
 
-     $('#container2').removeClass('loaded')
-     $('#container').addClass('loaded')
+    //  $('#container2').removeClass('loaded')
+    //  $('#container').addClass('loaded')
     // bgLayer ? map.remove(bgLayer) : ''
 
 
@@ -192,6 +193,7 @@ function navigation2(map, scallback) {
         setZoom(6, 0.1).then(_ => {
             setZoom(7, 0.1).then(_ => {
                 setZoom(8, 0.1).then(_ => {
+                    setPitch(58)
                     setZoom(9, 0.1).then(_ => {
                         map2.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                         next()
@@ -212,7 +214,7 @@ function navigation2(map, scallback) {
     function f5() {
         setImgLayer(map2)
         // setpitch(58);
-        setPitch(58)
+        
         setTimeout(() => {
             next()
         }, 500);

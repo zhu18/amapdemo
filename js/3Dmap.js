@@ -74,7 +74,8 @@ function initMap() {
         showLabel: true,
         mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
         // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
-        expandZoomRange: true,
+        expandZoomRange: false,
+        jogEnable:false,
         zoom: 4,
         center: [116.372169, 40.041315]
     });

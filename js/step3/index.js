@@ -28,26 +28,25 @@ function step3() {
     // 
     // map.setRotation(180)
     map.panTo([116.454925, 39.914705]);
-   
-        setZoom(11, 0.1).then(_ => {
-            setZoom(12, 0.1).then(_ => {
-                setZoom(13, 0.1).then(_ => {
-                    setZoom(14, 0.1).then(_ => {
-                        setZoom(15, 0.1).then(_ => {
-                            setTimeout(() => {
-                                // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
-                                // $('.ring').addClass('showBox')
-                                
-    
-                            }, 300);
+        setZoom(11, 0.3).then(_ => {
+            setZoom(12, 0.3).then(_ => {
+                setZoom(13, 0.3).then(_ => {
+                    setZoom(14, 0.3).then(_ => {
+                        setZoom(15, 0.3).then(_ => {
+                                setTimeout(() => {
+                                    // map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                                    // $('.ring').addClass('showBox')
+
+
+                                }, 300);
+                           
                         })
                     })
                 })
             })
         })
-    
-    setPitch(80,8000)
-    setRotation(360,8000)
+    setPitch(80,5000)
+    setRotation(360,5000)
    
     //setRotation(0)
     initStatus();

@@ -225,9 +225,10 @@ function animation(to ,speed) {
 
 // }
 var tasks = []
+
 function navigation(map,scallback) {
     // tasks.length > 0 ? tasks = (tasks.push(scallback)) : tasks = [f1, f2, f3, f4, f5, f6, f7, scallback]
-    tasks = [f1, f2, f3, f4, f5, f6, f7, scallback]
+    tasks = [f1, f2, f3, f4, f5, scallback]
     next()
     function next() {
         if (tasks.length > 0) {
@@ -242,44 +243,56 @@ function navigation(map,scallback) {
     }
     function f1() {
         // animate.setCenter([116.372169, 40.041315])
-        setZoom(18).then(_ => {
+        setPitch(60)
+        setZoom(16).then(_ => {
+            setRotation(70)
             next()
         })
     }
     function f2() {
-        //map.setMapStyle('amap://styles/2b5b5a7bf7d342735986be35a82f241f')
-        pitch(60).then(_ => {
+        map.panTo([116.442161, 39.922941])
+        setTimeout(() => {
             next()
-        })
+        }, 500);
+        // animation([116.442161, 39.922941]).then(_ => {
+        //     next()
+        // })
+        
     }
     function f3() {
-        rotation(110).then(_ => {
+        rotation(320).then(_ => {
             next()
         })
     }
     function f4() {
-        animation([116.547737, 39.915975]).then(_ => {
+        map.panTo([116.460762, 39.929612])
+        setPitch(76)
+        // setTimeout(() => {
+            
+        // }, 500);
+        rotation(360).then(_ => {
             next()
         })
     }
     function f5() {
+        setPitch(46)
+        setZooms(14.5)
+      setTimeout(() => {
+          next()
+      }, 2000);
         
+    }
+    // function f6() {
+    //     animation([116.465255, 39.957569], 0.00009).then(_ => {
+    //         next()
+    //     })
+    // }
+    // function f7() {
+    //     pitch(80).then(_ => {
+    //         next()
+    //     })
 
-        rotation(200).then(_ => {
-            next()
-        })
-    }
-    function f6() {
-        animation([116.545385, 39.90389], 0.00009).then(_ => {
-            next()
-        })
-    }
-    function f7() {
-        pitch(80).then(_ => {
-            next()
-        })
-
-    }
+    // }
     
     map.on('mousedown', (e) => {
         clearTimeout(timer)
