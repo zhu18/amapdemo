@@ -22,7 +22,7 @@ var particlesLayer, polygonizrLayer, buildObject3Dlayer;
  * step3 北京朝阳区进入
  */
 function step3() {
-
+    initPoints();
     // 
     // map.setRotation(180)
     map.panTo([116.454925, 39.914705]);
@@ -53,8 +53,8 @@ function step3() {
 
     map.panTo([116.454925, 39.914705]);
     setTimeout(function(){
-        initPoints();
-    },2000)
+        //initPoints();
+    },500)
     setTimeout(function(){
         $('.echart-con').addClass('loaded');
         $('.echart-lcon').addClass('loaded');
@@ -63,7 +63,7 @@ function step3() {
         initBuild();
         initLine();
        // initPoints();
-        addPolygonizrLayer();
+        //addPolygonizrLayer();
     },5000);
    
     // addParticlesLayer();

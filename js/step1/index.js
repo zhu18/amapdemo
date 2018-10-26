@@ -25,8 +25,13 @@ setStepInstance(1,{
         //$("#container2").removeClass('loaded');
         clearInterval(intervalLocalMap);
         bgLayer ? bgLayer.hide() : null;
-        step1Loca?step1Loca.destroy():null;
-        mapBorderLayer ? mapBorderLayer.hide() : null;
+        setTimeout(function(){
+            step1Loca?step1Loca.destroy():null;
+        });
+        setTimeout(function(){
+            mapBorderLayer ? mapBorderLayer.hide() : null;
+        },500);
+        
     }
 });
 

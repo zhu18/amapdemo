@@ -107,6 +107,8 @@ function setImgLayer(map) {
 //出场
 function destroyStep2() {
 
+    $('#container2').removeClass('loaded')
+    $('#container').addClass('loaded')
     tasks = []
     marks.forEach((v, i) => {
         setTimeout(() => {
@@ -200,7 +202,9 @@ function navigation2(map, scallback) {
         })
     }
     function f3() {
-        setTimeout(next, 800)
+
+        //setTimeout(next, 800)
+        next();
     }
     function f4() {
         $('.ring').addClass('showBox')

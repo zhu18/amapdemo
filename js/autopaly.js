@@ -8,13 +8,13 @@ function autoPlay(params) {
             }, 500);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=2' : ''
-            }, 5000);
+            }, 3000);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=3' : ''
-            }, 20000);
+            }, 13000);
             setTimeout(() => {
                 flag ? navigation(map, _fn) : ''
-            }, 25000);
+            }, 20000);
     }
     _fn()
 }
