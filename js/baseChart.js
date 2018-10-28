@@ -68,7 +68,7 @@ function initEchart() {
     $('.echart-con .item').each((i,item)=>{
 
         (function(obj,i) {
-            console.log('obj:',obj,'i:',i);
+           // console.log('obj:',obj,'i:',i);
             setTimeout(()=>{
                 $(obj).addClass('loaded');
             },500+i*300)
@@ -1207,7 +1207,7 @@ function pieLine() {
     $('.echart-lcon .item').each((i,item)=>{
 
         (function(obj,i) {
-            console.log('obj:',obj,'i:',i);
+            //console.log('obj:',obj,'i:',i);
             setTimeout(()=>{
                 $(obj).addClass('loaded');
             },500+i*300)

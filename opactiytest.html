@@ -10,8 +10,8 @@
   top:0;
 }
 </style>
-
-<script src="./js/particles.min.js" type="text/javascript"></script>
+<!-- 
+<script src="./js/particles.min.js" type="text/javascript"></script> -->
 
 
 <canvas id="canvas"></canvas>
@@ -50,10 +50,13 @@
     var x, y, s;
     y = x = 100;
     s = 50;
-    var img = colorize(particle, c.r, c.g, c.b, 1);
-    ctx.drawImage(img, x - s / 2, y - s / 2, s, s);
+    //等待图片src加载
+    setTimeout(function(){
+        console.log(particle.width)
+        var img = colorize(particle, c.r, c.g, c.b, 1);
+        ctx.drawImage(img, x - s / 2, y - s / 2, s, s);
 
-    ctx.drawImage(img, x - s / 2, y - s / 2, s, s)
+         ctx.drawImage(img, x - s / 2, y - s / 2, s, s)
     y = x = 400;
     s = 150;
     c = {
@@ -65,6 +68,11 @@
     ctx.drawImage(img, x - s / 2, y - s / 2, s, s);
     ctx.drawImage(img, x - s / 2, y - s / 2, s, s)
 
+
+    },
+    100)
+   
+   
     var tempFileCanvas;
     function colorize(img, r, g, b, a) {
         if (!img)
@@ -110,7 +118,7 @@
     ctx.drawImage(img, x - s / 2, y - s / 2, s, s);
     }
 
-    render();
+    //redrawCanvas();
     
     function render() {
         requestAnimationFrame(render);

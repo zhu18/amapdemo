@@ -212,7 +212,7 @@ function playAnimation(domNode) {
     }
 }
 
-var isLogin=false;
+var isLogin=true;
 //监听触发操作
 function hashChange() {
 

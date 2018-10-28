@@ -116,8 +116,8 @@ function destroyStep2() {
     }, 1500);
 
 
-    // $('#container2').removeClass('loaded')
-    // $('#container').addClass('loaded')
+     $('#container2').removeClass('loaded')
+     $('#container').addClass('loaded')
     // bgLayer ? map.remove(bgLayer) : ''
 
 
