@@ -1234,6 +1234,10 @@ function pieLine() {
         loadEChart("lpie5",getPieOption());
         loadEChart("lline5",getLineOption());
     },2200);
+    setTimeout(()=>{
+        loadEChart("lpie6",getPieOption());
+        loadEChart("lline6",getLineOption());
+    },2400);
 }
 function getPieOption() {
     var optionPie = {

@@ -11,10 +11,10 @@ function autoPlay(params) {
             }, 3000);
             setTimeout(() => {
                 flag ? window.location.hash = 'step=3' : ''
-            }, 6000);
+            }, 13000);
             setTimeout(() => {
                 flag ? navigation(map, _fn) : ''
-            }, 9000);
+            }, 20000);
     }
     _fn()
 }

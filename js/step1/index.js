@@ -1,5 +1,5 @@
-var layer, mapBorderLayer, bgLayer,intervalLocalMap;
-var stepInstance1 = {
+var step1Loca,layer, mapBorderLayer, bgLayer,intervalLocalMap;
+setStepInstance(1,{
     destroyTime: 700,
     load(t) {
         setTimeout(function () {
@@ -17,23 +17,28 @@ var stepInstance1 = {
             //addCircleLayer();
             $("#container").addClass('loaded');;
             $("#container2").removeClass('loaded');
-        }, t - 200)
+        }, lastStep==2?5000:(t - 200))
     },
     destroy() {
 
-        $("#container").addClass('loaded');;
-        $("#container2").removeClass('loaded');
+        //$("#container").addClass('loaded');
+        //$("#container2").removeClass('loaded');
         clearInterval(intervalLocalMap);
-        bgLayer ? bgLayer.hide() : {};
-        layer ? layer.destroy() : {};
-        mapBorderLayer ? mapBorderLayer.hide() : {};
+        bgLayer ? bgLayer.hide() : null;
+        setTimeout(function(){
+            step1Loca?step1Loca.destroy():null;
+        });
+        setTimeout(function(){
+            mapBorderLayer ? mapBorderLayer.hide() : null;
+        },500);
+        
     }
-}
+});
 
 
 function addLocaMap() {
 
-    var step1Loca = new Loca(map)
+    step1Loca = new Loca(map)
     layer = Loca.visualLayer({
         container: step1Loca,
         type: 'point',
@@ -190,5 +195,3 @@ function addMapBorderLayer() {
     });
     mapBorderLayer.setMap(map);
 }
-
-setStepInstance(1, stepInstance1);

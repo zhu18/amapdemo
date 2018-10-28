@@ -114,7 +114,11 @@ ul, li {
 .btn-login:hover{
     background: #fff;
 }
-
+#clayer,#particles {
+    width: 100%;
+    height: 200px;
+    transform: translateY(-100px);
+}
 .header {
     line-height: 100px;
     width: 100%;
@@ -130,9 +134,13 @@ ul, li {
     float: left;
     margin-left: 120px;
     font-size: 30px;
-    text-shadow: 0 0 40px rgba(0, 79, 255, 0.79), 0 0 30px rgba(0, 102, 255, 0.88), 0 0 20px rgb(0, 78, 255), 0 0 10px rgba(0, 43, 255, 0.64);
+    /*text-shadow: 0 0 40px rgba(0, 79, 255, 0.79), 0 0 30px rgba(0, 102, 255, 0.88), 0 0 20px rgb(0, 78, 255), 0 0 10px rgba(0, 43, 255, 0.64);*/
     /*text-shadow: 0px 0px 10px #0066ff, 0px 0px 20px #0066ff,0px 0px 40px #0066ff,0px 0px 80px #0066ff;*/
     position: relative;
+}
+.title>img{
+    margin-top:2px;
+    margin-left: -15px;
 }
 
 .title::before {
@@ -494,20 +502,22 @@ ul, li {
 
 .echart-lcon{
     position: fixed;
-    left: 48px;
+    left: 60px;
     bottom: 240px;
-    height: 380px;
-    width: 310px;
+    height: 365px;
+    width: 276px;
     z-index: 1000;
     perspective: 600px;
     transform-style: preserve-3d;
-    background: url(../img/step3-zone-border2.png),url(../img/step3-zone-bg3.png) no-repeat 22px 24px;
-    background-size: 100% 100%,271px 345px;
+    /*background: url(../img/step3-zone-border2.png),url(../img/step3-zone-bg3.png) no-repeat 22px 24px;
+    background-size: 100% 100%,271px 345px;*/
+    background: url('../img/step3-box2.png') no-repeat;
+    background-size: 100% 100%;
     transform: translate3d(0,500px,0);
     opacity: 0;
     transition: all .5s;
 }
-.step3 .echart-lcon{
+.echart-lcon.loaded{
     opacity: 1;
     transform: translate3d(0,0,0)
 }
@@ -518,7 +528,7 @@ ul, li {
 }
 
 .echart-lcon .item{
-    margin-left: 20px;
+    margin-left: 5px;
     line-height: 0;
     height: 0;
     width: 100%;
@@ -537,7 +547,7 @@ ul, li {
     opacity: 1;
 }
 .echart-lcon .item:first-child{
-    margin-top: 26px;
+    margin-top: 16px;
 }
 .echart-lcon .item .num{
     float: left;
@@ -563,7 +573,7 @@ ul, li {
 }
 .echart-lcon .item .line{
     float: left;
-    width:50%;
+    width:60%;
     height: 100%;
     background: url('../img/line-bg.png') no-repeat;
     background-position: 0 6px;
@@ -584,7 +594,8 @@ ul, li {
     perspective: 600px;
     transform-style: preserve-3d;
     height: 238px;
-    background: url(../img/step3_zone_border.png) no-repeat,url(../img/step3_zone_bg1.png) no-repeat;
+    /*background: url(../img/step3_zone_border.png) no-repeat,url(../img/step3_zone_bg1.png) no-repeat;*/
+    background: url(../img/step3-box3.png) no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
     transform: translate3d(0,500px,0);
@@ -592,7 +603,7 @@ ul, li {
     transition: all .5s;
 }
 
-.step3 .echart-con{
+.echart-con.loaded{
     opacity: 1;
     transform: translate3d(0,0,0)
 }
@@ -605,11 +616,11 @@ ul, li {
     transition: transform 1s;
     transform: rotateX(90deg);
     background-size: cover;
-    padding: 27px 20px 0px 20px;
+    padding: 20px 20px 0px 20px;
     /*  */
 }
 .echart-con .item:first-child{
-    padding: 27px 17px 0px 23px;
+    padding: 20px 17px 0px 23px;
 }
 
 .itemdemo{
@@ -631,26 +642,37 @@ ul, li {
 .con-panel {
     position: fixed;
     top: 0;
-    width: 120px;
+    width: 130px;
     height: 100%;
     z-index: 100;
     pointer-events: none;
 }
 
+.top-panel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    z-index: 101;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(4, 31, 97, 1),rgba(4, 31, 97, .7), rgba(4,31,97,0)); /* 标准的语法（必须放在最后） */
+}
+
 .left-panel {
     left: 0;
-    background: -webkit-linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Firefox 3.6 - 15 */
-    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* 标准的语法（必须放在最后） */
+    background: -webkit-linear-gradient(to right, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to right, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to right, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* 标准的语法（必须放在最后） */
 }
 
 .right-panel {
     right: 0;
-    background: -webkit-linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Firefox 3.6 - 15 */
-    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* 标准的语法（必须放在最后） */
+    background: -webkit-linear-gradient(to left, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to left, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to left, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to left, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0)); /* 标准的语法（必须放在最后） */
 }
 
 /*数字滚动插件的CSS可调整样式*/
@@ -696,7 +718,7 @@ ul, li {
 }
 .con-statis {
     position: fixed;
-    left: 28px;
+    left: 13px;
     top: 140px;
     background: url(../img/light8.png) no-repeat, url(../img/line.png) no-repeat;
     background-position: -4px 13px, 0 0;
@@ -704,7 +726,7 @@ ul, li {
     background-position: 0 0;
     background-blend-mode: screen;*/
     color: #fff;
-    padding: 36px 0 0 55px;
+    padding: 26px 0 0 55px;
     font-size: 16px;
     pointer-events: none;
     z-index: 101;
@@ -730,30 +752,31 @@ ul, li {
     transition: all 1s;
 }
 .step1 .con-statis .base-info .name{
-    background-position: 0px 0px;
+    background-position: 0px -6px;
 }
 .step2 .con-statis .base-info .name{
-    background-position: 0px -76px;
+    background-position: 0px -62px;
 }
 .step4 .con-statis .base-info .name,.step3 .con-statis .base-info .name{
-    background-position: 0px -149px;
+    background-position: 0px -155px;
 }
 .con-statis .base-info .time {
     line-height: 38px;
     position: absolute;
     color: rgba(255,255,255,.8);
-    top: 80px;
+    top: 70px;
 }
 .con-statis .base-info .weather {
     line-height: 38px;
-    color: #fff;
-    top: 80px;
+    color: rgba(255,255,255,.8);
+    top: 70px;
     left: 245px;
     position: absolute;
     display: none;
 }
 .con-statis .base-info .weather i{
     font-weight: bold;
+    color: rgba(255,255,255,.8);
 }
 .con-statis .lbl-name {
     font-size: 18px;
@@ -848,7 +871,7 @@ ul, li {
 }
 
 
-.step3 .overview
+.overview.loaded
 {
     opacity: 1;
     transform:translate3d(0, 0, 0)
@@ -868,9 +891,9 @@ ul, li {
     border: 1px solid #1da9dd;
     border-radius: 10px;
     background: #02102f;
+    box-shadow: inset 0 0 50px rgb(3, 191, 244), inset 0 0 80px rgba(3, 68, 244, 0.82), inset 0 0 150px rgba(0, 74, 255, 0.35),3px 3px 15px 3px rgba(0,0,0,.8);
     width:277px;
     height: 170px;
-    box-shadow: inset 0 0 50px rgb(3, 191, 244), inset 0 0 80px rgba(3, 68, 244, 0.82), inset 0 0 150px rgba(0, 74, 255, 0.35),3px 3px 15px 3px rgba(0,0,0,.8);
 }
 @media screen and (max-height: 999px) {
     .overview {
@@ -1196,4 +1219,36 @@ ul, li {
     left:-3.5px;
     top:-4px;
     transform: rotate(270deg)
+}
+
+.step3 .temp-box{
+    opacity: 1;
+}
+.temp-box{
+    position:fixed;
+    opacity: 0;
+    z-index: 1000;;
+}
+.temp-box img{
+    width: 100%;
+    height:100%;
+}
+
+.temp-box1{
+    height: 525px;
+    width:280px;
+    left: 45px;
+    bottom:265px;
+}
+.temp-box2{
+    height: 245px;
+    bottom: 0px;
+    right: 45px;
+    left: 45px;
+}
+.temp-box3{
+    width: 280px;
+    height: 225px;
+    right: 45px;
+    bottom:265px;
 }
