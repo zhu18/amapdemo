@@ -5,15 +5,16 @@ var stepInstance2 = {
         //     dragEnable: true,
         //     doubleClickZoom: true
         // })
+        map.clearMap()
         if (lastStep == 1) {
             // $('#container').removeClass('loaded')
             // $('#container2').addClass('loaded')
-            setImgLayer(map)
+            // setImgLayer(map)
             navigation2(map)
         } else if (lastStep == 3) {
             // $('#container').removeClass('loaded')
             // $('#container2').addClass('loaded')
-            setImgLayer(map)
+            // setImgLayer(map)
             navigation3(map)
         }
 
@@ -32,13 +33,10 @@ var map3, layer2, topLine, bottomLine, layer4, layer5, marks = [], tasks = [],
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds(new AMap.LngLat(115.3000, 39.164537),
             new AMap.LngLat(117.35728, 41.09606)),
-        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        //url: '../../img/step2_F.png',
-        url: '../../img/step2_F2.png?' + Math.random(),
+        url: '../../img/step2_F2.png',
         opacity: 1,
         height: 70000,
-        visible: true,
-        zooms: [7, 14]
+        zooms: [8, 12]
     })
 
 function setLayer2() {
@@ -125,6 +123,7 @@ function destroyStep2() {
                         setZoom(5, -0.2).then(_ => {
                             setZoom(4.4, -0.2).then(_ => {
                                 map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
+                                map.clearMap()
                             })
                         })
                     })
@@ -134,21 +133,17 @@ function destroyStep2() {
     } else if (lastStep == 2 && currStep == 3) {
         setZoom(10, 0.2).then(_ => {
             bgLayer ? map.remove(bgLayer) : '';
-            map.clearMap()
             setZoom(11, 0.2).then(_ => {
                 setZoom(12, 0.2).then(_ => {
                     map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
                     setZoom(13, 0.2).then(_ => {
                         setZoom(14, 0.2).then(_ => {
-                          
+                            map.clearMap()
                         })
                     })
                 })
             })
         })
-        // $('#container2').removeClass('loaded')
-        // $('#container').addClass('loaded')
-
     }
 
 
@@ -207,7 +202,7 @@ function navigation2(map, scallback) {
         }, 300);
     }
     function f5() {
-        // setImgLayer(map)
+        setImgLayer(map)
         // setpitch(58);
         setTimeout(() => {
             next()
@@ -234,10 +229,7 @@ function navigation3(map, scallback) {
     }
     function f1() {
         map.setZoom(14)
-        // map2.setZoom(14)
         map.setCenter([116.397428, 39.90929])
-        // map2.setCenter([116.397428, 39.90929])
-        // map2.setZoomAndCenter(14, [116.397428, 39.90929])
         setTimeout(() => {
             next()
         }, 500);
@@ -249,8 +241,7 @@ function navigation3(map, scallback) {
                 setZoom(11, -0.1).then(_ => {
                     setZoom(10, -0.1).then(_ => {
                         setZoom(9, -0.1).then(_ => {
-                            // $('#container').removeClass('loaded')
-                            // $('#container2').addClass('loaded')
+                            setImgLayer(map)
                             map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                             $('.ring').addClass('showBox')
                             next()
@@ -333,12 +324,10 @@ function setPoniters() {
         });
         marks.push(marker)
         marker.on('mouseover', function (ev) {
-            console.log('in')
             v.name == "CC" ? infoWindow.open(map, v.location, true) : infoWindow2.open(map, v.location, true)
 
         });
         marker.on('mouseout', function (ev) {
-            console.log('out')
             v.name == "CC" ? infoWindow.close() : infoWindow2.close()
         });
         setTimeout(() => {
