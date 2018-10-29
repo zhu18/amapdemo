@@ -1,5 +1,5 @@
 var stepInstance3={
-    destroyTime:300,
+    destroyTime:3000,
     load(t){
         setTimeout(step3,t-100);
     },

@@ -60,25 +60,25 @@ function initMap() {
         center: [116.372169, 40.041315]
     });
 
-    map2 = new AMap.Map('container2', {
-        resizeEnable: true,
-        rotateEnable: true,
-        pitchEnable: true,
-        showIndoorMap: false,
-        isHotspot: false,
-        pitch: 0,
-        rotation: 0,
-        viewMode: '3D',//开启3D视图,默认为关闭
-        buildingAnimation: true,//楼块出现是否带动画
-        features: ['bg', 'road', 'point'],//隐藏默认楼块
-        showLabel: true,
-        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
-        // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
-        expandZoomRange: false,
-        jogEnable:false,
-        zoom: 4,
-        center: [116.372169, 40.041315]
-    });
+    // map2 = new AMap.Map('container2', {
+    //     resizeEnable: true,
+    //     rotateEnable: true,
+    //     pitchEnable: true,
+    //     showIndoorMap: false,
+    //     isHotspot: false,
+    //     pitch: 0,
+    //     rotation: 0,
+    //     viewMode: '3D',//开启3D视图,默认为关闭
+    //     buildingAnimation: true,//楼块出现是否带动画
+    //     features: ['bg', 'road', 'point'],//隐藏默认楼块
+    //     showLabel: true,
+    //     mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
+    //     // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
+    //     expandZoomRange: false,
+    //     jogEnable:false,
+    //     zoom: 4,
+    //     center: [116.372169, 40.041315]
+    // });
 
 }
 
@@ -124,7 +124,7 @@ function setPitch(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            map2.setPitch(this.v)
+            // map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
@@ -137,7 +137,7 @@ function setRotation(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
-            map.setRotation(this.v)
+            // map.setRotation(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
@@ -149,7 +149,7 @@ function setZooms(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setZoom(this.v)
-            map2.setZoom(this.v)
+            // map2.setZoom(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
