@@ -1252,3 +1252,108 @@ ul, li {
     right: 45px;
     bottom:265px;
 }
+
+
+
+
+
+
+.step3 .temp-box2{
+        position: fixed;
+        bottom: 0;
+        left:0;
+        width: 100%;
+        height: 263px;
+        background:url(../img/bottomBar_03.png) no-repeat center;
+        background-size: contain;
+        animation: wrapBox 1s step-end;
+       
+}
+@keyframes wrapBox{
+    from{width: 0;}
+    to{width: 100%;}
+}
+.step3 .temp-box2 .bg-box{
+    position: absolute;
+    left: 0;
+    bottom:0;
+    height: 263px;
+    width: 100%;
+   
+}
+.step3 .temp-box2 .bg-box:nth-child(1){
+    background:url(../img/leftpointerBg_03.png) no-repeat ;
+    background-position: center;
+    background-size: contain;
+    animation: leftIcon 2s ease-in-out infinite alternate;
+}
+.step3 .temp-box2 .bg-box:nth-child(2){
+    background:url(../img/leftTopPointerBg_03.png) no-repeat center;
+    background-size: contain;
+    animation: pointerA 1s ease-in-out infinite alternate,pointerB 3s ease-in-out  alternate
+    
+}
+.step3 .temp-box2 .bg-box:nth-child(3){
+    background:url(../img/pointerBg1_03.png) no-repeat center;
+    background-size: contain;
+    animation: pointerA 1s ease-in-out infinite alternate;
+}
+.step3 .temp-box2 .bg-box:nth-child(4){
+    background:url(../img/centerpointer2Bg_03.png) no-repeat center;
+    background-size: contain;
+    right: 100%;
+    animation: pointerA 1s ease-in-out infinite alternate,pointerC 1s ease-in-out alternate 2s;
+    animation-fill-mode: forwards;
+}
+
+
+.step3 .temp-box2 .bg-box:nth-child(5){
+    background:url(../img/centerpointerBg_03.png) no-repeat center;
+    background-size: contain;
+    animation: pointerA 1s ease-in-out infinite alternate,pointerD 1s ease-in-out alternate 1.5s;
+}
+@keyframes pointerA{
+    from{
+        opacity: 0.4
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes pointerB{
+    from{
+        left: 1000%
+    }
+    to{
+        left:0;
+    }
+}
+@keyframes pointerC{
+    from{
+        right: 100%;
+        left:auto;
+    }
+    to{
+        right:0%;
+        left:auto;
+    }
+}
+@keyframes pointerD{
+    from{
+        height: 1%
+    }
+    to{
+        height:100%;
+    }
+}
+@keyframes leftIcon{
+    from{
+        opacity: 0.1;
+        /* background-position-y: 500% */
+        
+    }
+    to{
+          opacity: 1;
+           /* background-position-y: center; */
+    }
+}
