@@ -1,7 +1,7 @@
-var stepInstance3={
-    destroyTime:2000,
-    load(t){
-        setTimeout(step3,t-100);
+var stepInstance3 = {
+    destroyTime: 300,
+    load(t) {
+        setTimeout(step3, t - 100);
     },
     destroy() {
         destroyStep3();
@@ -16,16 +16,37 @@ setStepInstance(3, stepInstance3);
 /**
  * step3 北京朝阳区
  */
-var particlesLayer, polygonizrLayer;
+var particlesLayer, polygonizrLayer, step3BgLayer;
 
 /**
  * step3 北京朝阳区进入
  */
 function step3() {
-    initPoints();
+    initBackground();
+    setTimeout(function () {
+        map.on('zoomchange', function (e, a) {
+            var zoom = map.getZoom()
+            console.log(zoom)
+
+            var opacity = zoom / (zoom < 14 ? 60 : 30);
+            console.log(opacity)
+            //散点透明度
+            if (step3PointsLayer) {
+                step3PointsLayer.setOptions({ style: { opacity: opacity } })
+                step3PointsLayer.render();
+            }
+
+            var lineOpactiy = (zoom >= 14) ? 1 : 0;
+            lineCanvasLayer && lineCanvasLayer.setOpacity(lineOpactiy)
+            step3BgLayer && step3BgLayer.setOpacity(lineOpactiy)
+
+        })
+    }, 3000)
+
+
     // 
-    map.setZoomAndCenter(15,[116.454925, 39.914705])
-   // map.setZoom(1);
+    map.setZoomAndCenter(15, [116.454925, 39.914705])
+    // map.setZoom(1);
 
     // setZoom(11, 0.1).then(_ => {
     //     setZoom(12, 0.1).then(_ => {
@@ -43,12 +64,12 @@ function step3() {
     //         })
     //     })
     // })
-   // setZoom(15, 04);
-    
-   setTimeout(()=>{
-    setPitch(80, 2000)
-    setRotation(360, 2000)
-   },500)
+    // setZoom(15, 04);
+
+    setTimeout(() => {
+         setPitch(80, 2000)
+         setRotation(360, 2000)
+    }, 500)
 
     //setRotation(0)
     initStatus();
@@ -56,50 +77,54 @@ function step3() {
     //setp3Tips()
 
     map.panTo([116.454925, 39.914705]);
+
     setTimeout(function () {
-        initPoints();
-    }, 2000)
-    setTimeout(function () {
+        $("#login").hide()
+        $(".temp-box").hide()
         $('.echart-con').addClass('loaded');
         $('.echart-lcon').addClass('loaded');
         $('.overview').addClass('loaded');
+       
+        //initLine();
+    }, 100);
+    setTimeout(function(){
         initEchart();
         initBuild();
-        initLine();
-        // initPoints();
-        add3DPoints();
-        addPolygonizrLayer();
-    }, 30);
-    initBackground();
+        init2D();
+       // add3DPoints();
+       // addPolygonizrLayer();
+       
+    },3000)
     // addParticlesLayer();
 }
 
 function initStatus() {
     //$(".turnover").removeClass('show')
     //$(".nums").removeClass('show')
-    $(".word-container").hide();
+  //  $(".word-container").hide();
     $(".step3-mask").hide();
-    $(".echart-lcon").hide();
-    $(".con-statis").hide();
-    $(".echart-con").hide();
-    $(".overview").hide();
+   // $(".echart-lcon").hide();
+   // $(".con-statis").hide();
+   // $(".echart-con").hide();
+    //$(".overview").hide();
 
 }
 
 function initBackground() {
-    bgLayer = new AMap.ImageLayer({
-        //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
+    
+    step3BgLayer = new AMap.ImageLayer({
         bounds: new AMap.Bounds(new AMap.LngLat(115.3000, 39.164537),
             new AMap.LngLat(117.35728, 41.09606)),
-        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
-        //url: '../../img/step2_F.png',
-        url: '../../img/step2_F.png?' + Date(),
+        url:'../../img/step2_F.png?' + Date(),
+        zooms:[3,18],
         opacity: 1,
         map: map,
-        height: 7000,
-        visible: true,
-        rejectMapMask: true
+        //height: 7000,
+        //visible: true,
+       zIndex:6
     })
+
+
 }
 
 function mapPanto(index) {
@@ -210,25 +235,25 @@ function addParticlesLayer() {
     }, 1000);
 }
 
-function addPolygonizrLayer() {
+function addPolygonizrLayer(c) {
 
     if (polygonizrLayer) {
         polygonizrLayer.show();
         return;
     }
-    var canvas = document.createElement('div');
-    canvas.className = 'clayer'
-    canvas.id = 'clayer'
+    // var canvas = document.createElement('div');
+    // canvas.className = 'clayer'
+    // canvas.id = 'clayer'
 
 
-    // 创建一个自定义图层
-    polygonizrLayer = new AMap.CustomLayer(canvas, {
-        zIndex: 11,
-        zooms: [1, 18] // 设置可见级别，[最小级别，最大级别]
-    });
-    polygonizrLayer.setMap(map);
+    // // 创建一个自定义图层
+    // polygonizrLayer = new AMap.CustomLayer(canvas, {
+    //     zIndex: 11,
+    //     zooms: [1, 18] // 设置可见级别，[最小级别，最大级别]
+    // });
+    // polygonizrLayer.setMap(map);
     setTimeout(function () {
-        $('#clayer').polygonizr({
+        $(c).polygonizr({
             // How long to pause in between new node-movements.
             restNodeMovements: 1,
             // When the cluster up<a href="https://www.jqueryscript.net/time-clock/">date</a>s, this sets speed of nodes.

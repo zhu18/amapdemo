@@ -41,7 +41,7 @@ function initMap() {
         buildingAnimation: true,//楼块出现是否带动画
         features: ['bg', 'road','point'],//隐藏默认楼块
         showLabel: true,
-        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
+        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',//9daff86426dcd3695c56b61792c7d343',2b5b5a7bf7d342735986be35a82f241f
         expandZoomRange: true,
         layers: [
              new AMap.TileLayer({
@@ -53,32 +53,32 @@ function initMap() {
             new AMap.Buildings({
                 zooms: [5, 18],
                 zIndex: 10,
-                heightFactor: 2//2倍于默认高度，3D下有效
+                heightFactor: 3//2倍于默认高度，3D下有效
             })//楼块图层
         ],
         zoom: 4,
         center: [116.372169, 40.041315]
     });
 
-    // map2 = new AMap.Map('container2', {
-    //     resizeEnable: true,
-    //     rotateEnable: true,
-    //     pitchEnable: true,
-    //     showIndoorMap: false,
-    //     isHotspot: false,
-    //     pitch: 0,
-    //     rotation: 0,
-    //     viewMode: '3D',//开启3D视图,默认为关闭
-    //     buildingAnimation: true,//楼块出现是否带动画
-    //     features: ['bg', 'road', 'point'],//隐藏默认楼块
-    //     showLabel: true,
-    //     mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
-    //     // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
-    //     expandZoomRange: false,
-    //     jogEnable:false,
-    //     zoom: 4,
-    //     center: [116.372169, 40.041315]
-    // });
+    map2 = new AMap.Map('container2', {
+        resizeEnable: true,
+        rotateEnable: true,
+        pitchEnable: true,
+        showIndoorMap: false,
+        isHotspot: false,
+        pitch: 0,
+        rotation: 0,
+        viewMode: '3D',//开启3D视图,默认为关闭
+        buildingAnimation: true,//楼块出现是否带动画
+        features: ['bg', 'road', 'point'],//隐藏默认楼块
+        showLabel: true,
+        mapStyle: 'amap://styles/a2b01ddbdbd8992c86fb350a3866f202',
+        // mapStyle: 'amap://styles/e0b13c8a53234cd891ba01913302b9fc',
+        expandZoomRange: false,
+        jogEnable:false,
+        zoom: 4,
+        center: [116.372169, 40.041315]
+    });
 
 }
 
@@ -124,7 +124,7 @@ function setPitch(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setPitch(this.v)
-            // map2.setPitch(this.v)
+            map2.setPitch(this.v)
             // console.log('pitch:' + this.v);
         }).onComplete(callback)
 }
@@ -137,7 +137,7 @@ function setRotation(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setRotation(this.v)
-            // map.setRotation(this.v)
+            map.setRotation(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }
@@ -149,7 +149,7 @@ function setZooms(deg, time, callback) {
     return new TWEEN.Tween(form).to({ v: deg }, time).start().onUpdate(
         function () {
             map.setZoom(this.v)
-            // map2.setZoom(this.v)
+            map2.setZoom(this.v)
             // console.log('Rotation:' + this.v);
         }).onComplete(callback)
 }

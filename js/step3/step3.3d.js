@@ -58,7 +58,7 @@ function initBuild() {
     function addbuild(paths, height, currentfloor) {
         height = height || 1000
         var bottomColor = [1,1,1,1]
-        var topColor = [0,.7,.8,.5]
+        var topColor = [1,1,1,0]
         // 添加建筑物
         //addMesh(paths, 0, height, bottomColor, topColor)
         addMeshLayers(paths, height, height/100, [.8, .95, 1, .8], [.95, .05],true,currentfloor,[1,.6,.1,.8])
@@ -70,7 +70,7 @@ function initBuild() {
         // addMeshLayers(paths, 500, 5, [.8, .95, 1, .5], [.3, .7])
         
         // 垂直线条
-        addVerticalLines(paths,bottomColor,topColor,height)
+        addVerticalLines(paths,bottomColor,topColor,height*1.5)
         // 顶部线条
         addLine(paths,[1,1,1,0.5],[1,1,1,0.5],height)
         // 地部线条
@@ -79,7 +79,7 @@ function initBuild() {
 
 
          // 添加灯光效果
-         var mesh = addMesh(paths, 0, 5000, [1, 1, 1, .3], [1, 1, 1, 0], 'front');
+        addMesh(paths, 0, height*2, [1, 1, 1, .3], [1, 1, 1, 0], 'front');
         // 外墙 数据格式和paths不一样
         // var wall = new AMap.Object3D.Wall({
         //     path: paths,
@@ -324,8 +324,8 @@ function rangeRandom(max, min, isInt) {
  // 修改光源
 function changeLinght() {
    
-    map.AmbientLight = new AMap.Lights.AmbientLight([1, 1, 1], 0.3);
-    map.DirectionLight = new AMap.Lights.DirectionLight([0, -1, 2], [1, 1, 1], 0.7);
+    map.AmbientLight = new AMap.Lights.AmbientLight([1, 1, 1], .3);
+    map.DirectionLight = new AMap.Lights.DirectionLight([0, -1, 2], [1, 1, 1], .9);
 
     var isStop = false;
     var angle = 90;
@@ -338,6 +338,7 @@ function changeLinght() {
                 2
             ];
             //console.log(dir)
+           
             map.DirectionLight.setDirection(dir);
             map.render();
         }
@@ -365,15 +366,15 @@ function add3DPoints(){
     points3D = new AMap.Object3D.Points();
     points3D.transparent = true;
     //points3D.textures.push(colorize(particle,p * 0.029, p * 0.015, p * 0.01, 0.5));
-    points3D.textures.push('/img/points1.png');
+   // points3D.textures.push('/img/points1.png');
     var geometry = points3D.geometry;
     for (var p = 0; p < provinces.length; p += 1) {
         // points 类型的顶点坐标需要使用 G20 坐标
         var center = lnglatToG20(provinces[p]);
         // 随机高度。Z 轴正方向指向地下，因此这里设置高度要添加负号指向反方向
-        geometry.vertices.push(center.x, center.y, -Math.random() * 10000);
-        geometry.pointSizes.push(Math.round(Math.random() * 150));
-        geometry.vertexColors.push(p * 0.029, p * 0.015, p * 0.01, 0.5);
+        geometry.vertices.push(center.x, center.y, -Math.random() * 2000);
+        geometry.pointSizes.push(Math.round(Math.random() * 10));
+        geometry.vertexColors.push(p * 0.009, p * 0.015, p * 0.02, 0.5);
         geometry.pointAreas.push(0, 0, 1, 1);
         // 每两个元素描述一个顶点的纹理坐标信息，纹理坐标以图片左上角为原点。分别是左上角和右下角。
         geometry.vertexUVs.push(0, 0, 1, 1);

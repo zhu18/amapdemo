@@ -5,17 +5,16 @@ var stepInstance2 = {
         //     dragEnable: true,
         //     doubleClickZoom: true
         // })
-        map.clearMap()
         if (lastStep == 1) {
-            // $('#container').removeClass('loaded')
-            // $('#container2').addClass('loaded')
-            // setImgLayer(map)
-            navigation2(map)
+            $('#container').removeClass('loaded')
+            $('#container2').addClass('loaded')
+            setLayer2()
+            navigation2(map2)
         } else if (lastStep == 3) {
             // $('#container').removeClass('loaded')
             // $('#container2').addClass('loaded')
-            // setImgLayer(map)
-            navigation3(map)
+            setLayer2()
+            navigation3(map2)
         }
 
 
@@ -33,53 +32,56 @@ var map3, layer2, topLine, bottomLine, layer4, layer5, marks = [], tasks = [],
         //bounds: new AMap.Bounds([114.9699, 39.083568], [117.87000, 41.41325]),
         bounds: new AMap.Bounds(new AMap.LngLat(115.3000, 39.164537),
             new AMap.LngLat(117.35728, 41.09606)),
-        url: '../../img/step2_F2.png',
+        // bounds: new AMap.Bounds([115.3000, 39.164537], [117.35728, 41.09606]),
+        //url: '../../img/step2_F.png',
+        url: '../../img/step2_F2.png?' + Math.random(),
         opacity: 1,
         height: 70000,
-        zooms: [8, 12]
+        visible: true,
+        zooms: [7 ,14]
     })
 
 function setLayer2() {
     // 可视化图
-    // map3 = new Loca(map)
-    // map3.on('mapload', () => {
-    //     // 带有高度的北京地图(面)
-    //     // layer2 = Loca.visualLayer({
-    //     //     eventSupport: false,
-    //     //     fitView: false,
-    //     //     container: map3,
-    //     //     type: 'polygon',
-    //     //     shape: 'polygon'
-    //     // });
+    map3 = new Loca(map2)
+    map3.on('mapload', () => {
+        // 带有高度的北京地图(面)
+        layer2 = Loca.visualLayer({
+            eventSupport: false,
+            fitView: false,
+            container: map3,
+            type: 'polygon',
+            shape: 'polygon'
+        });
 
-    //     // layer2.setData(dd, {
-    //     //     lnglat: 'coordinates'
-    //     // });
+        layer2.setData(dd, {
+            lnglat: 'coordinates'
+        });
 
-    //     // layer2.setOptions({
-    //     //     style: {
-    //     //         height: 1,
-    //     //         lineWidth: 1,
-    //     //         stroke: 'rgba(0,0,0,0)',
-    //     //         fill: function (res) {
-    //     //             // return 'rgba(0,0,0,1)';
-    //     //             return 'rgba(0,0,0,0)';
-    //     //             // return colors[index % colors.length];
-    //     //         },
-    //     //         fillOpacity: 0.5
-    //     //     },
-    //     //     selectStyle: {
-    //     //         color: '#ffffff',
-    //     //         fill: function (res) {
-    //     //             return '#ff9900';
-    //     //         },
-    //     //         lineWidth: 2,
-    //     //         fillOpacity: 0.6,
-    //     //     }
-    //     // });
-    //     // layer2.render()
-    //     setImgLayer(map)
-    // })
+        layer2.setOptions({
+            style: {
+                height: 1,
+                lineWidth: 1,
+                stroke: '#eceff1',
+                fill: function (res) {
+                    // return 'rgba(0,0,0,1)';
+                    return 'rgba(0,0,0,0)';
+                    // return colors[index % colors.length];
+                },
+                fillOpacity: 0.5
+            },
+            selectStyle: {
+                color: '#ffffff',
+                fill: function (res) {
+                    return '#ff9900';
+                },
+                lineWidth: 2,
+                fillOpacity: 0.6,
+            }
+        });
+        layer2.render()
+        setImgLayer(map2)
+    })
 
 
 
@@ -95,26 +97,42 @@ function setImgLayer(map) {
         //url: '../../img/step2_F.png',
         url: '../../img/step2_F2.png?' + Math.random(),
         opacity: 1,
-        map: map,
         height: 70000,
         visible: true,
         zooms: [7, 14]
     })
+    bgLayer.setMap(map)
+    bgLayer.show()
 }
+//出场
 function destroyStep2() {
+
+    $('#container2').removeClass('loaded')
+    $('#container').addClass('loaded')
     tasks = []
     marks.forEach((v, i) => {
         setTimeout(() => {
-            map.remove(v);
+            map2.remove(v);
         }, 200 * i);
     })
     setTimeout(() => {
+
         setPitch(0)
     }, 800);
     setTimeout(() => {
-        bgLayer ? map.remove(bgLayer) : '';
+        // bgLayer.hide()
+        map2.remove(bgLayer);
         $('.ring').removeClass('showBox')
     }, 1200);
+
+    // setTimeout(() => {
+    //     if (lastStep == 1) {
+    //         setZooms(5, 3000)
+    //         map2.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
+    //     }
+    //     $('#container2').removeClass('loaded')
+    //     $('#container').addClass('loaded')
+    // }, 1500);
     if (lastStep == 2 && currStep != 3) {
         setZoom(9, -0.2).then(_ => {
             setZoom(8, -0.2).then(_ => {
@@ -122,28 +140,19 @@ function destroyStep2() {
                     setZoom(6, -0.2).then(_ => {
                         setZoom(5, -0.2).then(_ => {
                             setZoom(4.4, -0.2).then(_ => {
-                                map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
-                                map.clearMap()
+                                $('#container2').removeClass('loaded')
+                                $('#container').addClass('loaded')
+                                map2.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
                             })
                         })
                     })
                 })
             })
         })
-    } else if (lastStep == 2 && currStep == 3) {
-        setZoom(10, 0.2).then(_ => {
-            bgLayer ? map.remove(bgLayer) : '';
-            setZoom(11, 0.2).then(_ => {
-                setZoom(12, 0.2).then(_ => {
-                    map.setMapStyle('amap://styles/a2b01ddbdbd8992c86fb350a3866f202')
-                    setZoom(13, 0.2).then(_ => {
-                        setZoom(14, 0.2).then(_ => {
-                            map.clearMap()
-                        })
-                    })
-                })
-            })
-        })
+    } else if (lastStep == 2 && currStep == 3){
+        $('#container2').removeClass('loaded')
+        $('#container').addClass('loaded')
+      
     }
 
 
@@ -173,7 +182,9 @@ function navigation2(map, scallback) {
     }
     function f1() {
         map.setZoomAndCenter(5, [116.397428, 39.90929])
-        // map2.setZoomAndCenter(5, [116.397428, 39.90929])
+        map2.setZoomAndCenter(5, [116.397428, 39.90929])
+
+        bgLayer.hide()
         next()
 
     }
@@ -183,7 +194,7 @@ function navigation2(map, scallback) {
                 setZoom(8, 0.1).then(_ => {
                     setPitch(58)
                     setZoom(9, 0.1).then(_ => {
-                        map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                        map2.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
                         next()
                     })
                 })
@@ -202,8 +213,9 @@ function navigation2(map, scallback) {
         }, 300);
     }
     function f5() {
-        setImgLayer(map)
+        setImgLayer(map2)
         // setpitch(58);
+        
         setTimeout(() => {
             next()
         }, 500);
@@ -229,23 +241,28 @@ function navigation3(map, scallback) {
     }
     function f1() {
         map.setZoom(14)
+        map2.setZoom(14)
         map.setCenter([116.397428, 39.90929])
-        setTimeout(() => {
-            next()
-        }, 500);
+        map2.setCenter([116.397428, 39.90929])
+        // map2.setZoomAndCenter(14, [116.397428, 39.90929])
+        next()
+        // setTimeout(() => {
+        //     next()
+        // }, 300);
     }
     function f2() {
         setZoom(13, -0.1).then(_ => {
-            setPitch(58)
+            setPitch(0);
             setZoom(12, -0.1).then(_ => {
                 setZoom(11, -0.1).then(_ => {
                     setZoom(10, -0.1).then(_ => {
-                        setZoom(9, -0.1).then(_ => {
-                            setImgLayer(map)
-                            map.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                        setZoom(9.6, -0.1).then(_ => {
+                            $('#container').removeClass('loaded')
+                            $('#container2').addClass('loaded')
+                            map2.setMapStyle('amap://styles/e0b13c8a53234cd891ba01913302b9fc')
+                            setImgLayer(map2)
                             $('.ring').addClass('showBox')
                             next()
-
                         })
                     })
                 })
@@ -281,26 +298,27 @@ function setPoniters() {
             name: 'CC'
         }
     ], {
-            lnglat: 'location'
-        });
+        lnglat: 'location'
+    });
 
     let lnglat = [{
         location: [116.88131, 40.215281],
         name: 'BB'
     },
 
-    {
-        location: [116.18131, 40.415281],
-        name: 'AA'
-    },
+        {
+            location: [116.18131, 40.415281],
+            name: 'AA'
+        },
 
-    {
-        location: [116.38131, 40.215281],
-        name: 'CC'
-    }
+        {
+            location: [116.38131, 40.215281],
+            name: 'CC'
+        }
     ]
     pointer.setOptions({
         source: function (res) {
+            console.log(res)
             if (res.value.name == 'CC') {
                 return '../img/pointer2-icon.png'
             } else {
@@ -324,14 +342,16 @@ function setPoniters() {
         });
         marks.push(marker)
         marker.on('mouseover', function (ev) {
-            v.name == "CC" ? infoWindow.open(map, v.location, true) : infoWindow2.open(map, v.location, true)
+            console.log('in')
+            v.name == "CC" ? infoWindow.open(map2, v.location, true) : infoWindow2.open(map2, v.location, true)
 
         });
         marker.on('mouseout', function (ev) {
+            console.log('out')
             v.name == "CC" ? infoWindow.close() : infoWindow2.close()
         });
         setTimeout(() => {
-            marker.setMap(map);
+            marker.setMap(map2);
         }, 1000 + i * 100);
     })
 }
