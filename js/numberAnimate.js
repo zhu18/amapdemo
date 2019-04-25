@@ -23,16 +23,16 @@
             return;
         }
         var nHtml = '<div class="mt-number-animate-dom" data-num="{{num}}">\
-            <span class="mt-number-animate-span"><img src="../img/num/0.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/1.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/2.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/3.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/4.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/5.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/6.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/7.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/8.png" /></span>\
-            <span class="mt-number-animate-span"><img src="../img/num/9.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/0.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/1.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/2.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/3.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/4.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/5.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/6.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/7.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/8.png" /></span>\
+            <span class="mt-number-animate-span"><img src="./img/num/9.png" /></span>\
             <span class="mt-number-animate-span">.</span>\
           </div>';
         /*var nHtml = '<div class="mt-number-animate-dom" data-num="{{num}}">\
