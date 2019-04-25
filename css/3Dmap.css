@@ -148,7 +148,7 @@ ul, li {
 .title::before {
     content: '';
     display: block;
-    background: url(../img/t0.png);
+    background: url(./../img/t0.png);
     width: 100px;
     height: 50px;
     position: absolute;
@@ -162,7 +162,7 @@ ul, li {
     top: -3px;
     left: -104px;
     transform: perspective(1000px) rotateY(40deg) rotateX(-45deg);
-    background: url(../img/t0.png);
+    background: url(./../img/t0.png);
     display: block;
     width: 100px;
     height: 100px;
@@ -171,7 +171,7 @@ ul, li {
 
 .title-after-img {
     display: block;
-    background: url(../img/t5.png);
+    background: url(./../img/t5.png);
     width: 100px;
     height: 100px;
     position: absolute;
@@ -181,7 +181,7 @@ ul, li {
 
 .title-after-inimg {
     display: block;
-    background: url(../img/t51.png);
+    background: url(./../img/t51.png);
     width: 100px;
     height: 100px;
     position: absolute;
@@ -191,7 +191,7 @@ ul, li {
 
 .title-after-pimg {
     display: block;
-    background: url(../img/t0.png);
+    background: url(./../img/t0.png);
     width: 80px;
     height: 80px;
     position: absolute;
